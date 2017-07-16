@@ -1,0 +1,32 @@
+#ifndef CONST_PRIMITIVE_TEST___
+#define CONST_PRIMITIVE_TEST___
+
+#include"PrimitiveTest.h"
+
+template< typename T >
+class ConstPrimitiveTest : public PrimitiveTest<T> 
+{
+protected:
+	T current_value_;
+public:
+	ConstPrimitiveTest( T _value ) 
+		: current_value_(_value)
+	{
+	}
+	virtual T Get()
+	{
+		return current_value_;
+	}
+	virtual void Generate() {}
+	virtual void Print(std::ostream& _out = std::cout) const 
+	{ 
+		_out << current_value_; 
+	};
+	virtual ConstPrimitiveTest* Clone() const
+	{
+		return new ConstPrimitiveTest(current_value_);
+	}
+	virtual ~ConstPrimitiveTest() {};
+};
+
+#endif
