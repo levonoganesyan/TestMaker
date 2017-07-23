@@ -4,9 +4,10 @@
 #include"RangePrimitiveTest.h"
 #include<memory>
 
-Graph::Graph(PrimitiveTest<int>* _number_of_vertices, PrimitiveTest<int>* _number_of_edges, bool _acyclic, bool _buckle)
+Graph::Graph(PrimitiveTest<int>* _number_of_vertices, PrimitiveTest<int>* _number_of_edges, PrimitiveTest<int>* _weights, bool _acyclic, bool _buckle)
 	: number_of_vertices_(_number_of_vertices)
 	, number_of_edges_(_number_of_edges)
+	, weight_(_weights)
 	, acyclic_(_acyclic)
 	, buckle_(_buckle)
 	, print_type_(PRINT_TYPE::CONNECTION_MATRIX)
@@ -79,7 +80,7 @@ std::vector<std::pair<int, int> > Graph::ListOfEdges()
 void Graph::PrintListOfEdges(std::ostream& _out)
 {
 	std::vector<std::pair<int, int> > edges = ListOfEdges();
-	_out << number_of_vertices_ << ' ' << edges.size() << std::endl;
+	_out << current_number_of_vertices_ << ' ' << edges.size() << std::endl;
 	for (unsigned int i = 0; i < edges.size(); i++)
 	{
 		_out << edges[i].first + 1 << ' ' << edges[i].second + 1 << std::endl;

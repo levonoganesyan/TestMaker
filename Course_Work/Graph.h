@@ -35,7 +35,7 @@ public:
 	v{n} u{n}
 	*/
 protected:
-	PrimitiveTest<int> *number_of_vertices_, *number_of_edges_;
+	PrimitiveTest<int> *number_of_vertices_, *number_of_edges_, *weight_;
 	int current_number_of_vertices_, current_number_of_edges_;
 	std::vector< std::set<int> > graph_;
 	std::function<void(std::ostream&)> print_function_;
@@ -55,7 +55,7 @@ protected:
 	virtual std::vector<std::pair<int, int> > ListOfEdges();
 	virtual void PrintListOfEdges(std::ostream&);
 public:
-	Graph(PrimitiveTest<int>*, PrimitiveTest<int>*, bool = false, bool = false);
+	Graph(PrimitiveTest<int>*, PrimitiveTest<int>*, PrimitiveTest<int>* = NULL, bool = false, bool = false);
 	virtual void Generate();
 	virtual void Print(std::ostream& = std::cout) const;
 	virtual Graph* Clone() const = 0;

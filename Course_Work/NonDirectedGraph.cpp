@@ -38,8 +38,8 @@ bool NonDirectedGraph::DSU::union_sets(int _first, int _second)
 
 
 
-NonDirectedGraph::NonDirectedGraph(PrimitiveTest<int>* _number_of_vertices, PrimitiveTest<int>* _number_of_edges, bool _acyclic, bool _buckle)
-	: Graph(_number_of_vertices, _number_of_edges, _acyclic, _buckle)
+NonDirectedGraph::NonDirectedGraph(PrimitiveTest<int>* _number_of_vertices, PrimitiveTest<int>* _number_of_edges, PrimitiveTest<int>* _weights, bool _acyclic, bool _buckle)
+	: Graph(_number_of_vertices, _number_of_edges, _weights, _acyclic, _buckle)
 	, dsu_(NULL)
 {
 	this->Generate();

@@ -21,7 +21,7 @@ protected:
 	virtual bool EdgeValidation(int, int);
 	virtual void AddEdge(int, int);
 public:
-	NonDirectedGraph(PrimitiveTest<int>*, PrimitiveTest<int>*, bool = false, bool = false);
+	NonDirectedGraph(PrimitiveTest<int>*, PrimitiveTest<int>*, PrimitiveTest<int>* = NULL, bool = false, bool = false);
 	virtual void Generate();
 	virtual NonDirectedGraph* Clone() const;
 	virtual ~NonDirectedGraph();

@@ -13,7 +13,7 @@ protected:
 	virtual bool EdgeValidation(int, int);
 	virtual void AddEdge(int, int);
 public:
-	DirectedGraph(PrimitiveTest<int>*, PrimitiveTest<int>*, bool = false, bool = false);
+	DirectedGraph(PrimitiveTest<int>*, PrimitiveTest<int>*, PrimitiveTest<int>* = NULL, bool = false, bool = false);
 	virtual void Generate();
 	virtual DirectedGraph* Clone() const;
 	virtual ~DirectedGraph();

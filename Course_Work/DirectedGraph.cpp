@@ -4,15 +4,15 @@
 #include"RangePrimitiveTest.h"
 
 
-DirectedGraph::DirectedGraph(PrimitiveTest<int>* _number_of_vertices, PrimitiveTest<int>* _number_of_edges, bool _acyclic, bool _buckle)
-	: Graph(_number_of_vertices, _number_of_edges, _acyclic, _buckle)
+DirectedGraph::DirectedGraph(PrimitiveTest<int>* _number_of_vertices, PrimitiveTest<int>* _number_of_edges, PrimitiveTest<int>* _weights, bool _acyclic, bool _buckle)
+	: Graph(_number_of_vertices, _number_of_edges, _weights, _acyclic, _buckle)
 	, current_vertex_map_index_(0)
 {
 	this->Generate();
 }
 
 bool DirectedGraph::EdgeValidation(int _start, int _end)
-{
+{	
 	if (!buckle_ && _start == _end)
 		return false;
 	return true;

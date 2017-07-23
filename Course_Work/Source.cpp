@@ -1,6 +1,54 @@
 #include "TestLibrary.h"
 // ToString
 
+
+class Expression : public CompositeTest
+{
+	int depth_;
+	int current_depth_;
+public:
+	Expression(int _depth) : depth_(_depth), current_depth_(_depth) { this->Generate(); }
+	void E()
+	{
+		if (current_depth_ == 0)
+		{
+			this->Add(CreateNumber(1, 100));
+			return;
+		}
+		current_depth_--;
+		int rng = rand() & 1;
+		if (!rng)
+		{
+			ConstStringSet* css = new ConstStringSet();
+			css->Add("+")
+				->Add("*")
+				->Add("-")
+				->Add("/");
+			E();
+			this->Add(css);
+			E();
+			delete css;
+		}
+		else
+		{
+			ConstPrimitiveTest<char>* left_bracket = new ConstPrimitiveTest<char>('(');
+			ConstPrimitiveTest<char>* right_bracket = new ConstPrimitiveTest<char>(')');
+			this->Add(left_bracket);
+			E();
+			this->Add(right_bracket);
+			delete right_bracket;
+			delete left_bracket;
+		}
+	}
+	void Generate()
+	{
+		this->tests_.clear();
+		current_depth_ = depth_;
+		E();
+	}
+
+};
+
 class Time : public CompositeTest
 {
 public:
@@ -259,14 +307,24 @@ void main(){
 
 		// PrimitiveTest<int>* start = new ConstPrimitiveTest<int>(4);
 		// PrimitiveTest<int>* end = new ConstPrimitiveTest<int>(40);
-		PrimitiveTest<int>* v = new ConstPrimitiveTest<int>(10);
+		/*PrimitiveTest<int>* v = new ConstPrimitiveTest<int>(10);
 		PrimitiveTest<int>* e = new ConstPrimitiveTest<int>(200);
 		Graph *graph = new DirectedGraph(v, e);
 		graph->Acyclic()->PrintType(Graph::LIST_OF_EDGES);
 		Test* test = new CompositeTest();
 		test->Add(graph);
 		TestCreator tc(test, 1000, "D:/tests", "graph", ".txt");
-		tc.Make();
+		tc.Make();*/
+
+		int depth = 5;
+		Expression* a = new Expression(depth);
+		int n = 100;
+		while (n--)
+		{
+			a->Generate();
+			a->Print();
+			std::cout << std::endl;
+		}
 
 		
 	}
