@@ -1,7 +1,7 @@
 #include "TestLibrary.h"
 
 
-class BinaryTree: public CompositeTest
+class BinaryTree : public CompositeTest
 {
 	int depth_;
 	int current_depth_;
@@ -20,7 +20,7 @@ public:
 		current_depth_--;
 		int rng = rand() % 4;
 		ConstPrimitiveTest<char>* semicolon = new ConstPrimitiveTest<char>(';');
-		
+
 		this->Add(left_bracket);
 		this->Add(CreateNumber(1, 100));
 		this->Add(semicolon);
@@ -54,20 +54,21 @@ public:
 
 };
 
-void main(){
+void main() {
 	try
 	{
-		Grammar* grammar = new Grammar("({1 , 2 , 3}, {a,b,c}, P, 1)", "${ 1 }->${2}${ 3 }\n${ 2 }->a${2}\n${ 2 }->${3}\n${ 3 }->${3}b\n${ 3 }->e" );
-		
-		while (1)
-		{
-			system("cls");
-			grammar->Generate();
-			grammar->Print();
-			std::cout << std::endl;
-			system("pause");
-		}
-		/*BinaryTree* bt = new BinaryTree(1000);
+		/*	Grammar* grammar = new Grammar("({1,2}, {a,b,c}, P, 1)", "${1} -> a${1}a\n${1} -> b${1}b\n${1} -> c${1}c\n${1} -> e\n" );
+
+			while (1)
+			{
+				system("cls");
+				grammar->Generate();
+				grammar->Print();
+				std::cout << std::endl;
+				system("pause");
+			}*/
+
+		BinaryTree* bt = new BinaryTree(1000);
 		int n = 10000;
 		while (n--)
 		{
@@ -76,11 +77,11 @@ void main(){
 			bt->Print();
 			std::cout << std::endl;
 			system("pause");
-		}*/
+		}
 
-		
+
 	}
-	catch ( std::runtime_error _err )
+	catch (std::runtime_error _err)
 	{
 		std::cout << _err.what() << std::endl;
 	}

@@ -13,7 +13,7 @@ Grammar::Grammar(const std::string & _grammar, const std::string & _rules)
 }
 void Grammar::RuleParsing(const std::string & _rule)
 {
-	if (_rule.size() <= 7) // ${a}->b
+	if (_rule.size() < 7) // ${a}->b
 		return;
 	std::string rule = _rule;
 	rule.erase(std::remove_if(rule.begin(), rule.end(), isspace), rule.end());
