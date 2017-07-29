@@ -60,6 +60,12 @@
     <ClInclude Include="NonDirectedGraph.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RegEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Grammar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -84,6 +90,18 @@
       <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="Graph.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GrammaticReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Templates.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RegEx.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Grammar.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>

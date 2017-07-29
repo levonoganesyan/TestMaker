@@ -15,6 +15,12 @@ Test * CompositeTest::Add( Test * _test )
 	tests_.push_back(_test->Clone());
 	return this;
 }
+void CompositeTest::Clear()
+{
+	for (unsigned int i = 0; i < tests_.size(); i++)
+		delete tests_[i];
+	tests_.clear();
+}
 void CompositeTest::Generate()
 {
 	for ( unsigned int i = 0 ; i < tests_.size() ; i++ )
@@ -40,6 +46,5 @@ CompositeTest * CompositeTest::Clone() const
 }
 CompositeTest::~CompositeTest() 
 {
-	for (int i = 0; i < tests_.size(); i++)
-		delete tests_[i];
+	Clear();
 }

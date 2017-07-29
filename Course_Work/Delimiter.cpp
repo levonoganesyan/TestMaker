@@ -1,6 +1,10 @@
 #include "Delimiter.h"
-Delimiter::Delimiter( std::string _delimiter ) 
-	: delimiter_ ( _delimiter )
+Delimiter::Delimiter(char _delimiter)
+	: delimiter_(_delimiter + "")
+{
+}
+Delimiter::Delimiter(std::string _delimiter)
+	: delimiter_(_delimiter)
 {
 }
 std::string Delimiter::Get()

@@ -4,12 +4,13 @@
 #include"Test.h"
 #include"Range.h"
 
-class Delimiter : public Test 
+class Delimiter : public Test
 {
 protected:
 	std::string delimiter_;
 public:
-	Delimiter( std::string );
+	Delimiter(char);
+	Delimiter(std::string);
 	std::string Get();
 	virtual void Generate();
 	virtual void Print(std::ostream& = std::cout) const;

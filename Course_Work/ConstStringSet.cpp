@@ -27,7 +27,7 @@ void ConstStringSet::Print(std::ostream& _out) const
 ConstStringSet* ConstStringSet::Clone() const
 {
 	ConstStringSet set_to_return;
-	for (int i = 0; i < set_.size(); i++)
+	for (unsigned int i = 0; i < set_.size(); i++)
 	{
 		set_to_return.Add(set_[i]);
 	}

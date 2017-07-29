@@ -11,6 +11,7 @@ public:
 
 	CompositeTest();
 	virtual Test * Add( Test * );
+	virtual void Clear();
 	virtual void Generate();
 	virtual void Print(std::ostream& = std::cout) const;
 	virtual CompositeTest* Clone() const;

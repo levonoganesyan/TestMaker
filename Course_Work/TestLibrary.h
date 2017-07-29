@@ -15,6 +15,9 @@
 #include"NonDirectedGraph.h"
 #include"DirectedGraph.h"
 
+#include"RegEx.h"
+#include"Grammar.h"
+
 #include"TestCreator.h"
 
 
