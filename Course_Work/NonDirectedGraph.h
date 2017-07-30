@@ -20,6 +20,8 @@ private:
 protected:
 	virtual bool EdgeValidation(int, int);
 	virtual void AddEdge(int, int);
+	virtual std::vector<std::vector<bool> > ConnectionMatrix();
+	virtual std::vector<std::set<int> > ConnectionList();
 public:
 	NonDirectedGraph(PrimitiveTest<int>*, PrimitiveTest<int>*, PrimitiveTest<int>* = NULL, bool = false, bool = false);
 	virtual void Generate();

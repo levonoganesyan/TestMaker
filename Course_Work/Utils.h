@@ -80,5 +80,17 @@
 //	else if (character == "\/")
 //		return '\/';
 //}
-
+class RNG
+{
+	static std::function<int()> rng_function_;
+public:
+	RNG();
+	static int Rand();
+	static void RandomFunction(std::function<int()> _rng_function);
+	static void RandomSeed(unsigned int _seed);
+};
+inline int Rand()
+{
+	return RNG::Rand();
+}
 #endif

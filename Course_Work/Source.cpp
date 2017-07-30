@@ -18,7 +18,7 @@ public:
 			return;
 		}
 		current_depth_--;
-		int rng = rand() % 4;
+		int rng = Rand() % 4;
 		ConstPrimitiveTest<char>* semicolon = new ConstPrimitiveTest<char>(';');
 
 		this->Add(left_bracket);
@@ -57,29 +57,17 @@ public:
 void main() {
 	try
 	{
-		/*	Grammar* grammar = new Grammar("({1,2}, {a,b,c}, P, 1)", "${1} -> a${1}a\n${1} -> b${1}b\n${1} -> c${1}c\n${1} -> e\n" );
+		RNG::RandomSeed(time(0));
+		Graph* ndgraph = new NonDirectedGraph(CreateNumber(4, 10), CreateNumber(1, 10), CreateNumber(100, 500));
+		ndgraph->Buckle(false)->PrintType(Graph::LIST_OF_EDGES)->Acyclic(true);
+		Graph* dgraph = new NonDirectedGraph(CreateNumber(4, 10), CreateNumber(10, 10), CreateNumber(1000, 5000));
+		dgraph->Buckle(false)->PrintType(Graph::CONNECTION_MATRIX)->Acyclic(true);
 
-			while (1)
-			{
-				system("cls");
-				grammar->Generate();
-				grammar->Print();
-				std::cout << std::endl;
-				system("pause");
-			}*/
+		Test* test = new CompositeTest();
+		test->Add(ndgraph)->Add(new_line_delimiter)->Add(dgraph);
 
-		BinaryTree* bt = new BinaryTree(1000);
-		int n = 10000;
-		while (n--)
-		{
-			system("cls");
-			bt->Generate();
-			bt->Print();
-			std::cout << std::endl;
-			system("pause");
-		}
-
-
+		TestCreator* tc = new TestCreator(test, 100, "D:/tests", "out");
+		tc->Make();
 	}
 	catch (std::runtime_error _err)
 	{

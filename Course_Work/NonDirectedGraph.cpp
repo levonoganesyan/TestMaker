@@ -45,6 +45,39 @@ NonDirectedGraph::NonDirectedGraph(PrimitiveTest<int>* _number_of_vertices, Prim
 	this->Generate();
 }
 
+std::vector<std::vector<bool> > NonDirectedGraph::ConnectionMatrix()
+{
+	if (current_number_of_vertices_ > 1000)
+		throw "Number of vertices must be less or equal 1000";
+	std::vector < std::vector < bool > > connection_matrix(current_number_of_vertices_, std::vector< bool >(current_number_of_vertices_));
+	for (int i = 0; i < current_number_of_vertices_; i++)
+	{
+		std::set<int>::iterator it = graph_[i].begin();
+		std::set<int>::iterator eit = graph_[i].end();
+		for (; it != eit; it++)
+		{
+			connection_matrix[i][*it] = true;
+			connection_matrix[*it][i] = true;
+		}
+	}
+	return connection_matrix;
+}
+std::vector<std::set<int> > NonDirectedGraph::ConnectionList()
+{
+	std::vector < std::set < int > > graph(current_number_of_vertices_);
+	for (int i = 0; i < current_number_of_vertices_; i++)
+	{
+		std::set<int>::iterator it = graph_[i].begin();
+		std::set<int>::iterator eit = graph_[i].end();
+		for (; it != eit; it++)
+		{
+			graph[i].insert(*it);
+			graph[*it].insert(i);
+		}
+	}
+	return graph;
+}
+
 bool NonDirectedGraph::EdgeValidation(int _start, int _end)
 {
 	if (!buckle_ && _start == _end)
@@ -58,7 +91,6 @@ bool NonDirectedGraph::EdgeValidation(int _start, int _end)
 void NonDirectedGraph::AddEdge(int _start, int _end)
 {
 	graph_[_start].insert(_end);
-	graph_[_end].insert(_start);
 }
 void NonDirectedGraph::Generate()
 {

@@ -18,7 +18,7 @@ std::string ConstStringSet::Get()
 }
 void ConstStringSet::Generate()
 {
-	current_string_ = set_ [ rand()%( set_.size() ) ];
+	current_string_ = set_ [ Rand()%( set_.size() ) ];
 }
 void ConstStringSet::Print(std::ostream& _out) const
 {

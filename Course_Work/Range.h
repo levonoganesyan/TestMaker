@@ -44,18 +44,18 @@ public:
 template<>
 int Range<int>::Generate(){
 	generate_helper();
-	return rand()%( end_->Get() - begin_->Get() + 1 ) + begin_->Get();
+	return Rand()%( end_->Get() - begin_->Get() + 1 ) + begin_->Get();
 }
 template<>
 double Range<double>::Generate(){
 	generate_helper();
-	double random_double = (double)rand() / RAND_MAX;
-	return ( (double)rand() / RAND_MAX ) * ( end_->Get() - begin_->Get() ) + begin_->Get();
+	double random_double = (double)Rand() / RAND_MAX;
+	return ( (double)Rand() / RAND_MAX ) * ( end_->Get() - begin_->Get() ) + begin_->Get();
 }
 template<>
 char Range<char>::Generate(){
 	generate_helper();
-	return (char)(rand()%( end_->Get() - begin_->Get() + 1 ) + begin_->Get());
+	return (char)(Rand()%( end_->Get() - begin_->Get() + 1 ) + begin_->Get());
 }
 
 #endif

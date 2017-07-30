@@ -138,7 +138,7 @@ void Grammar::Generator(const std::string & _current_nonterm)
 	{
 		std::runtime_error("Error when trying parse the nonterm " + _current_nonterm + ": that nonterm not present in rules.");
 	}
-	int rule_number = rand() % parsed_rules_[_current_nonterm].size();
+	int rule_number = Rand() % parsed_rules_[_current_nonterm].size();
 	std::string rule = parsed_rules_[_current_nonterm][rule_number];
 	if (rule == "e")
 	{

@@ -389,6 +389,16 @@
 //			system("pause");
 //		}
 //
+		/*	Grammar* grammar = new Grammar("({1,2}, {a,b,c}, P, 1)", "${1} -> a${1}a\n${1} -> b${1}b\n${1} -> c${1}c\n${1} -> e\n" );
+
+		while (1)
+		{
+		system("cls");
+		grammar->Generate();
+		grammar->Print();
+		std::cout << std::endl;
+		system("pause");
+		}*/
 //
 //	}
 //	catch (std::runtime_error _err)

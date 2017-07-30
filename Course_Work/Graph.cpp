@@ -83,7 +83,13 @@ void Graph::PrintListOfEdges(std::ostream& _out)
 	_out << current_number_of_vertices_ << ' ' << edges.size() << std::endl;
 	for (unsigned int i = 0; i < edges.size(); i++)
 	{
-		_out << edges[i].first + 1 << ' ' << edges[i].second + 1 << std::endl;
+		_out << edges[i].first + 1 << ' ' << edges[i].second + 1 << ' ';
+		if (weight_ != NULL)
+		{
+			weight_->Generate();
+			weight_->Print(_out);
+		}
+		_out << std::endl;
 	}
 }
 int Graph::AddVertex()
@@ -131,6 +137,10 @@ void Graph::Generate()
 }
 void Graph::Print(std::ostream& _out) const
 {
+	if (print_type_ != LIST_OF_EDGES && weight_ != NULL)
+	{
+		throw std::runtime_error("Weights cannot be specified with not LIST_OF_EDGES printing modificator");
+	}
 	print_function_(_out);
 }
 Graph * Graph::Acyclic(bool _acyclic)
