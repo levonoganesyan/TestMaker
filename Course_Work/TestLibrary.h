@@ -49,6 +49,10 @@ PrimitiveTest<int>* CreateNumber(PrimitiveTest<int>* _start, PrimitiveTest<int>*
 
 PrimitiveTest<int>* CreateNumber(int _start, int _end)
 {
+	if (_start > _end)
+	{
+		throw std::runtime_error("Start can't be greater than end");
+	}
 	ConstPrimitiveTest<int>* start_number = new ConstPrimitiveTest<int>(_start);
 	ConstPrimitiveTest<int>* end_number = new ConstPrimitiveTest<int>(_end);
 	return CreateNumber(start_number, end_number);

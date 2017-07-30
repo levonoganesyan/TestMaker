@@ -58,15 +58,15 @@ void main() {
 	try
 	{
 		RNG::RandomSeed(time(0));
-		Graph* ndgraph = new NonDirectedGraph(CreateNumber(4, 10), CreateNumber(1, 10), CreateNumber(100, 500));
+		Graph* ndgraph = new NonDirectedGraph(CreateNumber(40, 100), CreateNumber(10, 100), CreateNumber(1000, 500));
 		ndgraph->Buckle(false)->PrintType(Graph::LIST_OF_EDGES)->Acyclic(true);
-		Graph* dgraph = new NonDirectedGraph(CreateNumber(4, 10), CreateNumber(10, 10), CreateNumber(1000, 5000));
+		Graph* dgraph = new DirectedGraph(CreateNumber(40, 100), CreateNumber(10000, 10000));
 		dgraph->Buckle(false)->PrintType(Graph::CONNECTION_MATRIX)->Acyclic(true);
 
 		Test* test = new CompositeTest();
 		test->Add(ndgraph)->Add(new_line_delimiter)->Add(dgraph);
 
-		TestCreator* tc = new TestCreator(test, 100, "D:/tests", "out");
+		TestCreator* tc = new TestCreator(test, 5, "D:/tests", "out");
 		tc->Make();
 	}
 	catch (std::runtime_error _err)

@@ -46,10 +46,11 @@ DirectedGraph * DirectedGraph::Clone() const
 {
 	DirectedGraph* graph = new DirectedGraph(number_of_vertices_, number_of_edges_);
 	graph->graph_ = graph_;
+	graph->weight_ = weight_;
 	graph->buckle_ = buckle_;
 	graph->acyclic_ = acyclic_;
 	graph->print_type_ = print_type_;
-	graph->print_function_ = print_function_;
+	graph->PrintType(print_type_);
 	return graph;
 }
 DirectedGraph::~DirectedGraph()

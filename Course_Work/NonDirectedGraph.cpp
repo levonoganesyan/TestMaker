@@ -80,16 +80,34 @@ std::vector<std::set<int> > NonDirectedGraph::ConnectionList()
 
 bool NonDirectedGraph::EdgeValidation(int _start, int _end)
 {
+	if (_start > _end)
+	{
+		_start ^= _end ^= _start ^= _end;
+	}
+	if (graph_[_start].find(_end) != graph_[_start].end())
+	{
+		return false;
+	}
 	if (!buckle_ && _start == _end)
+	{
 		return false;
+	}
 	if (dsu_ == NULL)
+	{
 		dsu_ = new DSU(graph_.size());
+	}
 	if (acyclic_ && !(dsu_->union_sets(_start, _end)))
+	{
 		return false;
+	}
 	return true;
 }
 void NonDirectedGraph::AddEdge(int _start, int _end)
 {
+	if (_start > _end)
+	{
+		_start ^= _end ^= _start ^= _end;
+	}
 	graph_[_start].insert(_end);
 }
 void NonDirectedGraph::Generate()
@@ -102,10 +120,11 @@ NonDirectedGraph * NonDirectedGraph::Clone() const
 {
 	NonDirectedGraph* graph = new NonDirectedGraph(number_of_vertices_, number_of_edges_);
 	graph->graph_ = graph_;
+	graph->weight_ = weight_;
 	graph->buckle_ = buckle_;
 	graph->acyclic_ = acyclic_;
 	graph->print_type_ = print_type_;
-	graph->print_function_ = print_function_;
+	graph->PrintType(print_type_);
 	return graph;
 }
 NonDirectedGraph::~NonDirectedGraph()

@@ -144,7 +144,7 @@ void Grammar::Generator(const std::string & _current_nonterm)
 	{
 		return;
 	}
-	enum variable_status {not_variable = 0, dollar_sign_readed, open_brace_readed, close_brace_readed};
+	enum variable_status {not_variable = 0, dollar_sign_readed = 1, open_brace_readed = 2, close_brace_readed = 3};
 	variable_status variable_state = not_variable;
 	std::string variable = "";
 	for (unsigned int i = 0; i < rule.size(); i++)
