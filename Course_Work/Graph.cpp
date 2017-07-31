@@ -54,8 +54,8 @@ void Graph::PrintConnectionList(std::ostream& _out)
 	for (unsigned int i = 0; i < connection_list.size(); i++)
 	{
 		_out << connection_list[i].size() << ' ';
-		std::set<int>::iterator it = graph_[i].begin();
-		std::set<int>::iterator eit = graph_[i].end();
+		std::set<int>::iterator it = connection_list[i].begin();
+		std::set<int>::iterator eit = connection_list[i].end();
 		for (; it != eit; it++)
 		{
 			_out << *it + 1 << ' ';
@@ -95,12 +95,12 @@ void Graph::PrintListOfEdges(std::ostream& _out)
 int Graph::AddVertex()
 {
 	graph_.push_back(std::set<int>());
-	return graph_.size();
+	return (int)graph_.size();
 }
 bool Graph::AddEdge()
 {
 	std::shared_ptr<PrimitiveTest<int>> first_vertex_num(new ConstPrimitiveTest<int>(0));
-	std::shared_ptr<PrimitiveTest<int>> last_vertex_num(new ConstPrimitiveTest<int>(graph_.size() - 1));
+	std::shared_ptr<PrimitiveTest<int>> last_vertex_num(new ConstPrimitiveTest<int>((int)graph_.size() - 1));
 	std::shared_ptr<Range<int>> rng(new Range<int>(first_vertex_num.get(), last_vertex_num.get()));
 	std::shared_ptr<PrimitiveTest<int>> random_number(new RangePrimitiveTest<int>(rng.get()));
 	int first_vertex, second_vertex;
@@ -133,10 +133,15 @@ void Graph::GenerateGraph()
 }
 void Graph::Generate()
 {
+	test_generated_ = true;
 	GenerateGraph();
 }
 void Graph::Print(std::ostream& _out) const
 {
+	if (!test_generated_)
+	{
+		throw std::runtime_error("Print() must be called after Generate() in Graph.");
+	}
 	if (print_type_ != LIST_OF_EDGES && weight_ != NULL)
 	{
 		throw std::runtime_error("Weights cannot be specified with not LIST_OF_EDGES printing modificator");

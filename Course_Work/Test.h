@@ -7,9 +7,10 @@
 class Test
 {
 protected:
+	bool test_generated_;
 public:
 	// typedef std::shared_ptr<Test> TOSPtr;
-	Test() {}
+	Test() : test_generated_(false) {}
 	virtual void Generate() = 0;
 	virtual void Print(std::ostream& = std::cout) const = 0;
 	virtual Test * Add ( Test * ) 

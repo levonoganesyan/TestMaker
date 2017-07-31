@@ -9,7 +9,7 @@ Grammar::Grammar(const std::string & _grammar, const std::string & _rules)
 	, rules_(_rules + '\n')
 {
 	this->GrammarParsing();
-	this->Generate();
+	// this->Generate();
 }
 void Grammar::RuleParsing(const std::string & _rule)
 {
@@ -17,7 +17,7 @@ void Grammar::RuleParsing(const std::string & _rule)
 		return;
 	std::string rule = _rule;
 	rule.erase(std::remove_if(rule.begin(), rule.end(), isspace), rule.end());
-	int index_of_arrow = rule.find_first_of("->");
+	size_t index_of_arrow = rule.find_first_of("->");
 	std::string left_part = rule.substr(0, index_of_arrow);
 	std::string right_part = rule.substr(index_of_arrow + 2);
 	std::string name_of_nonterm;
@@ -44,7 +44,7 @@ void Grammar::NonTermsParsing(const std::string & _nonterms)
 		writable_nonterms.erase(0, 1);
 		writable_nonterms.pop_back();
 		char delimiter = ',';
-		int pos, last_pos = 0;
+		size_t pos, last_pos = 0;
 		while ((pos = writable_nonterms.find(delimiter, last_pos)) != std::string::npos) {
 			std::string nonterm = writable_nonterms.substr(last_pos, pos - last_pos);
 			names_of_nonterm_.insert(nonterm);
@@ -66,7 +66,7 @@ void Grammar::TermsParsing(const std::string & _terms)
 		writable_terms.erase(0, 1);
 		writable_terms.pop_back();
 		char delimiter = ',';
-		int pos, last_pos = 0;
+		size_t pos, last_pos = 0;
 		while ((pos = writable_terms.find(delimiter, last_pos)) != std::string::npos) {
 			std::string term = writable_terms.substr(last_pos, pos - last_pos);
 			if (term.size() != 1)
@@ -101,7 +101,7 @@ void Grammar::GrammarParsing()
 	grammar_.erase(std::remove_if(grammar_.begin(), grammar_.end(), isspace), grammar_.end());
 
 
-	int index_of_brace = grammar_.find_first_of('}'), last_brace_index = 0;
+	size_t index_of_brace = grammar_.find_first_of('}'), last_brace_index = 0;
 
 	std::string nonterminals = grammar_.substr(last_brace_index + 1, index_of_brace - last_brace_index);
 	this->NonTermsParsing(nonterminals);
@@ -118,8 +118,7 @@ void Grammar::GrammarParsing()
 	this->StartNonTermParsing(start_nonterminal);
 
 	char delimiter = '\n';
-	size_t pos = 0;
-	int last_pos = 0;
+	size_t pos = 0, last_pos = 0;
 	while ((pos = rules_.find(delimiter, last_pos)) != std::string::npos) {
 		std::string rule = rules_.substr(last_pos, pos - last_pos);
 		this->RuleParsing(rule);
@@ -138,7 +137,7 @@ void Grammar::Generator(const std::string & _current_nonterm)
 	{
 		std::runtime_error("Error when trying parse the nonterm " + _current_nonterm + ": that nonterm not present in rules.");
 	}
-	int rule_number = Rand() % parsed_rules_[_current_nonterm].size();
+	size_t rule_number = Rand() % parsed_rules_[_current_nonterm].size();
 	std::string rule = parsed_rules_[_current_nonterm][rule_number];
 	if (rule == "e")
 	{
@@ -205,12 +204,17 @@ void Grammar::Generator(const std::string & _current_nonterm)
 	}
 }
 void Grammar::Generate()
-{
+{	
+	test_generated_ = true;
 	this->Clear();
 	this->Generator(start_nonterm_);
 }
 void Grammar::Print(std::ostream& _out) const
 {
+	if (!test_generated_)
+	{
+		throw std::runtime_error("Print() must be called after Generate() in Grammar.");
+	}
 	CompositeTest::Print(_out);
 }
 Grammar* Grammar::Clone() const

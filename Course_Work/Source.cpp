@@ -53,21 +53,40 @@ public:
 	}
 
 };
+#include <chrono>
 
 void main() {
 	try
 	{
 		RNG::RandomSeed(time(0));
-		Graph* ndgraph = new NonDirectedGraph(CreateNumber(40, 100), CreateNumber(10, 100), CreateNumber(1000, 500));
-		ndgraph->Buckle(false)->PrintType(Graph::LIST_OF_EDGES)->Acyclic(true);
-		Graph* dgraph = new DirectedGraph(CreateNumber(40, 100), CreateNumber(10000, 10000));
-		dgraph->Buckle(false)->PrintType(Graph::CONNECTION_MATRIX)->Acyclic(true);
 
-		Test* test = new CompositeTest();
-		test->Add(ndgraph)->Add(new_line_delimiter)->Add(dgraph);
+		RangePrimitiveTest<int> integer;
+		10 < integer < 19;
+		integer.Generate();
+		integer.Print();
 
-		TestCreator* tc = new TestCreator(test, 5, "D:/tests", "out");
-		tc->Make();
+		std::cout << "Generating graphs with V vertices and E edges with weights with output in file.\n";
+		int count_threads = 5;
+		while (count_threads --> 1)
+		{
+			long long start_time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+			for (int v = 10000; v <= 10000; v *= 10)
+			{
+				for (int e = v * 100 ; e <= v * 100; e *= 10)
+				{
+					Graph* ndgraph = new NonDirectedGraph(CreateNumber(v, v), CreateNumber(e, e), CreateNumber(v, e));
+					ndgraph->Buckle(false)->PrintType(Graph::LIST_OF_EDGES);
+					Test* test = new CompositeTest();
+					test->Add(ndgraph)->Add(new_line_delimiter);
+
+					TestCreator* tc = new TestCreator(test, 4, "D:/tests", count_threads, "out_" + std::to_string(v) + "_" + std::to_string(e));
+					tc->Make();
+					// std::cout << "V = " << v << ", E = " << e << ". Executing time: " << std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() - start_time << "ms." << std::endl;
+					delete ndgraph;
+				}
+			}
+			std::cout << "Count of threads: " << count_threads << ". Executing time: " << std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count() - start_time << "ms." << std::endl;
+		}
 	}
 	catch (std::runtime_error _err)
 	{

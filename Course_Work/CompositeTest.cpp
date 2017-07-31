@@ -23,12 +23,17 @@ void CompositeTest::Clear()
 }
 void CompositeTest::Generate()
 {
+	test_generated_ = true;
 	for ( unsigned int i = 0 ; i < tests_.size() ; i++ )
 		tests_[ i ]->Generate();
 	//std::for_each( tests_.begin(), tests_.end(), []( const TOSPtr& testObj ) { testObj->Generate(); } );
 }
 void CompositeTest::Print(std::ostream& _out) const
 {
+	if (!test_generated_)
+	{
+		throw std::runtime_error("Print() must be called after Generate() in CompositeTest.");
+	}
 	for ( unsigned int i = 0 ; i < tests_.size() ; i++ )
 		tests_[ i ]->Print(_out);
 	//std::for_each( tests_.begin(), tests_.end(), []( const TOSPtr& testObj ) { testObj->Print(); } );

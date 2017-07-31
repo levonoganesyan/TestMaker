@@ -42,7 +42,7 @@ NonDirectedGraph::NonDirectedGraph(PrimitiveTest<int>* _number_of_vertices, Prim
 	: Graph(_number_of_vertices, _number_of_edges, _weights, _acyclic, _buckle)
 	, dsu_(NULL)
 {
-	this->Generate();
+	// this->Generate();
 }
 
 std::vector<std::vector<bool> > NonDirectedGraph::ConnectionMatrix()
@@ -94,7 +94,7 @@ bool NonDirectedGraph::EdgeValidation(int _start, int _end)
 	}
 	if (dsu_ == NULL)
 	{
-		dsu_ = new DSU(graph_.size());
+		dsu_ = new DSU((int)graph_.size());
 	}
 	if (acyclic_ && !(dsu_->union_sets(_start, _end)))
 	{

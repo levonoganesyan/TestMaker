@@ -3,12 +3,12 @@
 #include"Array.h"
 
 Array::Array(PrimitiveTest<int>* _array_size_to, std::function<Test*()> _generation_function, std::string _delimiter, std::string _line_breaker)
-	: array_size_(_array_size_to), generation_function_(_generation_function), delimiter_(_delimiter), line_breaker_(_line_breaker)
+	: array_size_(_array_size_to), generation_function_(_generation_function), example_(NULL), delimiter_(_delimiter), line_breaker_(_line_breaker)
 {
 	//std::shared_ptr<Int> s_ptr_io();
 	//array_size_ = _array_size_to;
 	//std::shared_ptr<Int> _array_size_into(io);
-	this->Generate();
+	// this->Generate();
 }
 Array::Array(PrimitiveTest<int>* _array_size_to, Test* _example, std::string _delimiter, std::string _line_breaker)
 	: array_size_(_array_size_to), example_(_example), delimiter_(_delimiter), line_breaker_(_line_breaker)
@@ -16,10 +16,11 @@ Array::Array(PrimitiveTest<int>* _array_size_to, Test* _example, std::string _de
 	//std::shared_ptr<Int> s_ptr_io();
 	//array_size_ = _array_size_to;
 	//std::shared_ptr<Int> _array_size_into(io);
-	this->Generate();
+	// this->Generate();
 }
 void Array::Generate() 
 {
+	test_generated_ = true;
 	array_size_->Generate();
 	array_.resize(array_size_->Get());
 	for ( int i = 0 ; i < array_size_->Get() ; i++ )
@@ -41,6 +42,10 @@ void Array::Generate()
 }
 void Array::Print(std::ostream& _out) const
 {
+	if (!test_generated_)
+	{
+		throw std::runtime_error("Print() must be called after Generate() in Array.");
+	}
 	_out << array_.size() << line_breaker_;
 	for (unsigned int i = 0 ; i < array_.size() ; i++ )
 	{

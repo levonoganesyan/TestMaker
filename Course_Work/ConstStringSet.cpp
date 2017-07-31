@@ -18,10 +18,15 @@ std::string ConstStringSet::Get()
 }
 void ConstStringSet::Generate()
 {
+	test_generated_ = true;
 	current_string_ = set_ [ Rand()%( set_.size() ) ];
 }
 void ConstStringSet::Print(std::ostream& _out) const
 {
+	if (!test_generated_)
+	{
+		throw std::runtime_error("Print() must be called after Generate() in ConstStringGenerator.");
+	}
 	_out << current_string_;
 }
 ConstStringSet* ConstStringSet::Clone() const
