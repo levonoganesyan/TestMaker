@@ -46,10 +46,13 @@ void Array::Print(std::ostream& _out) const
 	{
 		throw std::runtime_error("Print() must be called after Generate() in Array.");
 	}
-	_out << array_.size() << line_breaker_;
+	if (print_size_)
+	{
+		_out << array_.size() << line_breaker_;
+	}
 	for (unsigned int i = 0 ; i < array_.size() ; i++ )
 	{
-		array_[ i ]->Print();
+		array_[ i ]->Print(_out);
 		if ( i != array_.size() - 1 ) 
 			_out << delimiter_;
 	}
@@ -57,11 +60,26 @@ void Array::Print(std::ostream& _out) const
 }
 Array* Array::Clone() const
 { 
-	return new Array(array_size_, generation_function_, delimiter_, line_breaker_);
+	Array* arr = new Array(array_size_, generation_function_, delimiter_, line_breaker_);
+	if (example_ != NULL)
+	{
+		delete arr;
+		arr = new Array(array_size_, example_, delimiter_, line_breaker_);
+	}
+	arr->print_size_ = print_size_;
+	return arr;
+}
+int Array::Size()
+{
+	return array_size_->Get();
 }
 Test* Array::operator[]( int i ) 
 {
 	return array_ [ i ];
+}
+void Array::PrintSize(bool _print_size)
+{
+	print_size_ = _print_size;
 }
 Array::~Array()
 {

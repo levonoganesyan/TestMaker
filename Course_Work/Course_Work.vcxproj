@@ -149,6 +149,7 @@
     <ClInclude Include="Graph.h" />
     <ClInclude Include="NonDirectedGraph.h" />
     <ClInclude Include="PrimitiveTest.h" />
+    <ClInclude Include="RandomTestSet.h" />
     <ClInclude Include="Range.h" />
     <ClInclude Include="RangePrimitiveTest.h" />
     <ClInclude Include="RegEx.h" />
@@ -172,6 +173,7 @@
     </ClCompile>
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="NonDirectedGraph.cpp" />
+    <ClCompile Include="RandomTestSet.cpp" />
     <ClCompile Include="RegEx.cpp" />
     <ClCompile Include="Source.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>

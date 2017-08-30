@@ -26,7 +26,8 @@ public:
 	virtual void Generate()
 	{
 		test_generated_ = true;
-		current_value_ = range_->Generate();
+		range_->Generate();
+		current_value_ = range_->Get();
 	}
 	virtual void Print(std::ostream& _out = std::cout) const
 	{

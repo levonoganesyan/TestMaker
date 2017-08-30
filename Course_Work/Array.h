@@ -14,12 +14,15 @@ protected:
 	std::vector<Test*> array_;
 	std::string delimiter_;
 	std::string line_breaker_;
+	bool print_size_;
 public:
 	// Array( char );
 	Array(PrimitiveTest<int>*, std::function<Test*()>, std::string = " ", std::string = "\n");
 	Array(PrimitiveTest<int>*, Test*, std::string = " ", std::string = "\n");
 	virtual void Generate();
 	virtual void Print(std::ostream& = std::cout) const;
+	void PrintSize(bool);
+	int Size();
 	//virtual void Sort() const;
 	virtual Array* Clone() const;
 	virtual ~Array();

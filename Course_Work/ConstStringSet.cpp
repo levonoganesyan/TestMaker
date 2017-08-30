@@ -3,38 +3,57 @@
 ConstStringSet::ConstStringSet()
 {
 }
-ConstStringSet* ConstStringSet::Add( std::string _word )
+ConstStringSet* ConstStringSet::Add(std::string _word)
 {
-	set_.push_back(_word);
-	if ( set_.size() == 1 )
+	set_.insert(_word);
+	if (set_.size() == 1)
 	{
-		current_string_ = set_ [ 0 ];
+		current_string_ = *set_.begin();
 	}
+	elements.clear();
 	return this;
-} 
+}
+ConstStringSet* ConstStringSet::Add(char _char)
+{
+	std::string temp = "";
+	temp += _char;
+	set_.insert(temp);
+	if (set_.size() == 1)
+	{
+		current_string_ = *set_.begin();
+	}
+	elements.clear();
+	return this;
+}
 std::string ConstStringSet::Get()
 {
+	if (!test_generated_)
+	{
+		throw std::runtime_error("Get() must be called after Generate() in ConstStringSet.");
+	}
 	return current_string_;
 }
 void ConstStringSet::Generate()
 {
 	test_generated_ = true;
-	current_string_ = set_ [ Rand()%( set_.size() ) ];
+	if ( elements.size() == 0 )
+		elements.assign(set_.begin(), set_.end());
+	current_string_ = elements[ Rand()%( set_.size() ) ];
 }
 void ConstStringSet::Print(std::ostream& _out) const
 {
 	if (!test_generated_)
 	{
-		throw std::runtime_error("Print() must be called after Generate() in ConstStringGenerator.");
+		throw std::runtime_error("Print() must be called after Generate() in ConstStringSet.");
 	}
 	_out << current_string_;
 }
 ConstStringSet* ConstStringSet::Clone() const
 {
 	ConstStringSet set_to_return;
-	for (unsigned int i = 0; i < set_.size(); i++)
+	for (auto it : set_)
 	{
-		set_to_return.Add(set_[i]);
+		set_to_return.Add(it);
 	}
 	set_to_return.Generate();
 	return new ConstStringSet( set_to_return );

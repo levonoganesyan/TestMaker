@@ -37,6 +37,7 @@ public:
 protected:
 	PrimitiveTest<int> *number_of_vertices_, *number_of_edges_, *weight_;
 	int current_number_of_vertices_, current_number_of_edges_;
+	int number_of_real_added_edges_;
 	std::vector< std::set<int> > graph_;
 	std::function<void(std::ostream&)> print_function_;
 	bool acyclic_;
@@ -62,6 +63,7 @@ public:
 	virtual Graph* Acyclic(bool = true);
 	virtual Graph* Buckle(bool = true);
 	virtual Graph* PrintType(PRINT_TYPE);
+	virtual int VerticesCount();
 	virtual ~Graph();
 };
 

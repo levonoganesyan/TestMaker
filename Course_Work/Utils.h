@@ -35,51 +35,20 @@
 //	return false;
 //}
 //
-//char GetEscapedCharByString(std::string character)
-//{
-//	if (character == "\t")
-//		return '\t';
-//	else if (character == "\n")
-//		return '\n';
-//	else if (character == "\v")
-//		return '\v';
-//	else if (character == "\f")
-//		return '\f';
-//	else if (character == "\r")
-//		return '\r';
-//	else if (character == "\0")
-//		return '\0';
-//	else if (character == "\.")
-//		return '\.';
-//	else if (character == "\\")
-//		return '\\';
-//	else if (character == "\+")
-//		return '\+';
-//	else if (character == "\*")
-//		return '\*';
-//	else if (character == "\?")
-//		return '\?';
-//	else if (character == "\^")
-//		return '\^';
-//	else if (character == "\$")
-//		return '\$';
-//	else if (character == "\{")
-//		return '\{';
-//	else if (character == "\}")
-//		return '\}';
-//	else if (character == "\(")
-//		return '\(';
-//	else if (character == "\)")
-//		return '\)';
-//	else if (character == "\[")
-//		return '\[';
-//	else if (character == "\]")
-//		return '\]';
-//	else if (character == "\|")
-//		return '\|';
-//	else if (character == "\/")
-//		return '\/';
-//}
+inline static char GetEscapedCharByString(std::string character)
+{
+	if (character == "\\t")
+		return '\t';
+	else if (character == "\\n")
+		return '\n';
+	else if (character == "\\0")
+		return '\0';
+	else if (character == "\\\\")
+		return '\\';
+	else if (character == "\\/")
+		return '/';
+	return ' ';
+}
 class RNG
 {
 	static std::function<int()> rng_function_;

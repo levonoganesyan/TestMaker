@@ -6,12 +6,14 @@
 class ConstStringSet : public Test 
 {
 protected:
-	std::vector<std::string> set_;
+	std::set<std::string> set_;
+	std::vector<std::string> elements;
 	std::string current_string_;
 public:
 	ConstStringSet();
-	ConstStringSet* Add( std::string );
-	std::string Get();
+	virtual ConstStringSet* Add(std::string);
+	virtual ConstStringSet* Add( char );
+	virtual std::string Get();
 	virtual void Generate();
 	virtual void Print(std::ostream& = std::cout) const;
 	virtual ConstStringSet* Clone() const;

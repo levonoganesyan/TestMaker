@@ -7,6 +7,9 @@
 Graph::Graph(PrimitiveTest<int>* _number_of_vertices, PrimitiveTest<int>* _number_of_edges, PrimitiveTest<int>* _weights, bool _acyclic, bool _buckle)
 	: number_of_vertices_(_number_of_vertices)
 	, number_of_edges_(_number_of_edges)
+	, current_number_of_vertices_(0)
+	, current_number_of_edges_(0)
+	, number_of_real_added_edges_(0)
 	, weight_(_weights)
 	, acyclic_(_acyclic)
 	, buckle_(_buckle)
@@ -99,6 +102,10 @@ int Graph::AddVertex()
 }
 bool Graph::AddEdge()
 {
+	if (graph_.size() == 0)
+	{
+		throw "Graph size is equals to 0";
+	}
 	std::shared_ptr<PrimitiveTest<int>> first_vertex_num(new ConstPrimitiveTest<int>(0));
 	std::shared_ptr<PrimitiveTest<int>> last_vertex_num(new ConstPrimitiveTest<int>((int)graph_.size() - 1));
 	std::shared_ptr<Range<int>> rng(new Range<int>(first_vertex_num.get(), last_vertex_num.get()));
@@ -111,6 +118,7 @@ bool Graph::AddEdge()
 	if (!EdgeValidation(first_vertex, second_vertex))
 		return false;
 	this->AddEdge(first_vertex, second_vertex);
+	number_of_real_added_edges_++;
 	return true;
 }
 void Graph::GenerateGraph()
@@ -119,6 +127,14 @@ void Graph::GenerateGraph()
 	number_of_edges_->Generate();
 	current_number_of_vertices_ = number_of_vertices_->Get();
 	current_number_of_edges_ = number_of_edges_->Get();
+	if (current_number_of_vertices_ > 100'000'000)
+	{
+		throw std::exception("Number of Graph vertices must be less than 1e8");
+	}
+	if (current_number_of_edges_ > 1'000'000'000)
+	{
+		throw std::exception("Number of Graph edges must be less than 1e9");
+	}
 	graph_.clear();
 	for (int i = 0; i < current_number_of_vertices_; i++)
 	{
@@ -184,6 +200,10 @@ Graph * Graph::PrintType(PRINT_TYPE _print_type)
 		break;
 	}
 	return this;
+}
+int Graph::VerticesCount()
+{
+	return number_of_real_added_edges_;
 }
 Graph::~Graph()
 {

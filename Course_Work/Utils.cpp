@@ -4,8 +4,8 @@
 std::function<int()> RNG::rng_function_ = std::bind(&::rand);
 RNG::RNG() {};
 long long RNG::Rand()
-{
-	return rng_function_() * 1ll * rng_function_() * 1ll * rng_function_() * 1ll * rng_function_();
+{ // TODO
+	return rng_function_() * 1ll * rng_function_();// *1ll * rng_function_() * 1ll * rng_function_();
 }
 void RNG::RandomFunction(std::function<int()> _rng_function)
 {

@@ -5,17 +5,13 @@
 #include"PrimitiveTest.h"
 
 template <typename T>
-class Range{
+class Range : public Test
+{
 private:
 	void generate_helper()
 	{
-// 		begin_->Generate();
-// 		end_->Generate();
-// 		while ( begin_->Get() > end_->Get() )
-// 		{
-// 			begin_->Generate();
-// 			end_->Generate();
-// 		}
+ 		begin_->Generate();
+ 		end_->Generate();
 	}
 	//long long get_time()
 	//{
@@ -28,14 +24,27 @@ private:
 	//	return (((long long)hi) << 32LL) | lo;	
 	//}
 protected:
-	//std::shared_ptr<
 	PrimitiveTest<T> *begin_, *end_;
 public:
 	Range() : begin_(NULL), end_(NULL) { }
 	Range(PrimitiveTest<T>* _begin, PrimitiveTest<T>* _end) : begin_(_begin), end_(_end) {}
 	//Range(T _begin) : begin_(_begin), end_(_begin) {}
-	T Generate() {};
-// 	Range* Clone()
+	T Get() {};
+	Range* Clone() const
+	{
+		Range* range = new Range(begin_, end_);
+		return range;
+	}
+	virtual void Generate()
+	{
+		generate_helper();
+		RangeValidation();
+	}
+	virtual void Print(std::ostream& _out) const
+	{
+		_out << "[" << begin_->Get() << ", " << end_->Get() << "]";
+	}
+	// 	Range* Clone()
 // 	{
 // 		return new Range(begin_->Clone(), end_->Clone());
 // 	}
@@ -79,28 +88,20 @@ public:
 };
 
 template<>
-long long Range<long long>::Generate() {
-	RangeValidation();
-	generate_helper();
+long long Range<long long>::Get() {
 	return Rand() % (end_->Get() - begin_->Get() + 1) + begin_->Get();
 }
 template<>
-int Range<int>::Generate() {
-	RangeValidation();
-	generate_helper();
+int Range<int>::Get() {
 	return Rand() % (end_->Get() - begin_->Get() + 1) + begin_->Get();
 }
 template<>
-double Range<double>::Generate(){
-	RangeValidation();
-	generate_helper();
-	double random_double = (double)Rand() / RAND_MAX;
-	return ( (double)Rand() / RAND_MAX ) * ( end_->Get() - begin_->Get() ) + begin_->Get();
+double Range<double>::Get(){
+	double random_double = (double)Rand() / (RAND_MAX*RAND_MAX);
+	return ( random_double) * ( end_->Get() - begin_->Get() ) + begin_->Get();
 }
 template<>
-char Range<char>::Generate(){
-	RangeValidation();
-	generate_helper();
+char Range<char>::Get(){
 	return (char)(Rand()%( end_->Get() - begin_->Get() + 1 ) + begin_->Get());
 }
 

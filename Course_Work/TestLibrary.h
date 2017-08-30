@@ -36,22 +36,34 @@ PrimitiveTest<int>* hundred_millions = new ConstPrimitiveTest<int>(100000000);
 PrimitiveTest<int>* milliard = new ConstPrimitiveTest<int>(1000000000); 
 
 // global helpful functions
-
-// must to call clone() ??? 
-inline PrimitiveTest<int>* CreateNumber(PrimitiveTest<int>* _start, PrimitiveTest<int>* _end)
+template <typename T>
+inline PrimitiveTest<T>* CreateNumber(PrimitiveTest<T>* _start, PrimitiveTest<T>* _end)
 {
-	PrimitiveTest<int>* start_number = _start->Clone();
-	PrimitiveTest<int>* end_number = _end->Clone();
-	Range<int>* number_range = new Range<int>(start_number, end_number);
-	PrimitiveTest<int>* number = new RangePrimitiveTest<int>(number_range);
+	PrimitiveTest<T>* start_number = _start->Clone();
+	PrimitiveTest<T>* end_number = _end->Clone();
+	Range<T>* number_range = new Range<T>(start_number, end_number);
+	number_range->AddDeleteResponsibility(start_number);
+	number_range->AddDeleteResponsibility(end_number);
+	PrimitiveTest<T>* number = new RangePrimitiveTest<T>(number_range);
+	number->AddDeleteResponsibility(number_range);
 	return number;
 }
 
-inline PrimitiveTest<int>* CreateNumber(int _start, int _end)
+template <typename T = int>
+inline PrimitiveTest<T>* CreateNumber(T _start, T _end)
 {
-	ConstPrimitiveTest<int>* start_number = new ConstPrimitiveTest<int>(_start);
-	ConstPrimitiveTest<int>* end_number = new ConstPrimitiveTest<int>(_end);
-	return CreateNumber(start_number, end_number);
+	ConstPrimitiveTest<T>* start_number = new ConstPrimitiveTest<T>(_start);
+	ConstPrimitiveTest<T>* end_number = new ConstPrimitiveTest<T>(_end);
+	PrimitiveTest<T>* number = CreateNumber<T>(start_number, end_number);
+	number->AddDeleteResponsibility(start_number);
+	number->AddDeleteResponsibility(end_number);
+	return number;
+}
+
+template <typename T = int>
+inline PrimitiveTest<T>* CreateNumber(T _number)
+{
+	return CreateNumber(_number, _number);
 }
 
 #endif
