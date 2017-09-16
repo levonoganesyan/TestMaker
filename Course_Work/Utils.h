@@ -10,6 +10,8 @@
 #include<vector>
 #include<map>
 #include<set>
+#include<stack>
+#include<sstream>
 #include<iomanip>
 #include<functional>
 

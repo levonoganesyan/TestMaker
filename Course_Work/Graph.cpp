@@ -203,6 +203,10 @@ Graph * Graph::PrintType(PRINT_TYPE _print_type)
 }
 int Graph::VerticesCount()
 {
+	return (int)graph_.size();
+}
+int Graph::EdgesCount()
+{
 	return number_of_real_added_edges_;
 }
 Graph::~Graph()

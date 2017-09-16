@@ -3,6 +3,7 @@
 
 #include"PrimitiveTest.h"
 #include"Range.h"
+#include"ConstPrimitiveTest.h"
 
 template< typename T >
 class RangePrimitiveTest : public PrimitiveTest<T>

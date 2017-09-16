@@ -64,6 +64,7 @@ public:
 	virtual Graph* Buckle(bool = true);
 	virtual Graph* PrintType(PRINT_TYPE);
 	virtual int VerticesCount();
+	virtual int EdgesCount();
 	virtual ~Graph();
 };
 

@@ -16,26 +16,29 @@ protected:
 	int number_of_threads_;
 	std::string file_name_prefix_;
 	std::string extension_;
+	int start_from_;
 	void TestGenerating(int interval_start, int interval_end)
 	{
 		Test* local_thread = test_->Clone();
 		for (int i = interval_start; i < interval_end; i++)
 		{
 			std::filebuf fb;
-			fb.open(path_ + "\\" + file_name_prefix_ + std::to_string(i) + extension_, std::ios::out);
+			std::string string_to_append = (start_from_ + i < 100) ? ( (start_from_ + i < 10) ? "0" : "") + std::string("0") : "";
+			fb.open(path_ + "\\" + file_name_prefix_ +  string_to_append + std::to_string(start_from_ + i) + extension_, std::ios::out);
 			std::ostream os(&fb);
 			local_thread->Generate();
 			local_thread->Print(os);
 		}
 	}
 public:
-	TestCreator(Test* _test, int _times, std::string _path, int _number_of_threads = 1, std::string _file_name_prefix = std::string(), std::string _extension = ".txt")
+	TestCreator(Test* _test, int _times, std::string _path, int _number_of_threads = 1, std::string _file_name_prefix = std::string(), std::string _extension = ".txt", int _start_from = 0)
 		: test_(_test)
 		, path_(_path)
 		, times_(_times)
 		, number_of_threads_(_number_of_threads)
 		, file_name_prefix_(_file_name_prefix)
 		, extension_(_extension)
+		, start_from_(_start_from)
 	{
 
 	}
