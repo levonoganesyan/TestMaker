@@ -290,7 +290,7 @@ public:
 	}
 	virtual void Generate()
 	{
-		for (int i = 0; i < graphs_.size(); i++)
+		for ( unsigned int i = 0; i < graphs_.size(); i++)
 		{
 			delete graphs_[i];
 		}
@@ -333,7 +333,7 @@ public:
 	virtual void Print(std::ostream& _out) const
 	{
 		_out << used_vertices_ << ' ' << used_edges_ << std::endl;
-		for (int i = 0; i < graphs_.size(); i++)
+		for (unsigned int i = 0; i < graphs_.size(); i++)
 		{
 			graphs_[i]->Print(_out);
 		}
@@ -366,7 +366,7 @@ public:
 	}
 	virtual void Print(std::ostream& _out) const
 	{
-		for (int i = 0; i < word_.size(); i++)
+		for ( unsigned int i = 0; i < word_.size(); i++)
 		{
 			_out << word_[i]->Get();
 		}
@@ -447,7 +447,8 @@ void run_code()
 {
 	while (1)
 	{
-		RegEx* regex = new RegEx("@(AB|C)", 20);
+		//RegEx* regex = new RegEx("rgb\\(\\s*(-?\\d+|-?\\d*\\.\\d+(?=%))(%?)\\s*)", 10);
+		RegEx* regex = new RegEx("", 10);
 		std::cout << "Printing...\n";
 		regex->Generate();
 		regex->Print();
@@ -455,5 +456,13 @@ void run_code()
 		delete regex;
 		system("pause");
 		system("cls");
+        /*PrimitiveTest<int>* size_of_matrix = CreateNumber( 6, 6 );
+        Array* arr1 = new Array( size_of_matrix, CreateNumber( 10, 20 ) );
+		arr1->PrintSize(false);
+        Array* arr2 = new Array( size_of_matrix, arr1, "");
+        arr2->Generate();
+        arr2->Print();
+        system( "pause" );
+        system( "cls" );*/
 	}
 }

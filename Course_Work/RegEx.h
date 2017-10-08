@@ -87,20 +87,21 @@ protected:
 			}
 		}
 	public:
+        Terminal( char c )
+            : Terminal( std::string( 1, c ) )
+        {
+
+        }
 		Terminal(const std::string& _regex)
 			: regex_(_regex)
 			, css_(new ConstStringSet())
 		{
-			if (regex_[0] != '[' || regex_.back() != ']' || regex_.size() <= 2 || regex_[regex_.size() - 2] == '\\')
-			{
-				throw std::logic_error("Terminal regex is incorrect");
-			}
 			bool backslash = false;
 			bool negation = false;
 			std::set<char> chars_to_adding;
-			for (int i = 1; i < regex_.size() - 1; i++)
+			for (unsigned int i = 0; i < regex_.size(); i++)
 			{
-				if (i == 1 && regex_[i] == '^')
+				if (i == 0 && regex_[i] == '^')
 				{
 					negation = true;
 					continue;
@@ -109,7 +110,7 @@ protected:
 				{
 					std::string escaped_characters = "tn0\\/.?^$[]{}()|sSdDwW";
 					bool character_found = false;
-					for (int j = 0; j < escaped_characters.size(); j++)
+					for ( unsigned int j = 0; j < escaped_characters.size(); j++)
 					{
 						if (regex_[i] == escaped_characters[j])
 						{
@@ -145,7 +146,7 @@ protected:
 						css_->Add(ch);
 					}
 				}
-				if (i < regex_.size() - 3 && regex_[i + 1] == '-')
+				if (i < regex_.size() - 2 && regex_[i + 1] == '-')
 				{
 					for (char j = regex_[i]; j <= regex_[i + 2]; j++)
 					{
@@ -162,41 +163,8 @@ protected:
 					backslash = true;
 				}
 			}
-			/*if (regex_[regex_.size() - 3] != '-')
-			{
-				if (regex_[regex_.size() - 3] != '\\')
-				{
-					if (regex_[regex_.size() - 2] == '.')
-					{
-						for (int ch = 0; ch < 256; ch++)
-						{
-							css_->Add(ch);
-						}
-					}
-					else
-					{
-						chars_to_adding.insert(regex_[regex_.size() - 3]);
-						chars_to_adding.insert(regex_[regex_.size() - 2]);
-					}
-				}
-				else
-				{
-					if (regex_[regex_.size() - 2] == '.' )
-					{
-						css_->Add('.');
-					}
-					if (!isalpha(regex_[regex_.size() - 2]))
-					{
-						chars_to_adding.insert(regex_[regex_.size() - 2]);
-					}
-					else
-					{
-						add_to_css_by_escaped_char(chars_to_adding, regex_[regex_.size() - 2]);
-					}
-				}
-			}*/
-
-			for (int ch = 0; ch < 256; ch++)
+		
+            for (int ch = 0; ch < 256; ch++)
 			{
 				if (negation)
 				{
@@ -300,7 +268,7 @@ protected:
 		}
 		virtual void Generate()
 		{
-			current_element_ = Rand() % subexps_.size();
+			current_element_ = (int)(Rand() % subexps_.size());
 			subexps_[current_element_]->Generate();
 		}
 		virtual std::string Get()
@@ -308,10 +276,8 @@ protected:
 			return subexps_[current_element_]->Get();
 		}
 	};
-
-	std::stack<char> operations_;
-	std::stack<Expression*> expressions_;
-
+    
+    Expression* regex_exp;
 	std::string regex_;
 	std::string current_string_;
 
@@ -326,6 +292,17 @@ public:
 	virtual void MaxLenght(int _max_size);
 	virtual RegEx* Clone() const;
 	virtual ~RegEx();
+
+private:
+    enum SymbolType {
+        Term,
+        BinaryOperation,
+        UnaryOperation,
+        SpecialOp
+    };
+    SymbolType get_symbol_type( char c ) const;
+    Expression* str_to_expression(unsigned int start, unsigned int end );
+    Expression* AndAllExpression( std::stack<Expression*>& exp_stack );
 };
 
 #endif

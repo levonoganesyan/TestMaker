@@ -25,7 +25,8 @@ void Array::Generate()
 	for (int i = 0; i < array_.size(); i++)
 		delete array_[i];
 	array_.resize(array_size_->Get());
-	for ( int i = 0 ; i < array_size_->Get() ; i++ )
+    int size_of_array = array_size_->Get();
+	for ( int i = 0 ; i < size_of_array ; i++ )
 	{
 		if (example_ != NULL)
 		{

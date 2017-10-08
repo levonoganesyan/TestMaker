@@ -1,231 +1,206 @@
 #include"Test.h"
 #include"Range.h"
 #include"RegEx.h"
-std::string ReplaceString(std::string subject, const std::string& search,
-	const std::string& replace) {
-	size_t pos = 0;
-	while ((pos = subject.find(search, pos)) != std::string::npos) {
-		subject.replace(pos, search.length(), replace);
-		pos += replace.length();
-	}
-	return subject;
-}
-RegEx::RegEx(const std::string& _regex, int _max_lenght) : regex_(_regex), max_lenght_(_max_lenght)
+
+RegEx::SymbolType RegEx::get_symbol_type( char c ) const
 {
-	bool backslash = false;
-	for (int i = 0; i < regex_.size(); i++)
-	{
-		if (backslash)
-		{
-			backslash = false;
-			Expression* term = new Terminal(std::string("[") + regex_[i] + std::string("]"));
-			continue;
-		}
-		if (regex_[i] == '\\')
-		{
-			backslash = true;
-		}
-		else if (regex_[i] == '(')
-		{
-			operations_.push('(');
-		}
-		else if (regex_[i] == ')')
-		{
-			if (operations_.size() == 0 )
-			{
-				throw std::runtime_error("Closing bracket occurs without opening bracket");
-			}
+    switch ( c ) {
+    case '|':
+        // case '&':
+        return BinaryOperation;
+    case '*':
+    case '+':
+    case '?':
+    case '{':
+    case '}':
+        return UnaryOperation;
+    case '(':
+    case ')':
+    case '[':
+    case ']':
+        return SpecialOp;
+    default:
+        return Term;
+    }
+}
 
-			Or* or_operation = NULL;
-			if (expressions_.empty())
+RegEx::RegEx( const std::string& _regex, int _max_lenght ) : max_lenght_( _max_lenght ), regex_( _regex )
+{
+    regex_exp = str_to_expression( 0, (unsigned int)regex_.size() );
+}
+RegEx::Expression* RegEx::str_to_expression( unsigned int start, unsigned int end )
+{
+    Or *expression = new Or();
+    std::stack<Expression*> expressions;
+    for ( unsigned int i = start; i < end; i++ )
+    {
+        SymbolType type = get_symbol_type( regex_[ i ] );
+        if ( regex_[ i ] == '\\' )
+        {
+            if ( i + 1 >= end ) 
 			{
-				throw std::runtime_error("There shouldn't be empty brackets");
-			}
-			// or_operation->Add(expressions_.top());
-			// expressions_.pop();
-			while (operations_.top() != '(')
-			{
-				if (operations_.size() == 0)
+                throw std::runtime_error( "Incorrect \\ in the position" + std::to_string(i) );
+            }
+            i++;
+            expressions.push( new Terminal( std::string("\\") + regex_[ i ] ) );
+        }
+        else if ( type == Term  )
+        {
+            expressions.push( new Terminal( regex_[ i ] ) );
+        }
+        else if ( type == UnaryOperation )
+        {
+            unsigned int min_rep = 0, max_rep = max_lenght_;
+            if ( regex_[ i ] == '*' )
+            {
+            }
+            else if ( regex_[ i ] == '+' )
+            {
+                min_rep = 1;
+            }
+            else if ( regex_[ i ] == '?' )
+            {
+                max_rep = 1;
+            }
+            else if ( regex_[ i ] == '{' )
+            {
+                unsigned int closing_bracket = (unsigned int)regex_.find( '}', i + 1 );
+                if ( closing_bracket == std::string::npos ) 
 				{
-					throw std::runtime_error("Closing bracket occurs without opening bracket");
-				}
-				char op = operations_.top();
-				operations_.pop();
-				if (!operations_.empty())
+                    throw std::runtime_error( "No closing bracket for bracket " + std::to_string(i) );
+                }
+                std::istringstream iss( regex_.substr(i, closing_bracket - i + 1) );
+                char temp_value;
+				iss >> temp_value;
+				iss >> min_rep;
+                iss >> temp_value;
+				if (temp_value != '}')
 				{
-					if (operations_.top() == '(' && op == '&' )
+					iss >> max_rep;
+					if (temp_value != ',')
 					{
-						continue;
+						throw std::runtime_error("In figure brackets delimeter must be a comma");
 					}
 				}
-				if (op != '|' && op != '&')
+				else
 				{
-					throw std::runtime_error("Is anyone here except Or and And?");
+					max_rep = min_rep;
 				}
-				if (op == '&')
+				i = closing_bracket;
+            }
+			if (expressions.empty())
+			{
+				throw std::runtime_error("Expressions must not be empty! At position " + std::to_string(i));
+			}
+            Expression *current_exp = expressions.top();
+            expressions.pop();
+            expressions.push( new Repeat( current_exp, new RangePrimitiveTest<int>( min_rep, max_rep ) ) );
+        }
+        else if ( type == BinaryOperation )
+        {
+            expression->Add( AndAllExpression( expressions ) );
+        }
+        else if ( type == SpecialOp )
+        {
+            if ( regex_[ i ] == '(' )
+            {
+                unsigned int brackets_count = 1;
+                unsigned int last_bracket_pos = i + 1;
+                for ( last_bracket_pos; last_bracket_pos < regex_.size() && brackets_count; last_bracket_pos++ ) 
 				{
-					if (or_operation != NULL)
+                    if ( regex_[ last_bracket_pos ] == '\\' ) 
 					{
-						expressions_.push(or_operation);
-					}
-					or_operation = NULL;
-					if (expressions_.size() < 2)
+                        ++last_bracket_pos;
+                    }
+                    else if ( regex_[ last_bracket_pos ] == '(' ) 
 					{
-						throw std::runtime_error("And must be used on 2 Expressions");
-					}
-					Expression* first = expressions_.top();
-					expressions_.pop();
-					Expression* second = expressions_.top();
-					expressions_.pop();
-					expressions_.push(new And(second, first));
-
-				}
-				else if (op == '|')
+                        ++brackets_count;
+                    }
+                    else if ( regex_[ last_bracket_pos ] == ')' ) 
+					{
+                        --brackets_count;
+                    }
+                }
+                if ( brackets_count != 0 ) 
 				{
-					if (or_operation == NULL)
-						or_operation = new Or();
-					or_operation->Add(expressions_.top());
-					expressions_.pop();
-				}
-			}
-			operations_.pop();
-		}
-		else if (regex_[i] == '[')
-		{
-			int start_point = i++;
-			while (regex_[i] != ']' && regex_[i-1] != '\\')
-			{
-				i++;
-				if (regex_.size() == i)
+                    throw std::runtime_error( "Wrong quantity of braceses from " + std::to_string(i) );
+                }
+                expressions.push( str_to_expression( i + 1, last_bracket_pos - 1 ) );
+                i = last_bracket_pos - 1;
+            }
+            if ( regex_[ i ] == '[' )
+            {
+                Expression *set_exp = NULL;
+                for ( unsigned int j = i + 1; j < regex_.size(); j++ ) 
 				{
-					throw std::runtime_error("There is no closing square bracket");
-				}
-			}
-			int end_point = i;
-			Expression* term = new Terminal(regex_.substr(start_point, end_point - start_point + 1));
-			expressions_.push(term);
-		}
-		else if (regex_[i] == '{')
-		{
-			int start_point = i;
-			while (regex_[i] != '}')
-			{
-				i++;
-				if (regex_.size() == i)
+                    if ( regex_[ j ] == '\\' ) 
+					{
+                        ++j;
+                    }
+                    else if ( regex_[ j ] == ']' ) 
+					{
+                        set_exp = new Terminal( regex_.substr( i + 1, j - i - 1 ) );
+                        i = j;
+                        break;
+                    }
+                }
+                if ( set_exp ) 
 				{
-					throw std::runtime_error("There is no closing figure bracket");
-				}
-			}
-			int end_point = i;
-			std::string repeat_str = regex_.substr(start_point, end_point - start_point + 1);
-			std::istringstream iss(repeat_str);
-			char temp;
-			int start, end;
-			iss >> temp;
-			iss >> start;
-			iss >> temp;
-			if (temp != ',')
-			{
-				throw std::runtime_error("Comma must be used in figure brackets");
-			}
-			iss >> end;
-			iss >> temp;
-			/*if (iss.str() != "")
-			{
-				throw std::runtime_error("Something wrong in figure brackets. Remaining string: " + iss.str());
-			}*/
-			if (expressions_.empty())
-			{
-				throw std::runtime_error("There shouldn't be figure brackets in the start");
-			}
-			RangePrimitiveTest<int>* count = new RangePrimitiveTest<int>(start, end);
-			Expression* repeat = new Repeat(expressions_.top(), count);
-			expressions_.pop();
-			expressions_.push(repeat);
-		}
-		else if (regex_[i] == '|')
-		{
-			while (operations_.top() == '&')
-			{
-				if (expressions_.size() < 2)
+                    expressions.push( set_exp );
+                }
+                else 
 				{
-					throw std::runtime_error("And must be used on 2 Expressions");
-				}
-				operations_.pop();
-				Expression* first = expressions_.top();
-				expressions_.pop();
-				Expression* second = expressions_.top();
-				expressions_.pop();
-				expressions_.push(new And(first, second));
-			}
-			operations_.push('|');
-		}
-		else if (regex_[i] == '+')
-		{
-			RangePrimitiveTest<int>* count = new RangePrimitiveTest<int>(1, max_lenght_);
-			Expression* repeat = new Repeat(expressions_.top(), count);
-			expressions_.pop();
-			expressions_.push(repeat);
-		}
-		else if (regex_[i] == '*')
-		{
-			RangePrimitiveTest<int>* count = new RangePrimitiveTest<int>(0, max_lenght_);
-			Expression* repeat = new Repeat(expressions_.top(), count);
-			expressions_.pop();
-			expressions_.push(repeat);
-		}
-		else if (regex_[i] == '?')
-		{
-			RangePrimitiveTest<int>* count = new RangePrimitiveTest<int>(0, 1);
-			Expression* repeat = new Repeat(expressions_.top(), count);
-			expressions_.pop();
-			expressions_.push(repeat);
-		}
-		else
-		{
-			if ( i != 0 )
-				operations_.push('&');
-			expressions_.push(new Terminal(std::string("[") + regex_[i] + std::string("]")));
-		}
-	}
-	Expression* first = expressions_.top();
-	expressions_.pop();
-	while( !expressions_.empty() )
+                    throw std::runtime_error( "Wrong quantity of brackets from " + std::to_string(i));
+                }
+            }
+        }
+    }
+    if ( !expressions.empty() ) 
 	{
-		first = new And(expressions_.top(), first);
-		expressions_.pop();
-	}
-	expressions_.push(first);
-	if (expressions_.size() != 1 || operations_.size() != 0)
+        expression->Add( AndAllExpression( expressions ) );
+    }
+    return expression;
+}
+RegEx::Expression * RegEx::AndAllExpression( std::stack<RegEx::Expression*>& _exp_stack )
+{
+    if ( _exp_stack.empty() )
+    {
+        throw std::runtime_error( "There are no expressions in stack" );
+    }
+    Expression *result_exp = _exp_stack.top();
+    _exp_stack.pop();
+    while ( !_exp_stack.empty() ) 
 	{
-		throw std::runtime_error("There must be only one element into the regex stack");
-	}
+        result_exp = new And( _exp_stack.top(), result_exp );
+        _exp_stack.pop();
+    }
+    return result_exp;
 }
 void RegEx::Generate()
 {
-	test_generated_ = true;
-	expressions_.top()->Generate();
-	current_string_ = expressions_.top()->Get();
+    test_generated_ = true;
+    regex_exp->Generate();
+    current_string_ = regex_exp->Get();
 }
 std::string RegEx::Get()
 {
-	if (!test_generated_)
-	{
-		throw std::runtime_error("Print() must be called after Generate() in RegEx.");
-	}
-	return current_string_;
+    if ( !test_generated_ )
+    {
+        throw std::runtime_error( "Print() must be called after Generate() in RegEx." );
+    }
+    return current_string_;
 }
-void RegEx::Print(std::ostream& _out) const
+void RegEx::Print( std::ostream& _out ) const
 {
-	_out << current_string_;
+    _out << current_string_;
 }
-void RegEx::MaxLenght(int _max_lenght)
+void RegEx::MaxLenght( int _max_lenght )
 {
-	max_lenght_ = _max_lenght;
+    max_lenght_ = _max_lenght;
 }
 RegEx* RegEx::Clone() const
 {
-	return NULL;
+    return NULL;
 }
 RegEx::~RegEx()
 {
