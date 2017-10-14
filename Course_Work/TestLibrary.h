@@ -2,18 +2,17 @@
 #define TEST_LIBRARY__
 
 #include"Test.h"
+#include"PrimitiveTest.h"
 #include"CompositeTest.h"
 #include"Range.h"
 #include"Array.h"
+#include"Matrix.h"
 #include"Delimiter.h"
 #include"ConstStringSet.h"
-#include"PrimitiveTest.h"
 #include"ConstPrimitiveTest.h"
 #include"RangePrimitiveTest.h"
 
 #include"Graph.h"
-#include"NonDirectedGraph.h"
-#include"DirectedGraph.h"
 
 #include"RegEx.h"
 #include"Grammar.h"

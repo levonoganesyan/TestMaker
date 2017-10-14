@@ -35,38 +35,43 @@ public:
 	v{n} u{n}
 	*/
 protected:
-	PrimitiveTest<int> *number_of_vertices_, *number_of_edges_, *weight_;
-	int current_number_of_vertices_, current_number_of_edges_;
-	int number_of_real_added_edges_;
-	std::vector< std::set<int> > graph_;
+	PrimitiveTest<int> *number_of_vertices_, *number_of_edges_;
+	Test* weight_;
+	long long current_number_of_vertices_, current_number_of_edges_;
+	std::vector< std::set<long long> > graph_;
+	std::set<std::pair<long long, long long> >  fixed_tree_;
 	std::function<void(std::ostream&)> print_function_;
-	bool acyclic_;
+	long long number_of_already_added_edges_;
 	bool buckle_;
+	bool directed_;
 	PRINT_TYPE print_type_;
 	
-	virtual void GenerateGraph();
-	virtual int AddVertex();
 	virtual bool AddEdge();
-	virtual bool EdgeValidation(int, int) = 0;
-	virtual void AddEdge(int, int) = 0;
+	virtual void AddEdge(long long, long long);
+	virtual bool RemoveEdge();
+	virtual void RemoveEdge(long long, long long);
+	virtual int  AddVertex();
+	virtual void FixingTree();
+	virtual void GenerateGraph();
+	virtual void GenerateSmallGraph();
+	virtual void GenerateLargeGraph();
+	virtual void CreateTree();
 	virtual std::vector<std::vector<bool> > ConnectionMatrix();
 	virtual void PrintConnectionMatrix(std::ostream&);
-	virtual std::vector<std::set<int> > ConnectionList();
+	virtual std::vector<std::set<long long> > ConnectionList();
 	virtual void PrintConnectionList(std::ostream&);
-	virtual std::vector<std::pair<int, int> > ListOfEdges();
+	virtual std::vector<std::pair<long long, long long> > ListOfEdges();
 	virtual void PrintListOfEdges(std::ostream&);
 public:
-	Graph(PrimitiveTest<int>*, PrimitiveTest<int>*, PrimitiveTest<int>* = NULL, bool = false, bool = false);
+	Graph(PrimitiveTest<int>*, PrimitiveTest<int>*, Test* = NULL, bool = false, bool = false);
 	virtual void Generate();
 	virtual void Print(std::ostream& = std::cout) const;
-	virtual Graph* Clone() const = 0;
-	virtual Graph* Acyclic(bool = true);
+	virtual Graph* Clone() const;
 	virtual Graph* Buckle(bool = true);
 	virtual Graph* PrintType(PRINT_TYPE);
-	virtual int VerticesCount();
-	virtual int EdgesCount();
+	virtual long long VerticesCount();
+	virtual long long EdgesCount();
 	virtual ~Graph();
 };
-
 
 #endif

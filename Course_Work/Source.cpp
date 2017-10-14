@@ -238,112 +238,112 @@ public:
 		delete arr;
 	}
 };
-class Forest : public Test
-{
-	std::vector<int> available_vertexes_;
-	PrimitiveTest<int>* number_of_vertices_;
-	PrimitiveTest<int>* number_of_edges_;
-	class MyGraph : public NonDirectedGraph
-	{
-		std::map<int, int> vertices_map_;
-		std::vector<int> available_vertexes_;
-		virtual void Print(std::ostream& _out) const
-		{
-		}
-	public:
-		MyGraph(std::vector<int>& _available_vertexes, PrimitiveTest<int>* _number_of_vertices, PrimitiveTest<int>* _number_of_edges, PrimitiveTest<int>* _weights, bool _acyclic, bool _buckle)
-			: NonDirectedGraph(_number_of_vertices, _number_of_edges, _weights, _acyclic, _buckle)
-			, available_vertexes_(_available_vertexes)
-		{
-			Generate();
-			current_number_of_vertices_ = VerticesCount();
-			for (int i = 0; i < current_number_of_vertices_; i++)
-			{
-				vertices_map_[i] = _available_vertexes.back();
-				_available_vertexes.pop_back();
-			}
-		}
-
-		virtual void Print(std::ostream& _out)
-		{
-			std::vector<std::pair<int, int> > list_of_edges = ListOfEdges();
-			for (unsigned int i = 0; i < list_of_edges.size(); i++)
-			{
-				_out << vertices_map_[list_of_edges[i].first] + 1 << ' '
-					<< vertices_map_[list_of_edges[i].second] + 1 << std::endl;
-			}
-		}
-		virtual Test* Clone()
-		{
-			MyGraph* graph = new MyGraph(available_vertexes_, number_of_vertices_, number_of_edges_, NULL, true, false);
-			return graph;
-		}
-	};
-	std::vector<MyGraph*> graphs_;
-	int used_vertices_;
-	int used_edges_;
-public:
-	Forest(PrimitiveTest<int>* _number_of_vertices, PrimitiveTest<int>* _number_of_edges)
-		: number_of_vertices_(_number_of_vertices)
-		, number_of_edges_(_number_of_edges)
-	{
-	}
-	virtual void Generate()
-	{
-		for ( unsigned int i = 0; i < graphs_.size(); i++)
-		{
-			delete graphs_[i];
-		}
-		graphs_.clear();
-		number_of_vertices_->Generate();
-		number_of_edges_->Generate();
-		int current_number_of_vertices = number_of_vertices_->Get();
-		int current_number_of_edges = number_of_edges_->Get();
-		available_vertexes_.clear();
-		available_vertexes_.resize(current_number_of_vertices);
-		for (int i = 0; i < current_number_of_vertices; i++)
-		{
-			available_vertexes_[i] = i;
-		}
-		std::random_shuffle(available_vertexes_.begin(), available_vertexes_.end());
-		while (current_number_of_vertices != 0)
-		{
-			int number_of_vertices_current_tree = Rand() % (current_number_of_vertices + 1);
-			while (number_of_vertices_current_tree == 0)
-			{
-				number_of_vertices_current_tree = Rand() % (current_number_of_vertices + 1);
-			}
-			current_number_of_vertices -= number_of_vertices_current_tree;
-			int number_of_edges_current_tree = Rand() % (current_number_of_edges + 1);
-			graphs_.push_back(
-				new MyGraph(
-					available_vertexes_,
-					CreateNumber(number_of_vertices_current_tree, number_of_vertices_current_tree),
-					CreateNumber(number_of_edges_current_tree, number_of_edges_current_tree),
-					nullptr,
-					true,
-					false
-				)
-			);
-			current_number_of_edges -= graphs_.back()->EdgesCount();
-		}
-		used_vertices_ = number_of_vertices_->Get() - current_number_of_vertices;
-		used_edges_ = number_of_edges_->Get() - current_number_of_edges;
-	}
-	virtual void Print(std::ostream& _out) const
-	{
-		_out << used_vertices_ << ' ' << used_edges_ << std::endl;
-		for (unsigned int i = 0; i < graphs_.size(); i++)
-		{
-			graphs_[i]->Print(_out);
-		}
-	}
-	virtual Test* Clone() const
-	{
-		return new Forest(number_of_vertices_, number_of_edges_);
-	}
-
-};
+//class Forest : public Test
+//{
+//	std::vector<int> available_vertexes_;
+//	PrimitiveTest<int>* number_of_vertices_;
+//	PrimitiveTest<int>* number_of_edges_;
+//	class MyGraph : public NonDirectedGraph
+//	{
+//		std::map<int, int> vertices_map_;
+//		std::vector<int> available_vertexes_;
+//		virtual void Print(std::ostream& _out) const
+//		{
+//		}
+//	public:
+//		MyGraph(std::vector<int>& _available_vertexes, PrimitiveTest<int>* _number_of_vertices, PrimitiveTest<int>* _number_of_edges, PrimitiveTest<int>* _weights, bool _acyclic, bool _buckle)
+//			: NonDirectedGraph(_number_of_vertices, _number_of_edges, _weights, _acyclic, _buckle)
+//			, available_vertexes_(_available_vertexes)
+//		{
+//			Generate();
+//			current_number_of_vertices_ = VerticesCount();
+//			for (int i = 0; i < current_number_of_vertices_; i++)
+//			{
+//				vertices_map_[i] = _available_vertexes.back();
+//				_available_vertexes.pop_back();
+//			}
+//		}
+//
+//		virtual void Print(std::ostream& _out)
+//		{
+//			std::vector<std::pair<int, int> > list_of_edges = ListOfEdges();
+//			for (unsigned int i = 0; i < list_of_edges.size(); i++)
+//			{
+//				_out << vertices_map_[list_of_edges[i].first] + 1 << ' '
+//					<< vertices_map_[list_of_edges[i].second] + 1 << std::endl;
+//			}
+//		}
+//		virtual Test* Clone()
+//		{
+//			MyGraph* graph = new MyGraph(available_vertexes_, number_of_vertices_, number_of_edges_, NULL, true, false);
+//			return graph;
+//		}
+//	};
+//	std::vector<MyGraph*> graphs_;
+//	int used_vertices_;
+//	int used_edges_;
+//public:
+//	Forest(PrimitiveTest<int>* _number_of_vertices, PrimitiveTest<int>* _number_of_edges)
+//		: number_of_vertices_(_number_of_vertices)
+//		, number_of_edges_(_number_of_edges)
+//	{
+//	}
+//	virtual void Generate()
+//	{
+//		for ( unsigned int i = 0; i < graphs_.size(); i++)
+//		{
+//			delete graphs_[i];
+//		}
+//		graphs_.clear();
+//		number_of_vertices_->Generate();
+//		number_of_edges_->Generate();
+//		int current_number_of_vertices = number_of_vertices_->Get();
+//		int current_number_of_edges = number_of_edges_->Get();
+//		available_vertexes_.clear();
+//		available_vertexes_.resize(current_number_of_vertices);
+//		for (int i = 0; i < current_number_of_vertices; i++)
+//		{
+//			available_vertexes_[i] = i;
+//		}
+//		std::random_shuffle(available_vertexes_.begin(), available_vertexes_.end());
+//		while (current_number_of_vertices != 0)
+//		{
+//			int number_of_vertices_current_tree = Rand() % (current_number_of_vertices + 1);
+//			while (number_of_vertices_current_tree == 0)
+//			{
+//				number_of_vertices_current_tree = Rand() % (current_number_of_vertices + 1);
+//			}
+//			current_number_of_vertices -= number_of_vertices_current_tree;
+//			int number_of_edges_current_tree = Rand() % (current_number_of_edges + 1);
+//			graphs_.push_back(
+//				new MyGraph(
+//					available_vertexes_,
+//					CreateNumber(number_of_vertices_current_tree, number_of_vertices_current_tree),
+//					CreateNumber(number_of_edges_current_tree, number_of_edges_current_tree),
+//					nullptr,
+//					true,
+//					false
+//				)
+//			);
+//			current_number_of_edges -= graphs_.back()->EdgesCount();
+//		}
+//		used_vertices_ = number_of_vertices_->Get() - current_number_of_vertices;
+//		used_edges_ = number_of_edges_->Get() - current_number_of_edges;
+//	}
+//	virtual void Print(std::ostream& _out) const
+//	{
+//		_out << used_vertices_ << ' ' << used_edges_ << std::endl;
+//		for (unsigned int i = 0; i < graphs_.size(); i++)
+//		{
+//			graphs_[i]->Print(_out);
+//		}
+//	}
+//	virtual Test* Clone() const
+//	{
+//		return new Forest(number_of_vertices_, number_of_edges_);
+//	}
+//
+//};
 class Palindrome : public Test
 {
 	std::vector<RangePrimitiveTest<char>*> word_;
@@ -427,16 +427,16 @@ void problem_f()
 	TestCreator tc(test, 200, "D:/tests/f/tests", 1, "", ".in");
 	tc.Make();
 }
-void problem_h()
-{
-	Forest* test1 = new Forest(CreateNumber(1, 100000), CreateNumber(1, 100000));
-	TestCreator tc1(test1, 50, "D:/tests/h/tests", 1, "", ".in");
-	tc1.Make();
-	Graph* test2 = new NonDirectedGraph(CreateNumber(1, 100000), CreateNumber(1, 100000));
-	test2->PrintType(Graph::LIST_OF_EDGES);
-	TestCreator tc2(test2, 50, "D:/tests/h/tests", 1, "", ".in", 50);
-	tc2.Make();
-}
+//void problem_h()
+//{
+//	Forest* test1 = new Forest(CreateNumber(1, 100000), CreateNumber(1, 100000));
+//	TestCreator tc1(test1, 50, "D:/tests/h/tests", 1, "", ".in");
+//	tc1.Make();
+//	Graph* test2 = new NonDirectedGraph(CreateNumber(1, 100000), CreateNumber(1, 100000));
+//	test2->PrintType(Graph::LIST_OF_EDGES);
+//	TestCreator tc2(test2, 50, "D:/tests/h/tests", 1, "", ".in", 50);
+//	tc2.Make();
+//}
 void problem_g()
 {
 	Quadrilateral* test = new Quadrilateral();
@@ -448,14 +448,17 @@ void run_code()
 	while (1)
 	{
 		//RegEx* regex = new RegEx("rgb\\(\\s*(-?\\d+|-?\\d*\\.\\d+(?=%))(%?)\\s*)", 10);
-		RegEx* regex = new RegEx("", 10);
+		Matrix* matrix = new Matrix(CreateNumber(5), CreateNumber(10));
+		matrix->Generate();
+		matrix->Print();
+		/*RegEx* regex = new RegEx("", 10);
 		std::cout << "Printing...\n";
 		regex->Generate();
 		regex->Print();
 		std::cout << "\nPrinted...\n";
 		delete regex;
 		system("pause");
-		system("cls");
+		system("cls");*/
         /*PrimitiveTest<int>* size_of_matrix = CreateNumber( 6, 6 );
         Array* arr1 = new Array( size_of_matrix, CreateNumber( 10, 20 ) );
 		arr1->PrintSize(false);

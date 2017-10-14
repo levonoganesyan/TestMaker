@@ -3,20 +3,22 @@
 #include"Array.h"
 
 Array::Array(PrimitiveTest<int>* _array_size_to, std::function<Test*()> _generation_function, std::string _delimiter, std::string _line_breaker)
-	: array_size_(_array_size_to), generation_function_(_generation_function), example_(NULL), delimiter_(_delimiter), line_breaker_(_line_breaker), print_size_(true)
+	: array_size_(_array_size_to)
+	, generation_function_(_generation_function)
+	, example_(NULL)
+	, delimiter_(_delimiter)
+	, line_breaker_(_line_breaker)
+	, print_size_(true)
 {
-	//std::shared_ptr<Int> s_ptr_io();
-	//array_size_ = _array_size_to;
-	//std::shared_ptr<Int> _array_size_into(io);
-	// this->Generate();
 }
 Array::Array(PrimitiveTest<int>* _array_size_to, Test* _example, std::string _delimiter, std::string _line_breaker)
-	: array_size_(_array_size_to), example_(_example), delimiter_(_delimiter), line_breaker_(_line_breaker), print_size_(true)
+	: array_size_(_array_size_to)
+	, generation_function_(NULL)
+	, example_(_example)
+	, delimiter_(_delimiter)
+	, line_breaker_(_line_breaker)
+	, print_size_(true)
 {
-	//std::shared_ptr<Int> s_ptr_io();
-	//array_size_ = _array_size_to;
-	//std::shared_ptr<Int> _array_size_into(io);
-	// this->Generate();
 }
 void Array::Generate() 
 {
@@ -24,9 +26,13 @@ void Array::Generate()
 	array_size_->Generate();
 	for (int i = 0; i < array_.size(); i++)
 		delete array_[i];
-	array_.resize(array_size_->Get());
-    int size_of_array = array_size_->Get();
-	for ( int i = 0 ; i < size_of_array ; i++ )
+	int n = array_size_->Get();
+	if (n <= 0)
+	{
+		throw std::runtime_error("Array size must be strongly positive");
+	}
+	array_.resize(n);
+	for ( int i = 0 ; i < n ; i++ )
 	{
 		if (example_ != NULL)
 		{
@@ -63,10 +69,13 @@ void Array::Print(std::ostream& _out) const
 }
 Array* Array::Clone() const
 { 
-	Array* arr = new Array(array_size_, generation_function_, delimiter_, line_breaker_);
-	if (example_ != NULL)
+	Array* arr;
+	if (example_ == NULL)
 	{
-		delete arr;
+		arr = new Array(array_size_, generation_function_, delimiter_, line_breaker_);
+	}
+	else
+	{
 		arr = new Array(array_size_, example_, delimiter_, line_breaker_);
 	}
 	arr->print_size_ = print_size_;

@@ -1,5 +1,6 @@
 #ifndef UTILS__
 #define UTILS__
+#pragma warning(disable: 4244)
 
 #include<cstdlib>
 #include<memory>
@@ -63,6 +64,10 @@ public:
 inline long long Rand()
 {
 	return RNG::Rand();
+}
+inline long long Rand_with_mod( int mod )
+{
+	return RNG::Rand() % mod;
 }
 
 #endif
