@@ -1,0 +1,71 @@
+\hypertarget{class_grammar}{}\section{Grammar Class Reference}
+\label{class_grammar}\index{Grammar@{Grammar}}
+Inheritance diagram for Grammar\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_grammar}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_grammar_a5ae4e5db880c0167b6d70934308ecdf7}\label{class_grammar_a5ae4e5db880c0167b6d70934308ecdf7}} 
+{\bfseries Grammar} (const std\+::string \&, const std\+::string \&)
+\item 
+\mbox{\Hypertarget{class_grammar_aa3769b85b2ca3eba1d0af9cd77aa9b9d}\label{class_grammar_aa3769b85b2ca3eba1d0af9cd77aa9b9d}} 
+virtual void {\bfseries Generator} (const std\+::string \&)
+\item 
+\mbox{\Hypertarget{class_grammar_a186953ca011692489432971cec4965f7}\label{class_grammar_a186953ca011692489432971cec4965f7}} 
+virtual void {\bfseries Generate} ()
+\item 
+\mbox{\Hypertarget{class_grammar_a79f12115faf53b231e34b1e40e443664}\label{class_grammar_a79f12115faf53b231e34b1e40e443664}} 
+virtual void {\bfseries Non\+Terms\+Parsing} (const std\+::string \&)
+\item 
+\mbox{\Hypertarget{class_grammar_a782f41eac47978d515b4ba5fa06c37dd}\label{class_grammar_a782f41eac47978d515b4ba5fa06c37dd}} 
+virtual void {\bfseries Start\+Non\+Term\+Parsing} (const std\+::string \&)
+\item 
+\mbox{\Hypertarget{class_grammar_a119ada593ad12ff9940a49eb1f71c9f4}\label{class_grammar_a119ada593ad12ff9940a49eb1f71c9f4}} 
+virtual void {\bfseries Terms\+Parsing} (const std\+::string \&)
+\item 
+\mbox{\Hypertarget{class_grammar_a251593d0e88bd99a1c8f55b065f4d39b}\label{class_grammar_a251593d0e88bd99a1c8f55b065f4d39b}} 
+virtual void {\bfseries Rule\+Parsing} (const std\+::string \&)
+\item 
+\mbox{\Hypertarget{class_grammar_aaf6ab2ee1f6988426f6796c12451e208}\label{class_grammar_aaf6ab2ee1f6988426f6796c12451e208}} 
+virtual void {\bfseries Grammar\+Parsing} ()
+\item 
+\mbox{\Hypertarget{class_grammar_a88135fd39f2bac99c761b1feef9d8c00}\label{class_grammar_a88135fd39f2bac99c761b1feef9d8c00}} 
+virtual void {\bfseries Print} (std\+::ostream \&=std\+::cout) const
+\item 
+\mbox{\Hypertarget{class_grammar_aecd99c02c9e13da44969cd9b07db7dcc}\label{class_grammar_aecd99c02c9e13da44969cd9b07db7dcc}} 
+virtual \hyperlink{class_grammar}{Grammar} $\ast$ {\bfseries Clone} () const
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_grammar_ad48a06416c658caaab2c6a7d6c538bd9}\label{class_grammar_ad48a06416c658caaab2c6a7d6c538bd9}} 
+std\+::string {\bfseries grammar\+\_\+}
+\item 
+\mbox{\Hypertarget{class_grammar_a660a540727807dfd9c3152b245377544}\label{class_grammar_a660a540727807dfd9c3152b245377544}} 
+std\+::string {\bfseries rules\+\_\+}
+\item 
+\mbox{\Hypertarget{class_grammar_a124b3128fe6b0df7845a5e9fefb1f530}\label{class_grammar_a124b3128fe6b0df7845a5e9fefb1f530}} 
+std\+::map$<$ std\+::string, std\+::vector$<$ std\+::string $>$ $>$ {\bfseries parsed\+\_\+rules\+\_\+}
+\item 
+\mbox{\Hypertarget{class_grammar_a4f20c5e5df17ca2c5ad53aaec4240b0b}\label{class_grammar_a4f20c5e5df17ca2c5ad53aaec4240b0b}} 
+std\+::set$<$ std\+::string $>$ {\bfseries names\+\_\+of\+\_\+nonterm\+\_\+}
+\item 
+\mbox{\Hypertarget{class_grammar_a7664c4481949296f8a706de7049a6cf2}\label{class_grammar_a7664c4481949296f8a706de7049a6cf2}} 
+std\+::set$<$ char $>$ {\bfseries terms\+\_\+}
+\item 
+\mbox{\Hypertarget{class_grammar_af02a912c7e3b2fa19049bf7fb3f4b815}\label{class_grammar_af02a912c7e3b2fa19049bf7fb3f4b815}} 
+std\+::string {\bfseries start\+\_\+nonterm\+\_\+}
+\item 
+\mbox{\Hypertarget{class_grammar_a1be4add6568bdc37256a7affba21fbca}\label{class_grammar_a1be4add6568bdc37256a7affba21fbca}} 
+std\+::string {\bfseries current\+\_\+string\+\_\+}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Grammar.\+h\item 
+Grammar.\+cpp\end{DoxyCompactItemize}

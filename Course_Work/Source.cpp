@@ -448,6 +448,18 @@ void run_code()
 	while (1)
 	{
 		//RegEx* regex = new RegEx("rgb\\(\\s*(-?\\d+|-?\\d*\\.\\d+(?=%))(%?)\\s*)", 10);
+		auto a = CreateNumber(0, 99);
+		std::vector<int> vec(100);
+		for (int i = 0; i < 100000000; i++)
+		{
+			a->Generate();
+			vec[a->Get()]++;
+		}
+		for (int i = 0; i < 100; i++)
+		{
+			std::cout << i << "\t" << vec[ i ] << std::endl;
+		}
+		return;
 		Matrix* matrix = new Matrix(CreateNumber(5), CreateNumber(10));
 		matrix->Generate();
 		matrix->Print();

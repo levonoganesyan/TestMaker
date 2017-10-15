@@ -12,10 +12,7 @@ RandomTestSet * RandomTestSet::Add(Test * _test)
 
 Test * RandomTestSet::Get()
 {
-	if (!test_generated_)
-	{
-		throw std::runtime_error("Get() must be called after Generate() in RandomTestSet.");
-	}
+	THROW(!test_generated_, "Get() must be called after Generate()");
 	return current_test_;
 }
 
@@ -27,10 +24,7 @@ void RandomTestSet::Generate()
 
 void RandomTestSet::Print(std::ostream & _out) const
 {
-	if (!test_generated_)
-	{
-		throw std::runtime_error("Print() must be called after Generate() in RandomTestSet.");
-	}
+	THROW(!test_generated_, "Print() must be called after Generate()");
 	current_test_->Print(_out);
 }
 

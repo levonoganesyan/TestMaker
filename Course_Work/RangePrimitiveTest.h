@@ -22,6 +22,7 @@ public:
 	}
 	virtual T Get()
 	{
+		THROW(!test_generated_, "Get() must be called after Generate()");
 		return current_value_;
 	}
 	virtual void Generate()
@@ -32,10 +33,7 @@ public:
 	}
 	virtual void Print(std::ostream& _out = std::cout) const
 	{
-		if (!test_generated_)
-		{
-			throw std::runtime_error("Print() must be called after Generate() in RangePrimitiveTest.");
-		}
+		THROW(!test_generated_, "Print() must be called after Generate()");
 		_out << current_value_;
 	};
 	virtual RangePrimitiveTest * Clone() const

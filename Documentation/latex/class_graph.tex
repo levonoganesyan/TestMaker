@@ -1,0 +1,166 @@
+\hypertarget{class_graph}{}\section{Graph Class Reference}
+\label{class_graph}\index{Graph@{Graph}}
+Inheritance diagram for Graph\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_graph_aabbabd0059aba1f53232d846cd7ca39e}\label{class_graph_aabbabd0059aba1f53232d846cd7ca39e}} 
+enum {\bfseries P\+R\+I\+N\+T\+\_\+\+T\+Y\+PE} \{ {\bfseries C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+M\+A\+T\+R\+IX}, 
+{\bfseries C\+O\+N\+N\+E\+C\+T\+I\+O\+N\+\_\+\+L\+I\+ST}, 
+{\bfseries L\+I\+S\+T\+\_\+\+O\+F\+\_\+\+E\+D\+G\+ES}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_graph_a480d475b69a6b892b044b255a5fb47f5}{Graph} (\hyperlink{class_primitive_test}{Primitive\+Test}$<$ int $>$ $\ast$\+\_\+number\+\_\+of\+\_\+vertices, \hyperlink{class_primitive_test}{Primitive\+Test}$<$ int $>$ $\ast$\+\_\+number\+\_\+of\+\_\+edges, \hyperlink{class_test}{Test} $\ast$\+\_\+weights=N\+U\+LL, bool \+\_\+directed=false, bool \+\_\+buckle=false)
+\item 
+\mbox{\Hypertarget{class_graph_ad47d7f61d68ed142c03a442424764c30}\label{class_graph_ad47d7f61d68ed142c03a442424764c30}} 
+virtual void {\bfseries Generate} ()
+\item 
+\mbox{\Hypertarget{class_graph_ac0953dd80558892dc281e17ae40fd5f1}\label{class_graph_ac0953dd80558892dc281e17ae40fd5f1}} 
+virtual void {\bfseries Print} (std\+::ostream \&=std\+::cout) const
+\item 
+\mbox{\Hypertarget{class_graph_a6d122fe3d1c8b3e39d752e11ac801062}\label{class_graph_a6d122fe3d1c8b3e39d752e11ac801062}} 
+virtual \hyperlink{class_graph}{Graph} $\ast$ {\bfseries Clone} () const
+\item 
+\mbox{\Hypertarget{class_graph_a03a0063bfcfa48031135fda93e7da3f4}\label{class_graph_a03a0063bfcfa48031135fda93e7da3f4}} 
+virtual \hyperlink{class_graph}{Graph} $\ast$ {\bfseries Buckle} (bool=true)
+\item 
+\mbox{\Hypertarget{class_graph_a38a58285e414869af2d4e6c911947d5f}\label{class_graph_a38a58285e414869af2d4e6c911947d5f}} 
+virtual \hyperlink{class_graph}{Graph} $\ast$ {\bfseries Print\+Type} (P\+R\+I\+N\+T\+\_\+\+T\+Y\+PE)
+\item 
+\mbox{\Hypertarget{class_graph_a8eccb4ebab764cf134e527aaf648af19}\label{class_graph_a8eccb4ebab764cf134e527aaf648af19}} 
+virtual long long {\bfseries Vertices\+Count} ()
+\item 
+\mbox{\Hypertarget{class_graph_a80fc159f5508fb7ecf12f1273c60518f}\label{class_graph_a80fc159f5508fb7ecf12f1273c60518f}} 
+virtual long long {\bfseries Edges\+Count} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_graph_a3b4b055070a248a8193798e8803f2db8}\label{class_graph_a3b4b055070a248a8193798e8803f2db8}} 
+virtual bool {\bfseries Add\+Edge} ()
+\item 
+\mbox{\Hypertarget{class_graph_a3f66bad284c375082f8167894949e536}\label{class_graph_a3f66bad284c375082f8167894949e536}} 
+virtual void {\bfseries Add\+Edge} (long long, long long)
+\item 
+\mbox{\Hypertarget{class_graph_ae58a11f973b4cb293613e97bad254860}\label{class_graph_ae58a11f973b4cb293613e97bad254860}} 
+virtual bool {\bfseries Remove\+Edge} ()
+\item 
+\mbox{\Hypertarget{class_graph_aa60add58a21bd65da45035e325dfa5dd}\label{class_graph_aa60add58a21bd65da45035e325dfa5dd}} 
+virtual void {\bfseries Remove\+Edge} (long long, long long)
+\item 
+\mbox{\Hypertarget{class_graph_ac7dced2a44ff221d1b0c64d84cd0d11a}\label{class_graph_ac7dced2a44ff221d1b0c64d84cd0d11a}} 
+virtual int {\bfseries Add\+Vertex} ()
+\item 
+\mbox{\Hypertarget{class_graph_a062db0193f1181276b909679b8cb9a48}\label{class_graph_a062db0193f1181276b909679b8cb9a48}} 
+virtual void {\bfseries Fixing\+Tree} ()
+\item 
+\mbox{\Hypertarget{class_graph_a94808d2f0658d53848833c41e38f49a7}\label{class_graph_a94808d2f0658d53848833c41e38f49a7}} 
+virtual void {\bfseries Generate\+Graph} ()
+\item 
+\mbox{\Hypertarget{class_graph_a542e1c26b57a0db7a34e81780cd71135}\label{class_graph_a542e1c26b57a0db7a34e81780cd71135}} 
+virtual void {\bfseries Generate\+Small\+Graph} ()
+\item 
+\mbox{\Hypertarget{class_graph_a1431632c345eb1130003f3e92d8b1bd0}\label{class_graph_a1431632c345eb1130003f3e92d8b1bd0}} 
+virtual void {\bfseries Generate\+Large\+Graph} ()
+\item 
+\mbox{\Hypertarget{class_graph_ad30e94ed85db8caa690617f235ce43ff}\label{class_graph_ad30e94ed85db8caa690617f235ce43ff}} 
+virtual void {\bfseries Create\+Tree} ()
+\item 
+\mbox{\Hypertarget{class_graph_aaa7392fb83b5c2fc76296ba6778ec479}\label{class_graph_aaa7392fb83b5c2fc76296ba6778ec479}} 
+virtual std\+::vector$<$ std\+::vector$<$ bool $>$ $>$ {\bfseries Connection\+Matrix} ()
+\item 
+\mbox{\Hypertarget{class_graph_a44b547d4833a2a438a3a337272dcd34f}\label{class_graph_a44b547d4833a2a438a3a337272dcd34f}} 
+virtual void {\bfseries Print\+Connection\+Matrix} (std\+::ostream \&)
+\item 
+\mbox{\Hypertarget{class_graph_a212f24e509217c2e7656afa52b9c2044}\label{class_graph_a212f24e509217c2e7656afa52b9c2044}} 
+virtual std\+::vector$<$ std\+::set$<$ long long $>$ $>$ {\bfseries Connection\+List} ()
+\item 
+\mbox{\Hypertarget{class_graph_a5f1a00ca16069a04c2d2e3c8cf79a942}\label{class_graph_a5f1a00ca16069a04c2d2e3c8cf79a942}} 
+virtual void {\bfseries Print\+Connection\+List} (std\+::ostream \&)
+\item 
+\mbox{\Hypertarget{class_graph_a7f715bb067cbac08145362cf792e2f96}\label{class_graph_a7f715bb067cbac08145362cf792e2f96}} 
+virtual std\+::vector$<$ std\+::pair$<$ long long, long long $>$ $>$ {\bfseries List\+Of\+Edges} ()
+\item 
+\mbox{\Hypertarget{class_graph_ac43adf725cee04e777c2931a2a7a9ba3}\label{class_graph_ac43adf725cee04e777c2931a2a7a9ba3}} 
+virtual void {\bfseries Print\+List\+Of\+Edges} (std\+::ostream \&)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_graph_a79f294fa2b32c3eace0c83bad42c49b4}\label{class_graph_a79f294fa2b32c3eace0c83bad42c49b4}} 
+\hyperlink{class_primitive_test}{Primitive\+Test}$<$ int $>$ $\ast$ {\bfseries number\+\_\+of\+\_\+vertices\+\_\+}
+\item 
+\mbox{\Hypertarget{class_graph_a6e6ae1654756cd35ee5fed179bf06818}\label{class_graph_a6e6ae1654756cd35ee5fed179bf06818}} 
+\hyperlink{class_primitive_test}{Primitive\+Test}$<$ int $>$ $\ast$ {\bfseries number\+\_\+of\+\_\+edges\+\_\+}
+\item 
+\mbox{\Hypertarget{class_graph_a01b91e0ef1a5d84cdd6bf6d7ca9108dd}\label{class_graph_a01b91e0ef1a5d84cdd6bf6d7ca9108dd}} 
+\hyperlink{class_test}{Test} $\ast$ {\bfseries weight\+\_\+}
+\item 
+\mbox{\Hypertarget{class_graph_acbda2d069e4637414d8fc310ef1ec50a}\label{class_graph_acbda2d069e4637414d8fc310ef1ec50a}} 
+long long {\bfseries current\+\_\+number\+\_\+of\+\_\+vertices\+\_\+}
+\item 
+\mbox{\Hypertarget{class_graph_aefdca59f340c64399b1f25ae0c69fb2a}\label{class_graph_aefdca59f340c64399b1f25ae0c69fb2a}} 
+long long {\bfseries current\+\_\+number\+\_\+of\+\_\+edges\+\_\+}
+\item 
+\mbox{\Hypertarget{class_graph_a352ee3d2c70d89c593ac82aebb16cdc3}\label{class_graph_a352ee3d2c70d89c593ac82aebb16cdc3}} 
+std\+::vector$<$ std\+::set$<$ long long $>$ $>$ {\bfseries graph\+\_\+}
+\item 
+\mbox{\Hypertarget{class_graph_afc0b5d718159d7d95e38187924c8a302}\label{class_graph_afc0b5d718159d7d95e38187924c8a302}} 
+std\+::set$<$ std\+::pair$<$ long long, long long $>$ $>$ {\bfseries fixed\+\_\+tree\+\_\+}
+\item 
+\mbox{\Hypertarget{class_graph_a733469321c21618c5b57dd1363f1b443}\label{class_graph_a733469321c21618c5b57dd1363f1b443}} 
+std\+::function$<$ void(std\+::ostream \&)$>$ {\bfseries print\+\_\+function\+\_\+}
+\item 
+\mbox{\Hypertarget{class_graph_a91c7f8a9e836b4f9c64def9583f27f07}\label{class_graph_a91c7f8a9e836b4f9c64def9583f27f07}} 
+long long {\bfseries number\+\_\+of\+\_\+already\+\_\+added\+\_\+edges\+\_\+}
+\item 
+\mbox{\Hypertarget{class_graph_a46abe9c833fc7054773ee12f9e2b1d76}\label{class_graph_a46abe9c833fc7054773ee12f9e2b1d76}} 
+bool {\bfseries buckle\+\_\+}
+\item 
+\mbox{\Hypertarget{class_graph_a6cea481b4ca3dc8e8e23fabb30b1506f}\label{class_graph_a6cea481b4ca3dc8e8e23fabb30b1506f}} 
+bool {\bfseries directed\+\_\+}
+\item 
+\mbox{\Hypertarget{class_graph_a68f23124b6972bf5cccbd25fc47013fd}\label{class_graph_a68f23124b6972bf5cccbd25fc47013fd}} 
+P\+R\+I\+N\+T\+\_\+\+T\+Y\+PE {\bfseries print\+\_\+type\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_graph_a480d475b69a6b892b044b255a5fb47f5}\label{class_graph_a480d475b69a6b892b044b255a5fb47f5}} 
+\index{Graph@{Graph}!Graph@{Graph}}
+\index{Graph@{Graph}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{Graph()}{Graph()}}
+{\footnotesize\ttfamily Graph\+::\+Graph (\begin{DoxyParamCaption}\item[{\hyperlink{class_primitive_test}{Primitive\+Test}$<$ int $>$ $\ast$}]{\+\_\+number\+\_\+of\+\_\+vertices,  }\item[{\hyperlink{class_primitive_test}{Primitive\+Test}$<$ int $>$ $\ast$}]{\+\_\+number\+\_\+of\+\_\+edges,  }\item[{\hyperlink{class_test}{Test} $\ast$}]{\+\_\+weights = {\ttfamily NULL},  }\item[{bool}]{\+\_\+directed = {\ttfamily false},  }\item[{bool}]{\+\_\+buckle = {\ttfamily false} }\end{DoxyParamCaption})}
+
+\hyperlink{class_graph}{Graph} 
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+number\+\_\+of\+\_\+vertices} & -\/ number of vertices in \hyperlink{class_graph}{Graph} \\
+\hline
+{\em \+\_\+number\+\_\+of\+\_\+edges} & -\/ number of edges in \hyperlink{class_graph}{Graph} \\
+\hline
+{\em \+\_\+weights} & -\/ weights if needed. Default\+: N\+U\+LL \\
+\hline
+{\em \+\_\+directed} & -\/ specified is \hyperlink{class_graph}{Graph} directed or not. Default\+: false \\
+\hline
+{\em \+\_\+buckle} & -\/ specified is \hyperlink{class_graph}{Graph} contains buckles or not. Default\+: false \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em No} & dot raise any exception \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Graph.\+h\item 
+Graph.\+cpp\end{DoxyCompactItemize}

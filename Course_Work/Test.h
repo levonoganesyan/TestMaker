@@ -17,7 +17,7 @@ public:
 	virtual Test* Clone() const = 0;
 	virtual Test * Add ( Test * )
 	{
-		throw std::runtime_error("Test: Can't add to a leaf");
+		THROW(true, "Can't add to a leaf");
 	}
 	virtual void AddDeleteResponsibility(Test* _object)
 	{

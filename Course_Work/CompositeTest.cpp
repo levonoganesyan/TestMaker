@@ -8,10 +8,7 @@ CompositeTest::CompositeTest()
 
 Test * CompositeTest::Add( Test * _test )
 {
-	if ( _test == this )
-	{
-		throw std::runtime_error("CompositeTest: Can't add itself");
-	}
+	THROW(_test == this, "Can't add itself");
 	tests_.push_back(_test->Clone());
 	return this;
 }
@@ -30,10 +27,7 @@ void CompositeTest::Generate()
 }
 void CompositeTest::Print(std::ostream& _out) const
 {
-	if (!test_generated_)
-	{
-		throw std::runtime_error("Print() must be called after Generate() in CompositeTest.");
-	}
+	THROW(!test_generated_, "Print() must be called after Generate()");
 	for ( unsigned int i = 0 ; i < tests_.size() ; i++ )
 		tests_[ i ]->Print(_out);
 	//std::for_each( tests_.begin(), tests_.end(), []( const TOSPtr& testObj ) { testObj->Print(); } );

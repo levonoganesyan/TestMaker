@@ -27,10 +27,7 @@ ConstStringSet* ConstStringSet::Add(char _char)
 }
 std::string ConstStringSet::Get()
 {
-	if (!test_generated_)
-	{
-		throw std::runtime_error("Get() must be called after Generate() in ConstStringSet.");
-	}
+	THROW(!test_generated_, "Get() must be called after Generate()");
 	return current_string_;
 }
 void ConstStringSet::Generate()
@@ -42,10 +39,7 @@ void ConstStringSet::Generate()
 }
 void ConstStringSet::Print(std::ostream& _out) const
 {
-	if (!test_generated_)
-	{
-		throw std::runtime_error("Print() must be called after Generate() in ConstStringSet.");
-	}
+	THROW(!test_generated_, "Print() must be called after Generate()");
 	_out << current_string_;
 }
 ConstStringSet* ConstStringSet::Clone() const

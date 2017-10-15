@@ -19,8 +19,7 @@ Graph::Graph(PrimitiveTest<int>* _number_of_vertices, PrimitiveTest<int>* _numbe
 }
 std::vector<std::vector<bool> > Graph::ConnectionMatrix()
 {
-	if (current_number_of_vertices_ > 1000)
-		throw "Number of vertices must be less or equal 1000";
+	THROW(current_number_of_vertices_ > 1000, "Number of vertices must be less or equal 1000");
 	std::vector < std::vector < bool > > connection_matrix(current_number_of_vertices_, std::vector< bool >(current_number_of_vertices_));
 	for (int i = 0; i < current_number_of_vertices_; i++)
 	{
@@ -225,23 +224,14 @@ void Graph::GenerateGraph()
 	number_of_edges_->Generate();
 	current_number_of_vertices_ = number_of_vertices_->Get();
 	current_number_of_edges_ = number_of_edges_->Get();
-	if (current_number_of_vertices_ > 100'000'000)
-	{
-		throw std::exception("Number of Graph vertices must be less than 1e8");
-	}
-	if (current_number_of_edges_ > 1'000'000'000)
-	{
-		throw std::exception("Number of Graph edges must be less than 1e9");
-	}
+	THROW(current_number_of_vertices_ > 100'000'000, "Number of Graph vertices must be less than 1e8");
+	THROW(current_number_of_edges_ > 1'000'000'000, "Number of Graph edges must be less than 1e9");
 	graph_.clear();
 	for (int i = 0; i < current_number_of_vertices_; i++)
 	{
 		this->AddVertex();
 	}
-	if (graph_.size() == 0)
-	{
-		throw std::runtime_error("Graph size is equals to 0");
-	}
+	THROW(graph_.size() == 0, "Graph size is equals to 0");
 	FixingTree();
 	if (current_number_of_edges_ * 2 < current_number_of_vertices_ * current_number_of_vertices_)
 	{
@@ -266,10 +256,7 @@ void Graph::GenerateSmallGraph()
 }
 void Graph::GenerateLargeGraph()
 {
-	if (current_number_of_vertices_ * current_number_of_vertices_ >= 1'000'000'000 * 2)
-	{
-		throw std::exception("Number of Graph edges must be less than 1e9");
-	}
+	THROW(current_number_of_vertices_ * current_number_of_vertices_ >= 1'000'000'000 * 2, "Number of Graph edges must be less than 1e9");
 	long long count_of_all_edges = 0;
 	for (int i = 0; i < current_number_of_vertices_; i++)
 	{
@@ -303,14 +290,8 @@ void Graph::Generate()
 }
 void Graph::Print(std::ostream& _out) const
 {
-	if (!test_generated_)
-	{
-		throw std::runtime_error("Print() must be called after Generate() in Graph.");
-	}
-	if (print_type_ != LIST_OF_EDGES && weight_ != NULL)
-	{
-		throw std::runtime_error("Weights cannot be specified with not LIST_OF_EDGES printing modificator");
-	}
+	THROW(!test_generated_, "Print() must be called after Generate()");
+	THROW(print_type_ != LIST_OF_EDGES && weight_ != NULL, "Weights cannot be specified with not LIST_OF_EDGES printing modificator");
 	print_function_(_out);
 }
 Graph * Graph::Buckle(bool _buckle)

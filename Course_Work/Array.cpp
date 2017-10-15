@@ -27,10 +27,7 @@ void Array::Generate()
 	for (int i = 0; i < array_.size(); i++)
 		delete array_[i];
 	int n = array_size_->Get();
-	if (n <= 0)
-	{
-		throw std::runtime_error("Array size must be strongly positive");
-	}
+	THROW(n <= 0, "Array size must be strongly positive");
 	array_.resize(n);
 	for ( int i = 0 ; i < n ; i++ )
 	{
@@ -42,19 +39,13 @@ void Array::Generate()
 		{
 			array_[i] = generation_function_();
 		}
-		if (array_[i] == NULL)
-		{
-			throw std::runtime_error("Array element is not assigned. In function Array::Generate()");
-		}
+		THROW(array_[i] == NULL, "Array element is not assigned");
 		array_[ i ]->Generate();
 	}
 }
 void Array::Print(std::ostream& _out) const
 {
-	if (!test_generated_)
-	{
-		throw std::runtime_error("Print() must be called after Generate() in Array.");
-	}
+	THROW(!test_generated_, "Print() must be called after Generate()");
 	if (print_size_)
 	{
 		_out << array_.size() << line_breaker_;

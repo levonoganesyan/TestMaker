@@ -25,14 +25,11 @@ void Grammar::RuleParsing(const std::string & _rule)
 	{
 		name_of_nonterm = left_part.substr(2);
 		name_of_nonterm.pop_back();
-		if (names_of_nonterm_.find(name_of_nonterm) == names_of_nonterm_.end())
-		{
-			std::runtime_error("Wrong nonterm element in RuleParsing");
-		}
+		THROW(names_of_nonterm_.find(name_of_nonterm) == names_of_nonterm_.end(), "Wrong nonterm element");
 	}
 	else
 	{
-		std::runtime_error("Wrong left part in RuleParsing");
+		THROW(true, "Wrong left part");
 	}
 	parsed_rules_[name_of_nonterm].push_back(right_part);
 }
@@ -55,7 +52,7 @@ void Grammar::NonTermsParsing(const std::string & _nonterms)
 	}
 	else
 	{
-		throw std::runtime_error("Nonterms format error. In function NonTermsParsing");
+		THROW(true, "Nonterms format error");
 	}
 }
 void Grammar::TermsParsing(const std::string & _terms)
@@ -69,31 +66,22 @@ void Grammar::TermsParsing(const std::string & _terms)
 		size_t pos, last_pos = 0;
 		while ((pos = writable_terms.find(delimiter, last_pos)) != std::string::npos) {
 			std::string term = writable_terms.substr(last_pos, pos - last_pos);
-			if (term.size() != 1)
-			{
-				std::runtime_error("Term length must be equal to 1");
-			}
+			THROW(term.size() != 1, "Term length must be equal to 1");
 			terms_.insert(term[0]);
 			last_pos = pos + 1;
 		}
 		std::string term = writable_terms.substr(last_pos);
-		if (term.size() != 1)
-		{
-			std::runtime_error("Term length must be equal to 1");
-		}
+		THROW(term.size() != 1, "Term length must be equal to 1");
 		terms_.insert(term[0]);
 	}
 	else
 	{
-		throw std::runtime_error("Terms format error. In function TermsParsing");
+		THROW(true, "Terms format error");
 	}
 }
 void Grammar::StartNonTermParsing(const std::string & _start_nonterm)
 {
-	if (names_of_nonterm_.find(_start_nonterm) == names_of_nonterm_.end())
-	{
-		throw std::runtime_error("Start nonterm not a valid nonterm. in function StartNonTermParsing");
-	}
+	THROW(names_of_nonterm_.find(_start_nonterm) == names_of_nonterm_.end(), "Start nonterm not a valid nonterm");
 	start_nonterm_ = _start_nonterm;
 }
 void Grammar::GrammarParsing()
@@ -129,14 +117,8 @@ void Grammar::GrammarParsing()
 }
 void Grammar::Generator(const std::string & _current_nonterm)
 {
-	if (names_of_nonterm_.find(_current_nonterm) == names_of_nonterm_.end())
-	{
-		std::runtime_error("Error when trying parse the nonterm " + _current_nonterm + ": that nonterm not present in grammar." );
-	} 
-	if (parsed_rules_.find(_current_nonterm) == parsed_rules_.end())
-	{
-		std::runtime_error("Error when trying parse the nonterm " + _current_nonterm + ": that nonterm not present in rules.");
-	}
+	THROW(names_of_nonterm_.find(_current_nonterm) == names_of_nonterm_.end(), "Error when trying parse the nonterm " + _current_nonterm + ": that nonterm not present in grammar.");
+	THROW(parsed_rules_.find(_current_nonterm) == parsed_rules_.end(), "Error when trying parse the nonterm " + _current_nonterm + ": that nonterm not present in rules.");
 	size_t rule_number = Rand() % parsed_rules_[_current_nonterm].size();
 	std::string rule = parsed_rules_[_current_nonterm][rule_number];
 	if (rule == "e")
@@ -169,7 +151,7 @@ void Grammar::Generator(const std::string & _current_nonterm)
 					delete brace_char;
 					continue;
 				}
-				throw std::runtime_error("Open brace character do not present in alphabet.");
+				THROW(true, "Open brace character do not present in alphabet.");
 			}
 		}
 		else if (rule[i] == '}')
@@ -198,7 +180,7 @@ void Grammar::Generator(const std::string & _current_nonterm)
 					delete character;
 					continue;
 				}
-				throw std::runtime_error(rule[i] + " character do not present in alphabet.");
+				THROW(true, rule[i] + " character do not present in alphabet.");
 			}
 		}
 	}
@@ -211,10 +193,7 @@ void Grammar::Generate()
 }
 void Grammar::Print(std::ostream& _out) const
 {
-	if (!test_generated_)
-	{
-		throw std::runtime_error("Print() must be called after Generate() in Grammar.");
-	}
+	THROW(!test_generated_, "Print() must be called after Generate()");
 	CompositeTest::Print(_out);
 }
 Grammar* Grammar::Clone() const

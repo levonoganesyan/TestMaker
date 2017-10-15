@@ -63,7 +63,14 @@ protected:
 	virtual std::vector<std::pair<long long, long long> > ListOfEdges();
 	virtual void PrintListOfEdges(std::ostream&);
 public:
-	Graph(PrimitiveTest<int>*, PrimitiveTest<int>*, Test* = NULL, bool = false, bool = false);
+	/// Graph
+	/// \param _number_of_vertices - number of vertices in Graph
+	/// \param _number_of_edges - number of edges in Graph
+	/// \param _weights - weights if needed. Default: NULL
+	/// \param _directed - specified is Graph directed or not. Default: false
+	/// \param _buckle - specified is Graph contains buckles or not. Default: false
+	/// \exception Does not raise any exceptions
+	Graph(PrimitiveTest<int>* _number_of_vertices, PrimitiveTest<int>* _number_of_edges, Test* _weights = NULL, bool _directed = false, bool _buckle = false);
 	virtual void Generate();
 	virtual void Print(std::ostream& = std::cout) const;
 	virtual Graph* Clone() const;

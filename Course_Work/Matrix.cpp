@@ -62,10 +62,7 @@ void Matrix::Generate()
 	}
 	int n = n_->Get();
 	int m = m_->Get();
-	if (n <= 0 && m <= 0)
-	{
-		throw std::runtime_error("Matrix size must be strongly positive");
-	}
+	THROW(n <= 0 && m <= 0, "Matrix size must be strongly positive");
 	matrix_.resize(n);
 	for (int i = 0; i < matrix_.size(); i++)
 	{
@@ -83,10 +80,7 @@ void Matrix::Generate()
 			{
 				matrix_[i][j] = generation_function_();
 			}
-			if (matrix_[i][j] == NULL)
-			{
-				throw std::runtime_error("Array element is not assigned. In function Array::Generate()");
-			}
+			THROW(matrix_[i][j] == NULL, "Matrix element is not assigned");
 			matrix_[i][j]->Generate();
 		}
 	}
@@ -94,10 +88,7 @@ void Matrix::Generate()
 
 void Matrix::Print(std::ostream & _out) const
 {
-	if (!test_generated_)
-	{
-		throw std::runtime_error("Print() must be called after Generate() in Array.");
-	}
+	THROW(!test_generated_, "Print() must be called after Generate()");
 	int n = n_->Get();
 	int m = m_->Get();
 	if (print_size_)

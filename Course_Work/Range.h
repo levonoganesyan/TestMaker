@@ -8,11 +8,6 @@ template <typename T>
 class Range : public Test
 {
 private:
-	void generate_helper()
-	{
- 		begin_->Generate();
- 		end_->Generate();
-	}
 	//long long get_time()
 	//{
 	//	int lo, hi; 
@@ -37,11 +32,14 @@ public:
 	}
 	virtual void Generate()
 	{
-		generate_helper();
+		test_generated_ = true;
+		begin_->Generate();
+		end_->Generate();
 		RangeValidation();
 	}
 	virtual void Print(std::ostream& _out) const
 	{
+		THROW(!test_generated_, "Print() must be called after Generate()");
 		_out << "[" << begin_->Get() << ", " << end_->Get() << "]";
 	}
 	// 	Range* Clone()
@@ -50,14 +48,8 @@ public:
 // 	}
 	void RangeValidation()
 	{
-		if (begin_ == NULL || end_ == NULL)
-		{
-			throw std::runtime_error("begin and end must be specified in Range");
-		}
-		if (begin_->Get() > end_->Get())
-		{
-			throw std::runtime_error("Begin can't be greater than end in Range");
-		}
+		THROW(begin_ == NULL || end_ == NULL, "Begin and end must be specified");
+		THROW(begin_->Get() > end_->Get(), "Begin can't be greater than end");
 	}
 	Range<T>& operator= (T _current_value)
 	{
@@ -89,19 +81,23 @@ public:
 
 template<>
 long long Range<long long>::Get() {
+	THROW(!test_generated_, "Get() must be called after Generate()");
 	return Rand() % (end_->Get() - begin_->Get() + 1) + begin_->Get();
 }
 template<>
 int Range<int>::Get() {
+	THROW(!test_generated_, "Get() must be called after Generate()");
 	return Rand() % (end_->Get() - begin_->Get() + 1) + begin_->Get();
 }
 template<>
 double Range<double>::Get(){
-	double random_double = (double)Rand() / (RAND_MAX*RAND_MAX);
+	THROW(!test_generated_, "Get() must be called after Generate()");
+	double random_double = (double)Rand() / RNG::Max();
 	return ( random_double) * ( end_->Get() - begin_->Get() ) + begin_->Get();
 }
 template<>
 char Range<char>::Get(){
+	THROW(!test_generated_, "Get() must be called after Generate()");
 	return (char)(Rand()%( end_->Get() - begin_->Get() + 1 ) + begin_->Get());
 }
 

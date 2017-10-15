@@ -1,18 +1,24 @@
 #include "Utils.h"
 
 
-std::function<int()> RNG::rng_function_ = std::bind(&::rand);
+unsigned long long RNG::seed_ = std::chrono::system_clock::now().time_since_epoch().count();
+std::mt19937_64 RNG::generator_(RNG::seed_);
 RNG::RNG() {};
-long long RNG::Rand()
-{ // TODO
-	return rng_function_();// *1ll * rng_function_();// *1ll * rng_function_() * 1ll * rng_function_();
-}
-void RNG::RandomFunction(std::function<int()> _rng_function)
-{
-	rng_function_ = _rng_function;
+unsigned long long RNG::Rand()
+{ 
+	// std::cout << "Maximum: " << generator_.max() << std::endl;
+	// std::cout << "Minimum: " << generator_.min() << std::endl;
+	return generator_();
 }
 void RNG::RandomSeed(unsigned int _seed)
 {
-	srand(_seed);
+	generator_.seed(_seed);
 }
-
+unsigned long long RNG::Max()
+{
+	return generator_.max();
+}
+unsigned long long RNG::Min()
+{
+	return generator_.min();
+}

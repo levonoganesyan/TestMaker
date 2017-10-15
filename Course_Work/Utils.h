@@ -15,6 +15,8 @@
 #include<sstream>
 #include<iomanip>
 #include<functional>
+#include<chrono>
+#include<random>
 
 // long long get_time()
 // {
@@ -38,6 +40,19 @@
 //	return false;
 //}
 //
+
+/*!
+ \def THROW(condition,error_message)
+ Throw function
+ if condition is true throws std::runtime_error
+ \param condition - condition to check
+ \param error_message - message to print on raise
+ \exception raises std::runtime_error
+*/
+#define THROW(condition,error_message) if(condition) {\
+	throw std::runtime_error(std::string("\nFile_name: ") + __FILE__ + "\nLine: " + std::to_string(__LINE__) + "\nError message: " + error_message );\
+}\
+
 inline static char GetEscapedCharByString(std::string character)
 {
 	if (character == "\\t")
@@ -55,17 +70,20 @@ inline static char GetEscapedCharByString(std::string character)
 class RNG
 {
 	static std::function<int()> rng_function_;
+	static unsigned long long seed_;
+	static std::mt19937_64 generator_;
 public:
 	RNG();
-	static long long Rand();
-	static void RandomFunction(std::function<int()> _rng_function);
+	static unsigned long long Rand();
 	static void RandomSeed(unsigned int _seed);
+	static unsigned long long Max();
+	static unsigned long long Min();
 };
-inline long long Rand()
+inline unsigned long long Rand()
 {
 	return RNG::Rand();
 }
-inline long long Rand_with_mod( int mod )
+inline unsigned long long Rand_with_mod( unsigned long long mod )
 {
 	return RNG::Rand() % mod;
 }

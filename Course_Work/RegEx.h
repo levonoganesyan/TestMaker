@@ -83,7 +83,7 @@ protected:
 			}
 			else
 			{
-				throw std::runtime_error((std::string)"Incorrect escaped character \\" + _ch);
+				THROW(true, "Incorrect escaped character \\" + _ch);
 			}
 		}
 	public:
@@ -132,10 +132,7 @@ protected:
 							break;
 						}
 					}
-					if (!character_found)
-					{
-						throw std::logic_error("Incorrect escaped character \\" + regex_[i]);
-					}
+					THROW(!character_found, "Incorrect escaped character \\" + regex_[i]);
 					backslash = false;
 					continue;
 				}

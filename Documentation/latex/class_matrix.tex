@@ -1,0 +1,77 @@
+\hypertarget{class_matrix}{}\section{Matrix Class Reference}
+\label{class_matrix}\index{Matrix@{Matrix}}
+Inheritance diagram for Matrix\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_matrix}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_matrix_af9148d60414731669dac225834d8bed4}\label{class_matrix_af9148d60414731669dac225834d8bed4}} 
+{\bfseries Matrix} (\hyperlink{class_primitive_test}{Primitive\+Test}$<$ int $>$ $\ast$\+\_\+n, \hyperlink{class_primitive_test}{Primitive\+Test}$<$ int $>$ $\ast$\+\_\+m, std\+::function$<$ \hyperlink{class_test}{Test} $\ast$()$>$ \+\_\+generation\+\_\+function, std\+::string \+\_\+delimiter=\char`\"{} \char`\"{}, std\+::string \+\_\+line\+\_\+breaker=\char`\"{}\textbackslash{})
+\item 
+\mbox{\Hypertarget{class_matrix_a2d3097d07161be83f5a8d7f7609d57d7}\label{class_matrix_a2d3097d07161be83f5a8d7f7609d57d7}} 
+{\bfseries Matrix} (\hyperlink{class_primitive_test}{Primitive\+Test}$<$ int $>$ $\ast$\+\_\+n, \hyperlink{class_primitive_test}{Primitive\+Test}$<$ int $>$ $\ast$\+\_\+m, \hyperlink{class_test}{Test} $\ast$\+\_\+example, std\+::string \+\_\+delimiter=\char`\"{} \char`\"{}, std\+::string \+\_\+line\+\_\+breaker=\char`\"{}\textbackslash{})
+\item 
+\mbox{\Hypertarget{class_matrix_a05fd5e85605d0c204f25c345b3a95e73}\label{class_matrix_a05fd5e85605d0c204f25c345b3a95e73}} 
+{\bfseries Matrix} (\hyperlink{class_primitive_test}{Primitive\+Test}$<$ int $>$ $\ast$\+\_\+n, std\+::function$<$ \hyperlink{class_test}{Test} $\ast$()$>$ \+\_\+generation\+\_\+function, std\+::string \+\_\+delimiter=\char`\"{} \char`\"{}, std\+::string \+\_\+line\+\_\+breaker=\char`\"{}\textbackslash{})
+\item 
+\mbox{\Hypertarget{class_matrix_adc02dd10e346d973f7c10eedb03df3dc}\label{class_matrix_adc02dd10e346d973f7c10eedb03df3dc}} 
+{\bfseries Matrix} (\hyperlink{class_primitive_test}{Primitive\+Test}$<$ int $>$ $\ast$\+\_\+n, \hyperlink{class_test}{Test} $\ast$\+\_\+example, std\+::string \+\_\+delimiter=\char`\"{} \char`\"{}, std\+::string \+\_\+line\+\_\+breaker=\char`\"{}\textbackslash{})
+\item 
+\mbox{\Hypertarget{class_matrix_ae0423e35c644fa22733a4333e5bbbdbd}\label{class_matrix_ae0423e35c644fa22733a4333e5bbbdbd}} 
+virtual void {\bfseries Generate} ()
+\item 
+\mbox{\Hypertarget{class_matrix_a73e84f4b1db2fec828c81028b808510d}\label{class_matrix_a73e84f4b1db2fec828c81028b808510d}} 
+virtual void {\bfseries Print} (std\+::ostream \&=std\+::cout) const
+\item 
+\mbox{\Hypertarget{class_matrix_aa5d036db7285113f78f23ba52e2181a3}\label{class_matrix_aa5d036db7285113f78f23ba52e2181a3}} 
+void {\bfseries Print\+Size} (bool)
+\item 
+\mbox{\Hypertarget{class_matrix_ada8820cdc7df9cb0397496f994614df9}\label{class_matrix_ada8820cdc7df9cb0397496f994614df9}} 
+std\+::pair$<$ int, int $>$ {\bfseries Size} ()
+\item 
+\mbox{\Hypertarget{class_matrix_a8aa21068138628b0009c8da68924b718}\label{class_matrix_a8aa21068138628b0009c8da68924b718}} 
+virtual \hyperlink{class_matrix}{Matrix} $\ast$ {\bfseries Clone} () const
+\item 
+\mbox{\Hypertarget{class_matrix_a667c01a94f1c5e6c2f3a94ae62a27b4d}\label{class_matrix_a667c01a94f1c5e6c2f3a94ae62a27b4d}} 
+std\+::vector$<$ \hyperlink{class_test}{Test} $\ast$ $>$ {\bfseries operator\mbox{[}$\,$\mbox{]}} (int i)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_matrix_a438f078e6bbcd0644a976c28b0ac3f30}\label{class_matrix_a438f078e6bbcd0644a976c28b0ac3f30}} 
+std\+::function$<$ \hyperlink{class_test}{Test} $\ast$()$>$ {\bfseries generation\+\_\+function\+\_\+}
+\item 
+\mbox{\Hypertarget{class_matrix_a0901ceb2c484aabc0d1c3d17e7f8a486}\label{class_matrix_a0901ceb2c484aabc0d1c3d17e7f8a486}} 
+\hyperlink{class_test}{Test} $\ast$ {\bfseries example\+\_\+}
+\item 
+\mbox{\Hypertarget{class_matrix_a3e9d1073fdbcde43ee028a6405970746}\label{class_matrix_a3e9d1073fdbcde43ee028a6405970746}} 
+\hyperlink{class_primitive_test}{Primitive\+Test}$<$ int $>$ $\ast$ {\bfseries n\+\_\+}
+\item 
+\mbox{\Hypertarget{class_matrix_a2790a160b50a135357ae20b9fae613e6}\label{class_matrix_a2790a160b50a135357ae20b9fae613e6}} 
+\hyperlink{class_primitive_test}{Primitive\+Test}$<$ int $>$ $\ast$ {\bfseries m\+\_\+}
+\item 
+\mbox{\Hypertarget{class_matrix_ab03d74c673757f8163e262cd521a98ae}\label{class_matrix_ab03d74c673757f8163e262cd521a98ae}} 
+std\+::vector$<$ std\+::vector$<$ \hyperlink{class_test}{Test} $\ast$ $>$ $>$ {\bfseries matrix\+\_\+}
+\item 
+\mbox{\Hypertarget{class_matrix_a663fb05d113edfe4a05f326cdeb1177d}\label{class_matrix_a663fb05d113edfe4a05f326cdeb1177d}} 
+std\+::string {\bfseries delimiter\+\_\+}
+\item 
+\mbox{\Hypertarget{class_matrix_a0ea53f948bd31468c744de899eb1e662}\label{class_matrix_a0ea53f948bd31468c744de899eb1e662}} 
+std\+::string {\bfseries line\+\_\+breaker\+\_\+}
+\item 
+\mbox{\Hypertarget{class_matrix_a639e660065b416929aae3c37fa36fb27}\label{class_matrix_a639e660065b416929aae3c37fa36fb27}} 
+bool {\bfseries print\+\_\+size\+\_\+}
+\item 
+\mbox{\Hypertarget{class_matrix_a7030785bad549a53de17ba99b9a05521}\label{class_matrix_a7030785bad549a53de17ba99b9a05521}} 
+bool {\bfseries print\+\_\+size\+\_\+as\+\_\+square\+\_\+}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Matrix.\+h\item 
+Matrix.\+cpp\end{DoxyCompactItemize}

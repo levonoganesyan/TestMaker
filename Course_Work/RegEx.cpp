@@ -37,10 +37,7 @@ RegEx::Expression* RegEx::str_to_expression( unsigned int start, unsigned int en
         SymbolType type = get_symbol_type( regex_[ i ] );
         if ( regex_[ i ] == '\\' )
         {
-            if ( i + 1 >= end ) 
-			{
-                throw std::runtime_error( "Incorrect \\ in the position" + std::to_string(i) );
-            }
+			THROW(i + 1 >= end, "Incorrect \\ in the position" + std::to_string(i));
             i++;
             expressions.push( new Terminal( std::string("\\") + regex_[ i ] ) );
         }
@@ -65,10 +62,7 @@ RegEx::Expression* RegEx::str_to_expression( unsigned int start, unsigned int en
             else if ( regex_[ i ] == '{' )
             {
                 unsigned int closing_bracket = (unsigned int)regex_.find( '}', i + 1 );
-                if ( closing_bracket == std::string::npos ) 
-				{
-                    throw std::runtime_error( "No closing bracket for bracket " + std::to_string(i) );
-                }
+				THROW(closing_bracket == std::string::npos, "No closing bracket for bracket " + std::to_string(i));
                 std::istringstream iss( regex_.substr(i, closing_bracket - i + 1) );
                 char temp_value;
 				iss >> temp_value;
@@ -77,10 +71,7 @@ RegEx::Expression* RegEx::str_to_expression( unsigned int start, unsigned int en
 				if (temp_value != '}')
 				{
 					iss >> max_rep;
-					if (temp_value != ',')
-					{
-						throw std::runtime_error("In figure brackets delimeter must be a comma");
-					}
+					THROW(temp_value != ',', "In figure brackets delimeter must be a comma");
 				}
 				else
 				{
@@ -88,10 +79,7 @@ RegEx::Expression* RegEx::str_to_expression( unsigned int start, unsigned int en
 				}
 				i = closing_bracket;
             }
-			if (expressions.empty())
-			{
-				throw std::runtime_error("Expressions must not be empty! At position " + std::to_string(i));
-			}
+			THROW(expressions.empty(), "Expressions must not be empty! At position " + std::to_string(i));
             Expression *current_exp = expressions.top();
             expressions.pop();
             expressions.push( new Repeat( current_exp, new RangePrimitiveTest<int>( min_rep, max_rep ) ) );
@@ -121,10 +109,7 @@ RegEx::Expression* RegEx::str_to_expression( unsigned int start, unsigned int en
                         --brackets_count;
                     }
                 }
-                if ( brackets_count != 0 ) 
-				{
-                    throw std::runtime_error( "Wrong quantity of braceses from " + std::to_string(i) );
-                }
+				THROW(brackets_count != 0, "Wrong quantity of braceses from " + std::to_string(i));
                 expressions.push( str_to_expression( i + 1, last_bracket_pos - 1 ) );
                 i = last_bracket_pos - 1;
             }
@@ -150,7 +135,7 @@ RegEx::Expression* RegEx::str_to_expression( unsigned int start, unsigned int en
                 }
                 else 
 				{
-                    throw std::runtime_error( "Wrong quantity of brackets from " + std::to_string(i));
+					THROW(true, "Wrong quantity of brackets from " + std::to_string(i));
                 }
             }
         }
@@ -163,10 +148,7 @@ RegEx::Expression* RegEx::str_to_expression( unsigned int start, unsigned int en
 }
 RegEx::Expression * RegEx::AndAllExpression( std::stack<RegEx::Expression*>& _exp_stack )
 {
-    if ( _exp_stack.empty() )
-    {
-        throw std::runtime_error( "There are no expressions in stack" );
-    }
+	THROW(_exp_stack.empty(), "There are no expressions in stack");
     Expression *result_exp = _exp_stack.top();
     _exp_stack.pop();
     while ( !_exp_stack.empty() ) 
@@ -184,15 +166,13 @@ void RegEx::Generate()
 }
 std::string RegEx::Get()
 {
-    if ( !test_generated_ )
-    {
-        throw std::runtime_error( "Print() must be called after Generate() in RegEx." );
-    }
+	THROW(!test_generated_, "Get() must be called after Generate()");
     return current_string_;
 }
 void RegEx::Print( std::ostream& _out ) const
 {
-    _out << current_string_;
+	THROW(!test_generated_, "Print() must be called after Generate()");
+	_out << current_string_;
 }
 void RegEx::MaxLenght( int _max_lenght )
 {
