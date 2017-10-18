@@ -115,7 +115,7 @@ RegEx::Expression* RegEx::str_to_expression( unsigned int start, unsigned int en
             }
             if ( regex_[ i ] == '[' )
             {
-                Expression *set_exp = NULL;
+                Expression *set_exp = nullptr;
                 for ( unsigned int j = i + 1; j < regex_.size(); j++ ) 
 				{
                     if ( regex_[ j ] == '\\' ) 
@@ -158,11 +158,12 @@ RegEx::Expression * RegEx::AndAllExpression( std::stack<RegEx::Expression*>& _ex
     }
     return result_exp;
 }
-void RegEx::Generate()
+RegEx* RegEx::Generate()
 {
     test_generated_ = true;
     regex_exp->Generate();
     current_string_ = regex_exp->Get();
+	return this;
 }
 std::string RegEx::Get()
 {
@@ -180,7 +181,7 @@ void RegEx::MaxLenght( int _max_lenght )
 }
 RegEx* RegEx::Clone() const
 {
-    return NULL;
+    return nullptr;
 }
 RegEx::~RegEx()
 {

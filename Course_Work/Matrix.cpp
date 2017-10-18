@@ -4,7 +4,7 @@ Matrix::Matrix(PrimitiveTest<int>* _n, PrimitiveTest<int>* _m, std::function<Tes
 	: n_(_n)
 	, m_(_m)
 	, generation_function_(_generation_function)
-	, example_(NULL)
+	, example_(nullptr)
 	, delimiter_(_delimiter)
 	, line_breaker_(_line_breaker)
 	, print_size_(true)
@@ -15,7 +15,7 @@ Matrix::Matrix(PrimitiveTest<int>* _n, PrimitiveTest<int>* _m, std::function<Tes
 Matrix::Matrix(PrimitiveTest<int>* _n, PrimitiveTest<int>* _m, Test * _example, std::string _delimiter, std::string _line_breaker)
 	: n_(_n)
 	, m_(_m)
-	, generation_function_(NULL)
+	, generation_function_(nullptr)
 	, example_(_example)
 	, delimiter_(_delimiter)
 	, line_breaker_(_line_breaker)
@@ -28,7 +28,7 @@ Matrix::Matrix(PrimitiveTest<int>* _n, std::function<Test*()> _generation_functi
 	: n_(_n)
 	, m_(_n)
 	, generation_function_(_generation_function)
-	, example_(NULL)
+	, example_(nullptr)
 	, delimiter_(_delimiter)
 	, line_breaker_(_line_breaker)
 	, print_size_(true)
@@ -39,7 +39,7 @@ Matrix::Matrix(PrimitiveTest<int>* _n, std::function<Test*()> _generation_functi
 Matrix::Matrix(PrimitiveTest<int>* _n, Test * _example, std::string _delimiter, std::string _line_breaker)
 	: n_(_n)
 	, m_(_n)
-	, generation_function_(NULL)
+	, generation_function_(nullptr)
 	, example_(_example)
 	, delimiter_(_delimiter)
 	, line_breaker_(_line_breaker)
@@ -48,7 +48,7 @@ Matrix::Matrix(PrimitiveTest<int>* _n, Test * _example, std::string _delimiter, 
 {
 }
 
-void Matrix::Generate()
+Matrix* Matrix::Generate()
 {
 	test_generated_ = true;
 	n_->Generate();
@@ -72,7 +72,7 @@ void Matrix::Generate()
 	{
 		for (int j = 0; j < m; j++)
 		{
-			if (example_ != NULL)
+			if (example_ != nullptr)
 			{
 				matrix_[i][j] = example_->Clone();
 			}
@@ -80,10 +80,11 @@ void Matrix::Generate()
 			{
 				matrix_[i][j] = generation_function_();
 			}
-			THROW(matrix_[i][j] == NULL, "Matrix element is not assigned");
+			THROW(matrix_[i][j] == nullptr, "Matrix element is not assigned");
 			matrix_[i][j]->Generate();
 		}
 	}
+	return this;
 }
 
 void Matrix::Print(std::ostream & _out) const
@@ -125,7 +126,7 @@ std::pair<int, int> Matrix::Size()
 Matrix * Matrix::Clone() const
 {
 	Matrix* matrix;
-	if (example_ == NULL)
+	if (example_ == nullptr)
 	{
 		if (m_)
 		{

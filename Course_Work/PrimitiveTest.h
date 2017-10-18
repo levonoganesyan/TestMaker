@@ -10,7 +10,7 @@ public:
 	// typedef std::shared_ptr<PrimitiveTest<T>> PTOSPtr;
 	PrimitiveTest() {};
 	virtual T Get() = 0;
-	virtual void Generate() = 0;
+	virtual PrimitiveTest* Generate() = 0;
 	virtual void Print(std::ostream& = std::cout) const = 0;
 	virtual PrimitiveTest* Clone() const = 0;
 	virtual ~PrimitiveTest() {};

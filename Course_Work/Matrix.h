@@ -21,7 +21,7 @@ public:
 	Matrix(PrimitiveTest<int>* _n, PrimitiveTest<int>* _m, Test* _example, std::string _delimiter = " ", std::string _line_breaker = "\n");
 	Matrix(PrimitiveTest<int>* _n, std::function<Test*()> _generation_function, std::string _delimiter = " ", std::string _line_breaker = "\n");
 	Matrix(PrimitiveTest<int>* _n, Test* _example, std::string _delimiter = " ", std::string _line_breaker = "\n");
-	virtual void Generate();
+	virtual Matrix* Generate();
 	virtual void Print(std::ostream& = std::cout) const;
 	void PrintSize(bool);
 	std::pair<int, int> Size();

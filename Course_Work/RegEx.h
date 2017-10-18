@@ -283,7 +283,7 @@ protected:
 public:
 
 	RegEx(const std::string&, int = 1000);
-	virtual void Generate();
+	virtual RegEx* Generate();
 	virtual std::string Get();
 	virtual void Print(std::ostream& = std::cout) const;
 	virtual void MaxLenght(int _max_size);

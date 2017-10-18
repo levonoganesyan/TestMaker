@@ -12,7 +12,7 @@ public:
 	RandomTestSet();
 	virtual RandomTestSet* Add(Test*);
 	virtual Test* Get();
-	virtual void Generate();
+	virtual RandomTestSet* Generate();
 	virtual void Print(std::ostream& = std::cout) const;
 	virtual RandomTestSet* Clone() const;
 	virtual ~RandomTestSet();

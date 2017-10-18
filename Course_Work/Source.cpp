@@ -45,11 +45,12 @@ public:
 		}
 		this->Add(right_bracket);
 	}
-	void Generate()
+	BinaryTree* Generate()
 	{
 		current_depth_ = depth_;
 		this->Clear();
 		E();
+		return this;
 	}
 
 };
@@ -92,11 +93,12 @@ class Quadrilateral : public Test
 			x_ = CreateNumber<double>(-10.0, 10.0);
 			y_ = CreateNumber<double>(-10.0, 10.0);
 		}
-		void Generate()
+		Point* Generate()
 		{
 			test_generated_ = true;
 			x_->Generate();
 			y_->Generate();
+			return this;
 		}
 		void Print(std::ostream& _out) const
 		{
@@ -151,7 +153,7 @@ public:
 			points.push_back(new Point());
 		}
 	}
-	virtual void Generate()
+	virtual Quadrilateral* Generate()
 	{
 		test_generated_ = true;
 		while (1)
@@ -164,6 +166,7 @@ public:
 			if (!intersect(points[0], points[1], points[2], points[3]) && !intersect(points[0], points[3], points[2], points[1]))
 				break;
 		}
+		return this;
 	}
 	virtual void Print(std::ostream& _out) const
 	{
@@ -204,12 +207,13 @@ public:
 		//test = new CompositeTest();
 		//test->Add(members)->Add(space_delimiter)->Add(count)->Add(new_line_delimiter)->Add(arr);
 	}
-	virtual void Generate()
+	virtual BG* Generate()
 	{
 		members->Generate();
 		count->Generate();
 		arr->Generate();
 		//test->Generate();
+		return this;
 	}
 	virtual void Print(std::ostream& _out) const
 	{
@@ -275,7 +279,7 @@ public:
 //		}
 //		virtual Test* Clone()
 //		{
-//			MyGraph* graph = new MyGraph(available_vertexes_, number_of_vertices_, number_of_edges_, NULL, true, false);
+//			MyGraph* graph = new MyGraph(available_vertexes_, number_of_vertices_, number_of_edges_, nullptr, true, false);
 //			return graph;
 //		}
 //	};
@@ -354,7 +358,7 @@ public:
 	{
 
 	}
-	virtual void Generate()
+	virtual Palindrome* Generate()
 	{
 		count_->Generate();
 		word_.clear();
@@ -363,6 +367,7 @@ public:
 			word_.push_back(new RangePrimitiveTest<char>('a', 'z'));
 			word_.back()->Generate();
 		}
+		return this;
 	}
 	virtual void Print(std::ostream& _out) const
 	{
@@ -448,7 +453,7 @@ void run_code()
 	while (1)
 	{
 		//RegEx* regex = new RegEx("rgb\\(\\s*(-?\\d+|-?\\d*\\.\\d+(?=%))(%?)\\s*)", 10);
-		auto a = CreateNumber(0, 99);
+		/*auto a = CreateNumber(0, 99);
 		std::vector<int> vec(100);
 		for (int i = 0; i < 100000000; i++)
 		{
@@ -462,7 +467,22 @@ void run_code()
 		return;
 		Matrix* matrix = new Matrix(CreateNumber(5), CreateNumber(10));
 		matrix->Generate();
-		matrix->Print();
+		matrix->Print();*/
+		//PrimitiveTest<int>* vertices_count = CreateNumber(3, 5);
+		//PrimitiveTest<int>* edges_count = CreateNumber(5, 10);
+		//Graph* graph = new Graph(vertices_count, edges_count);
+		//graph->Buckle()->Directed();
+		//graph->PrintType(Graph::LIST_OF_EDGES);
+		//graph->Generate();
+		//graph->Print();
+		//delete graph;
+		//delete edges_count;
+		//delete vertices_count;
+		Graph* graph = new Graph(CreateNumber(3, 5), CreateNumber(5, 10));
+		graph->Buckle()->Directed()->PrintType(Graph::LIST_OF_EDGES)->Generate()->Print();
+		delete graph;
+		system("pause");
+		system("cls");
 		/*RegEx* regex = new RegEx("", 10);
 		std::cout << "Printing...\n";
 		regex->Generate();

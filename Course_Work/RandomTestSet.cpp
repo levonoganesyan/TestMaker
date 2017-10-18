@@ -16,10 +16,11 @@ Test * RandomTestSet::Get()
 	return current_test_;
 }
 
-void RandomTestSet::Generate()
+RandomTestSet* RandomTestSet::Generate()
 {
 	test_generated_ = true;
 	current_test_ = random_set_[Rand() % (random_set_.size())];
+	return this;
 }
 
 void RandomTestSet::Print(std::ostream & _out) const

@@ -19,7 +19,7 @@ public:
 	// Array( char );
 	Array(PrimitiveTest<int>*, std::function<Test*()>, std::string = " ", std::string = "\n");
 	Array(PrimitiveTest<int>*, Test*, std::string = " ", std::string = "\n");
-	virtual void Generate();
+	virtual Array* Generate();
 	virtual void Print(std::ostream& = std::cout) const;
 	void PrintSize(bool);
 	int Size();

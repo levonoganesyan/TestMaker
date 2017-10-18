@@ -5,7 +5,7 @@
 Array::Array(PrimitiveTest<int>* _array_size_to, std::function<Test*()> _generation_function, std::string _delimiter, std::string _line_breaker)
 	: array_size_(_array_size_to)
 	, generation_function_(_generation_function)
-	, example_(NULL)
+	, example_(nullptr)
 	, delimiter_(_delimiter)
 	, line_breaker_(_line_breaker)
 	, print_size_(true)
@@ -13,14 +13,14 @@ Array::Array(PrimitiveTest<int>* _array_size_to, std::function<Test*()> _generat
 }
 Array::Array(PrimitiveTest<int>* _array_size_to, Test* _example, std::string _delimiter, std::string _line_breaker)
 	: array_size_(_array_size_to)
-	, generation_function_(NULL)
+	, generation_function_(nullptr)
 	, example_(_example)
 	, delimiter_(_delimiter)
 	, line_breaker_(_line_breaker)
 	, print_size_(true)
 {
 }
-void Array::Generate() 
+Array* Array::Generate() 
 {
 	test_generated_ = true;
 	array_size_->Generate();
@@ -31,7 +31,7 @@ void Array::Generate()
 	array_.resize(n);
 	for ( int i = 0 ; i < n ; i++ )
 	{
-		if (example_ != NULL)
+		if (example_ != nullptr)
 		{
 			array_[i] = example_->Clone();
 		}
@@ -39,9 +39,10 @@ void Array::Generate()
 		{
 			array_[i] = generation_function_();
 		}
-		THROW(array_[i] == NULL, "Array element is not assigned");
+		THROW(array_[i] == nullptr, "Array element is not assigned");
 		array_[ i ]->Generate();
 	}
+	return this;
 }
 void Array::Print(std::ostream& _out) const
 {
@@ -61,7 +62,7 @@ void Array::Print(std::ostream& _out) const
 Array* Array::Clone() const
 { 
 	Array* arr;
-	if (example_ == NULL)
+	if (example_ == nullptr)
 	{
 		arr = new Array(array_size_, generation_function_, delimiter_, line_breaker_);
 	}

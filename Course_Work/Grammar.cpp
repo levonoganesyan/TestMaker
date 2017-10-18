@@ -185,11 +185,12 @@ void Grammar::Generator(const std::string & _current_nonterm)
 		}
 	}
 }
-void Grammar::Generate()
+Grammar* Grammar::Generate()
 {	
 	test_generated_ = true;
 	this->Clear();
 	this->Generator(start_nonterm_);
+	return this;
 }
 void Grammar::Print(std::ostream& _out) const
 {

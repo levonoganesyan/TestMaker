@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['delimiter',['Delimiter',['../class_delimiter.html',1,'']]]
+  ['expression',['Expression',['../class_reg_ex_1_1_expression.html',1,'RegEx']]]
 ];

@@ -11,9 +11,9 @@ std::string Delimiter::Get()
 {
 	return delimiter_;
 }
-void Delimiter::Generate()
+Delimiter* Delimiter::Generate()
 {
-	
+	return this;
 }
 void Delimiter::Print(std::ostream& _out) const
 {

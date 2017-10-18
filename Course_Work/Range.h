@@ -21,7 +21,7 @@ private:
 protected:
 	PrimitiveTest<T> *begin_, *end_;
 public:
-	Range() : begin_(NULL), end_(NULL) { }
+	Range() : begin_(nullptr), end_(nullptr) { }
 	Range(PrimitiveTest<T>* _begin, PrimitiveTest<T>* _end) : begin_(_begin), end_(_end) {}
 	//Range(T _begin) : begin_(_begin), end_(_begin) {}
 	T Get() {};
@@ -30,12 +30,13 @@ public:
 		Range* range = new Range(begin_, end_);
 		return range;
 	}
-	virtual void Generate()
+	virtual Range* Generate()
 	{
 		test_generated_ = true;
 		begin_->Generate();
 		end_->Generate();
 		RangeValidation();
+		return this;
 	}
 	virtual void Print(std::ostream& _out) const
 	{
@@ -48,7 +49,7 @@ public:
 // 	}
 	void RangeValidation()
 	{
-		THROW(begin_ == NULL || end_ == NULL, "Begin and end must be specified");
+		THROW(begin_ == nullptr || end_ == nullptr, "Begin and end must be specified");
 		THROW(begin_->Get() > end_->Get(), "Begin can't be greater than end");
 	}
 	Range<T>& operator= (T _current_value)

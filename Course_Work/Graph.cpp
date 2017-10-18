@@ -109,7 +109,7 @@ void Graph::PrintListOfEdges(std::ostream& _out)
 	for (unsigned int i = 0; i < edges.size(); i++)
 	{
 		_out << edges[i].first + 1 << ' ' << edges[i].second + 1 << ' ';
-		if (weight_ != NULL)
+		if (weight_ != nullptr)
 		{
 			weight_->Generate();
 			weight_->Print(_out);
@@ -283,20 +283,26 @@ void Graph::GenerateLargeGraph()
 		}
 	}
 }
-void Graph::Generate()
+Graph* Graph::Generate()
 {
 	test_generated_ = true;
 	GenerateGraph();
+	return this;
 }
 void Graph::Print(std::ostream& _out) const
 {
 	THROW(!test_generated_, "Print() must be called after Generate()");
-	THROW(print_type_ != LIST_OF_EDGES && weight_ != NULL, "Weights cannot be specified with not LIST_OF_EDGES printing modificator");
+	THROW(print_type_ != LIST_OF_EDGES && weight_ != nullptr, "Weights cannot be specified with not LIST_OF_EDGES printing modificator");
 	print_function_(_out);
 }
 Graph * Graph::Buckle(bool _buckle)
 {
 	buckle_ = _buckle;
+	return this;
+}
+Graph * Graph::Directed(bool _directed)
+{
+	directed_ = _directed;
 	return this;
 }
 Graph * Graph::PrintType(PRINT_TYPE _print_type)

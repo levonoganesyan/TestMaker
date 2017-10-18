@@ -14,7 +14,7 @@ public:
 	virtual ConstStringSet* Add(std::string);
 	virtual ConstStringSet* Add( char );
 	virtual std::string Get();
-	virtual void Generate();
+	virtual ConstStringSet* Generate();
 	virtual void Print(std::ostream& = std::cout) const;
 	virtual ConstStringSet* Clone() const;
 	virtual ~ConstStringSet();

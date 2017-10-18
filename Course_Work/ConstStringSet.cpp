@@ -30,12 +30,13 @@ std::string ConstStringSet::Get()
 	THROW(!test_generated_, "Get() must be called after Generate()");
 	return current_string_;
 }
-void ConstStringSet::Generate()
+ConstStringSet* ConstStringSet::Generate()
 {
 	test_generated_ = true;
 	if ( elements.size() == 0 )
 		elements.assign(set_.begin(), set_.end());
 	current_string_ = elements[ Rand()%( set_.size() ) ];
+	return this;
 }
 void ConstStringSet::Print(std::ostream& _out) const
 {

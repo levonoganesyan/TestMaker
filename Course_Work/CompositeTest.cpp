@@ -18,12 +18,13 @@ void CompositeTest::Clear()
 		delete tests_[i];
 	tests_.clear();
 }
-void CompositeTest::Generate()
+CompositeTest* CompositeTest::Generate()
 {
 	test_generated_ = true;
 	for ( unsigned int i = 0 ; i < tests_.size() ; i++ )
 		tests_[ i ]->Generate();
 	//std::for_each( tests_.begin(), tests_.end(), []( const TOSPtr& testObj ) { testObj->Generate(); } );
+	return this;
 }
 void CompositeTest::Print(std::ostream& _out) const
 {

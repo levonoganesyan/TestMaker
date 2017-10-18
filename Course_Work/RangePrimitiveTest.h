@@ -25,11 +25,12 @@ public:
 		THROW(!test_generated_, "Get() must be called after Generate()");
 		return current_value_;
 	}
-	virtual void Generate()
+	virtual RangePrimitiveTest* Generate()
 	{
 		test_generated_ = true;
 		range_->Generate();
 		current_value_ = range_->Get();
+		return this;
 	}
 	virtual void Print(std::ostream& _out = std::cout) const
 	{

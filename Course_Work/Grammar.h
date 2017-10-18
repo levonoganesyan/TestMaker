@@ -24,7 +24,7 @@ public:
 
 	Grammar(const std::string &, const std::string &);
 	virtual void Generator(const std::string &);
-	virtual void Generate();
+	virtual Grammar* Generate();
 	virtual void NonTermsParsing(const std::string &);
 	virtual void StartNonTermParsing(const std::string &);
 	virtual void TermsParsing(const std::string &);

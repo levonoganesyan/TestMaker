@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['quadrilateral',['Quadrilateral',['../class_quadrilateral.html',1,'']]]
+  ['terminal',['Terminal',['../class_reg_ex_1_1_terminal.html',1,'RegEx']]],
+  ['test',['Test',['../class_test.html',1,'']]],
+  ['testcreator',['TestCreator',['../class_test_creator.html',1,'']]]
 ];

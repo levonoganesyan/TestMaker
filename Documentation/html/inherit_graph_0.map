@@ -1,0 +1,8 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$class_reg_ex_1_1_expression.html" title="RegEx::Expression" alt="" coords="5,81,140,108"/>
+<area shape="rect" id="node2" href="$class_reg_ex_1_1_operation.html" title="RegEx::Operation" alt="" coords="188,56,313,83"/>
+<area shape="rect" id="node6" href="$class_reg_ex_1_1_terminal.html" title="RegEx::Terminal" alt="" coords="191,107,310,133"/>
+<area shape="rect" id="node3" href="$class_reg_ex_1_1_and.html" title="RegEx::And" alt="" coords="371,5,463,32"/>
+<area shape="rect" id="node4" href="$class_reg_ex_1_1_or.html" title="RegEx::Or" alt="" coords="375,56,458,83"/>
+<area shape="rect" id="node5" href="$class_reg_ex_1_1_repeat.html" title="RegEx::Repeat" alt="" coords="361,107,472,133"/>
+</map>
