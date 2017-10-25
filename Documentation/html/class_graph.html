@@ -144,7 +144,16 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>test_generated_</b></
 std::vector&lt; <a class="el" href="class_test.html">Test</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>objects_with_delete_responsibility_</b></td></tr>
 <tr class="separator:a6d134f96b13a6d97991731bfeb60d086 inherit pro_attribs_class_test"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="class_graph.html">Graph</a> class.<br />
+Supports creating directed and non-directed graphs.<br />
+<a class="el" href="class_graph.html">Graph</a> always connected (except the case, when number of edges is low than number of vertices)<br />
+<a class="el" href="class_graph.html">Graph</a> always fix a random tree, and try to deduce, are your <a class="el" href="class_graph.html">Graph</a> small or big (deduces by number of edges)<br />
+If your <a class="el" href="class_graph.html">Graph</a> have more that n*n/2 edges, where n is number of vertices, then <a class="el" href="class_graph.html">Graph</a> is big, otherwise small.<br />
+Big <a class="el" href="class_graph.html">Graph</a> generated this way: it takes full-connected <a class="el" href="class_graph.html">Graph</a>, and tries to remove random (u, v). If that edge is already deleted or that edge is in fixed tree, algorithm tries again. In worst case there is 50% chance to mistake, so number of trying should be ~ 2<br />
+Small <a class="el" href="class_graph.html">Graph</a> generated this way: it takes empty fraph, and add fixed tree edges. After that if there is any edges left tries to add random (u, v). If that edge is already added algorithm tries again. In worst case there is 50% chance to mistake, so number of trying should be ~ 2<br />
+If you want to generate not connected Graphs, you must use GraphMerge function (but not now :D) </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>write GraphMerge function </dd></dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab66db6d6d9083a8b9f24097f70712980"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab66db6d6d9083a8b9f24097f70712980">&#9670;&nbsp;</a></span>Graph()</h2>
 
