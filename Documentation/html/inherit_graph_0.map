@@ -1,8 +1,11 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_reg_ex_1_1_expression.html" title="RegEx::Expression" alt="" coords="5,81,140,108"/>
-<area shape="rect" id="node2" href="$class_reg_ex_1_1_operation.html" title="RegEx::Operation" alt="" coords="188,56,313,83"/>
-<area shape="rect" id="node6" href="$class_reg_ex_1_1_terminal.html" title="RegEx::Terminal" alt="" coords="191,107,310,133"/>
-<area shape="rect" id="node3" href="$class_reg_ex_1_1_and.html" title="RegEx::And" alt="" coords="371,5,463,32"/>
-<area shape="rect" id="node4" href="$class_reg_ex_1_1_or.html" title="RegEx::Or" alt="" coords="375,56,458,83"/>
-<area shape="rect" id="node5" href="$class_reg_ex_1_1_repeat.html" title="RegEx::Repeat" alt="" coords="361,107,472,133"/>
+<area shape="rect" id="node1" href="$class_test.html" title="Test" alt="" coords="5,157,52,184"/>
+<area shape="rect" id="node2" href="$class_array.html" title="Array" alt="" coords="137,5,190,32"/>
+<area shape="rect" id="node3" href="$class_delimiter.html" title="Class Delimiter. " alt="" coords="127,56,200,83"/>
+<area shape="rect" id="node4" href="$class_graph.html" title="Graph" alt="" coords="135,107,192,133"/>
+<area shape="rect" id="node5" href="$class_matrix.html" title="Matrix" alt="" coords="134,157,193,184"/>
+<area shape="rect" id="node6" href="$class_primitive_test.html" title="PrimitiveTest\&lt; T \&gt;" alt="" coords="100,208,227,235"/>
+<area shape="rect" id="node8" href="$class_random_test_set.html" title="RandomTestSet" alt="" coords="106,259,221,285"/>
+<area shape="rect" id="node9" href="$class_reg_ex.html" title="RegEx" alt="" coords="133,309,194,336"/>
+<area shape="rect" id="node7" href="$class_range_primitive_test.html" title="RangePrimitiveTest\&lt; T \&gt;" alt="" coords="275,208,439,235"/>
 </map>

@@ -2,6 +2,230 @@
 #include"Range.h"
 #include"RegEx.h"
 
+void RegEx::Terminal::add_to_css_by_escaped_char(std::set<char>& _chars_to_adding, char _ch)
+{
+	if (_ch == 's')
+	{
+		_chars_to_adding.insert(' ');
+		_chars_to_adding.insert('\t');
+		_chars_to_adding.insert('\n');
+	}
+	else if (_ch == 'S')
+	{
+		for (int i = 0; i < 256; i++)
+		{
+			if (i != ' ' && i != '\t' && i != '\n')
+			{
+				_chars_to_adding.insert(i);
+			}
+		}
+	}
+	else if (_ch == 'd')
+	{
+		for (char i = '0'; i <= '9'; i++)
+		{
+			_chars_to_adding.insert(i);
+		}
+	}
+	else if (_ch == 'D')
+	{
+		for (int i = 0; i < 256; i++)
+		{
+			if (i < '0' || i > '9')
+			{
+				_chars_to_adding.insert(i);
+			}
+		}
+	}
+	else if (_ch == 'w')
+	{
+		for (char i = 'a'; i <= 'z'; i++)
+		{
+			_chars_to_adding.insert(i);
+		}
+		for (char i = 'A'; i <= 'Z'; i++)
+		{
+			_chars_to_adding.insert(i);
+		}
+		for (char i = '0'; i <= '9'; i++)
+		{
+			_chars_to_adding.insert(i);
+		}
+	}
+	else if (_ch == 'W')
+	{
+		for (int i = 0; i < 256; i++)
+		{
+			if ((i < '0' || i > '9') && (i < 'a' || i > 'z') && (i < 'A' || i > 'Z'))
+			{
+				_chars_to_adding.insert(i);
+			}
+		}
+	}
+	else
+	{
+		THROW(true, "Incorrect escaped character \\" + _ch);
+	}
+}
+RegEx::Terminal::Terminal(char c)
+	: Terminal(std::string(1, c)) 
+{ 
+}
+RegEx::Terminal::Terminal(const std::string& _regex)
+	: regex_(_regex)
+	, css_(new ConstStringSet())
+{
+	bool backslash = false;
+	bool negation = false;
+	std::set<char> chars_to_adding;
+	for (unsigned int i = 0; i < regex_.size(); i++)
+	{
+		if (i == 0 && regex_[i] == '^')
+		{
+			negation = true;
+			continue;
+		}
+		if (backslash)
+		{
+			std::string escaped_characters = "tn0\\/.?^$[]{}()|sSdDwW";
+			bool character_found = false;
+			for (unsigned int j = 0; j < escaped_characters.size(); j++)
+			{
+				if (regex_[i] == escaped_characters[j])
+				{
+					std::string temp = "\\";
+					temp += regex_[i];
+					if (GetEscapedCharByString(temp) != ' ')
+					{
+						chars_to_adding.insert(GetEscapedCharByString(temp));
+					}
+					else if (!isalpha(regex_[i]))
+					{
+						chars_to_adding.insert(regex_[i]);
+					}
+					else
+					{
+						add_to_css_by_escaped_char(chars_to_adding, regex_[i]);
+					}
+					character_found = true;
+					break;
+				}
+			}
+			THROW(!character_found, "Incorrect escaped character \\" + regex_[i]);
+			backslash = false;
+			continue;
+		}
+		if (regex_[i] == '.' && backslash == false)
+		{
+			for (int ch = 0; ch < 256; ch++)
+			{
+				css_->Add(ch);
+			}
+		}
+		if (i < regex_.size() - 2 && regex_[i + 1] == '-')
+		{
+			for (char j = regex_[i]; j <= regex_[i + 2]; j++)
+			{
+				chars_to_adding.insert(j);
+			}
+			i += 2;
+		}
+		else if (regex_[i] != '\\')
+		{
+			chars_to_adding.insert(regex_[i]);
+		}
+		else
+		{
+			backslash = true;
+		}
+	}
+
+	for (int ch = 0; ch < 256; ch++)
+	{
+		if (negation)
+		{
+			if (chars_to_adding.find(ch) == chars_to_adding.end())
+			{
+				css_->Add(ch);
+			}
+		}
+		else
+		{
+			if (chars_to_adding.find(ch) != chars_to_adding.end())
+			{
+				css_->Add(ch);
+			}
+		}
+	}
+
+}
+void RegEx::Terminal::Generate()
+{
+	css_->Generate();
+}
+std::string RegEx::Terminal::Get()
+{
+	return css_->Get();
+}
+RegEx::Terminal::~Terminal()
+{
+	delete css_;
+}
+
+RegEx::Repeat::Repeat(Expression* _exp, PrimitiveTest<int>* _count)
+	: exp_(_exp)
+	, count_(_count)
+{
+
+}
+void RegEx::Repeat::Generate()
+{
+	count_->Generate();
+	exp_->Generate();
+}
+std::string RegEx::Repeat::Get()
+{
+	std::string word = "";
+	for (int i = 0; i < count_->Get(); i++)
+	{
+		exp_->Generate();
+		word += exp_->Get();
+	}
+	return word;
+}
+
+RegEx::And::And(Expression* _left_exp, Expression* _right_exp)
+	: left_exp_(_left_exp)
+	, right_exp_(_right_exp)
+{
+}
+void RegEx::And::Generate()
+{
+	left_exp_->Generate();
+	right_exp_->Generate();
+}
+std::string RegEx::And::Get()
+{
+	return left_exp_->Get() + right_exp_->Get();
+}
+
+RegEx::Or::Or() {}
+void RegEx::Or::Add( Expression* _exp) 
+{
+	subexps_.push_back(_exp);
+}
+void RegEx::Or::Generate()
+{
+	current_element_ = (int)(Rand() % subexps_.size());
+	subexps_[current_element_]->Generate();
+}
+std::string RegEx::Or::Get()
+{
+	return subexps_[current_element_]->Get();
+}
+
+
+
 RegEx::SymbolType RegEx::get_symbol_type( char c ) const
 {
     switch ( c ) {
@@ -23,8 +247,7 @@ RegEx::SymbolType RegEx::get_symbol_type( char c ) const
         return Term;
     }
 }
-
-RegEx::RegEx( const std::string& _regex, int _max_lenght ) : max_lenght_( _max_lenght ), regex_( _regex )
+RegEx::RegEx( const std::string& _regex, int _max_depth) : max_depth_(_max_depth), regex_( _regex )
 {
     regex_exp = str_to_expression( 0, (unsigned int)regex_.size() );
 }
@@ -47,7 +270,7 @@ RegEx::Expression* RegEx::str_to_expression( unsigned int start, unsigned int en
         }
         else if ( type == UnaryOperation )
         {
-            unsigned int min_rep = 0, max_rep = max_lenght_;
+            unsigned int min_rep = 0, max_rep = max_depth_;
             if ( regex_[ i ] == '*' )
             {
             }
@@ -175,9 +398,9 @@ void RegEx::Print( std::ostream& _out ) const
 	THROW(!test_generated_, "Print() must be called after Generate()");
 	_out << current_string_;
 }
-void RegEx::MaxLenght( int _max_lenght )
+void RegEx::MaxDepth( int _max_depth)
 {
-    max_lenght_ = _max_lenght;
+	max_depth_ = _max_depth;
 }
 RegEx* RegEx::Clone() const
 {

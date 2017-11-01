@@ -13,7 +13,7 @@
 //	{
 //		if (current_depth_ == 0)
 //		{
-//			this->Add(CreateNumber(1, 100));
+//			this->Add(CreateElement(1, 100));
 //			return;
 //		}
 //		current_depth_--;
@@ -71,7 +71,7 @@
 //		ConstPrimitiveTest<char>* semicolon = new ConstPrimitiveTest<char>(';');
 //
 //		this->Add(left_bracket);
-//		this->Add(CreateNumber(1, 100));
+//		this->Add(CreateElement(1, 100));
 //		this->Add(semicolon);
 //		if (rng & 2)
 //		{
@@ -154,7 +154,7 @@
 //	try
 //	{
 //		//CompositeTest * mct = new MyCompositeTest();
-//		//mct->Add(CreateNumber(new ConstPrimitiveTest<int>(1), new ConstPrimitiveTest<int>(100)));
+//		//mct->Add(CreateElement(new ConstPrimitiveTest<int>(1), new ConstPrimitiveTest<int>(100)));
 //		//CompositeTest * mct1 = mct->Clone();
 //
 //		//PrimitiveTest<int> * bound1 = new ConstPrimitiveTest<int>(1);
@@ -290,11 +290,11 @@
 //		//	std::cout << i << std::endl;
 //		//}
 //
-//		//PrimitiveTest<int>* n = CreateNumber(one, ten)->Clone();
+//		//PrimitiveTest<int>* n = CreateElement(one, ten)->Clone();
 //
 //
 //		//std::function<Test*()> elements_generator = []() -> Test* {	
-//		//	return CreateNumber(one, new ConstPrimitiveTest<int>(5000))->Clone();
+//		//	return CreateElement(one, new ConstPrimitiveTest<int>(5000))->Clone();
 //		//};
 //		//
 //		//Array* array_of_elements = new Array ( n, elements_generator, "\n" );
@@ -303,10 +303,10 @@
 //		//css->Add("###");
 //
 //
-//		//PrimitiveTest<int>* queries_number = CreateNumber(one, ten)->Clone();
+//		//PrimitiveTest<int>* queries_number = CreateElement(one, ten)->Clone();
 //
 //		//std::function<Test*()> query_generator = [&n]() -> Test* {	
-//		//	return CreateNumber(one, n)->Clone();
+//		//	return CreateElement(one, n)->Clone();
 //		//};
 //
 //		//Array* array_of_queries = new Array ( queries_number, query_generator, "\n" );
@@ -410,7 +410,7 @@
 //	{
 //		for (int e = v * 100; e <= v * 100; e *= 10)
 //		{
-//			Graph* ndgraph = new NonDirectedGraph(CreateNumber(v, v), CreateNumber(e, e), CreateNumber(v, e));
+//			Graph* ndgraph = new NonDirectedGraph(CreateElement(v, v), CreateElement(e, e), CreateElement(v, e));
 //			ndgraph->Buckle(false)->PrintType(Graph::LIST_OF_EDGES);
 //			Test* test = new CompositeTest();
 //			test->Add(ndgraph)->Add(new_line_delimiter);

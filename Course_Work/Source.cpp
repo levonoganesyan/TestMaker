@@ -22,7 +22,7 @@ public:
 		ConstPrimitiveTest<char>* semicolon = new ConstPrimitiveTest<char>(';');
 
 		this->Add(left_bracket);
-		this->Add(CreateNumber(1, 100));
+		this->Add(CreateElement(1, 100));
 		this->Add(semicolon);
 		if (rng & 2)
 		{
@@ -90,8 +90,8 @@ class Quadrilateral : public Test
 	public:
 		Point()
 		{
-			x_ = CreateNumber<double>(-10.0, 10.0);
-			y_ = CreateNumber<double>(-10.0, 10.0);
+			x_ = CreateElement<double>(-10.0, 10.0);
+			y_ = CreateElement<double>(-10.0, 10.0);
 		}
 		Point* Generate()
 		{
@@ -197,8 +197,8 @@ class BG : public Test
 public:
 	BG()
 	{
-		members = CreateNumber<int>(1, 50);
-		count = CreateNumber<int>(1, 50);
+		members = CreateElement<int>(1, 50);
+		count = CreateElement<int>(1, 50);
 		css = new ConstStringSet();
 		css->Add("B");
 		css->Add("G");
@@ -322,8 +322,8 @@ public:
 //			graphs_.push_back(
 //				new MyGraph(
 //					available_vertexes_,
-//					CreateNumber(number_of_vertices_current_tree, number_of_vertices_current_tree),
-//					CreateNumber(number_of_edges_current_tree, number_of_edges_current_tree),
+//					CreateElement(number_of_vertices_current_tree, number_of_vertices_current_tree),
+//					CreateElement(number_of_edges_current_tree, number_of_edges_current_tree),
 //					nullptr,
 //					true,
 //					false
@@ -390,9 +390,9 @@ void problem_a()
 	{
 		css->Add(ch);
 	}
-	Array* word = new Array(CreateNumber(1, 32), css, "", "");
+	Array* word = new Array(CreateElement(1, 32), css, "", "");
 	word->PrintSize(false);
-	Array* test = new Array(CreateNumber(1, 100000), word, "\n");
+	Array* test = new Array(CreateElement(1, 100000), word, "\n");
 	test->PrintSize(true);
 	TestCreator tc(test, 20, "D:/tests/a/tests", 1, "", ".in");
 	tc.Make();
@@ -400,7 +400,7 @@ void problem_a()
 void problem_b()
 {
 	Test* test = new CompositeTest();
-	test->Add(CreateNumber(1, 100))->Add(space_delimiter)->Add(CreateNumber(0, 900));
+	test->Add(CreateElement(1, 100))->Add(space_delimiter)->Add(CreateElement(0, 900));
 	TestCreator tc(test, 200, "D:/tests/b/tests", 1, "", ".in");
 	tc.Make();
 }
@@ -408,21 +408,21 @@ void problem_c()
 {
 	for (int i = 2; i <= 16; i++)
 	{
-		TestCreator tc(CreateNumber(i), 1, "D:/tests/c/tests", 1, "", std::to_string(i) + ".in", 2);
+		TestCreator tc(CreateElement(i), 1, "D:/tests/c/tests", 1, "", std::to_string(i) + ".in", 2);
 		tc.Make();
 	}
 }
 void problem_d()
 {
-	// Problem_Forest::Forest* q = new Problem_Forest::Forest(CreateNumber(1000), CreateNumber(1000));
-	Palindrome* palindrome = new Palindrome(CreateNumber(1, 100));
+	// Problem_Forest::Forest* q = new Problem_Forest::Forest(CreateElement(1000), CreateElement(1000));
+	Palindrome* palindrome = new Palindrome(CreateElement(1, 100));
 	TestCreator tc(palindrome, 100, "D:/tests/d/tests", 1, "", ".in");
 	tc.Make();
 }
 void problem_e()
 {
 	Test* test = new CompositeTest();
-	test->Add(CreateNumber<long long>(1, 1000000000000000000ll))->Add(space_delimiter)->Add(CreateNumber<long long>(1, 1000000000000000000ll))->Add(new_line_delimiter);
+	test->Add(CreateElement<long long>(1, 1000000000000000000ll))->Add(space_delimiter)->Add(CreateElement<long long>(1, 1000000000000000000ll))->Add(new_line_delimiter);
 	TestCreator tc(test, 200, "D:/tests/e/tests", 1, "", ".in");
 	tc.Make();
 }
@@ -434,10 +434,10 @@ void problem_f()
 }
 //void problem_h()
 //{
-//	Forest* test1 = new Forest(CreateNumber(1, 100000), CreateNumber(1, 100000));
+//	Forest* test1 = new Forest(CreateElement(1, 100000), CreateElement(1, 100000));
 //	TestCreator tc1(test1, 50, "D:/tests/h/tests", 1, "", ".in");
 //	tc1.Make();
-//	Graph* test2 = new NonDirectedGraph(CreateNumber(1, 100000), CreateNumber(1, 100000));
+//	Graph* test2 = new NonDirectedGraph(CreateElement(1, 100000), CreateElement(1, 100000));
 //	test2->PrintType(Graph::LIST_OF_EDGES);
 //	TestCreator tc2(test2, 50, "D:/tests/h/tests", 1, "", ".in", 50);
 //	tc2.Make();
@@ -448,12 +448,18 @@ void problem_g()
 	TestCreator tc(test, 50, "D:/tests/g/tests", 1, "", ".in", 0);
 	tc.Make();
 }
+
 void run_code()
 {
 	while (1)
 	{
-		//RegEx* regex = new RegEx("rgb\\(\\s*(-?\\d+|-?\\d*\\.\\d+(?=%))(%?)\\s*)", 10);
-		/*auto a = CreateNumber(0, 99);
+	
+		/*RegEx* regex = new RegEx("([a-zA-Z]{100}\n)*", 100);
+		regex->Generate()->Print();*/
+		system("pause");
+		system("cls");
+
+		/*auto a = CreateElement(0, 99);
 		std::vector<int> vec(100);
 		for (int i = 0; i < 100000000; i++)
 		{
@@ -465,11 +471,11 @@ void run_code()
 			std::cout << i << "\t" << vec[ i ] << std::endl;
 		}
 		return;
-		Matrix* matrix = new Matrix(CreateNumber(5), CreateNumber(10));
+		Matrix* matrix = new Matrix(CreateElement(5), CreateElement(10));
 		matrix->Generate();
 		matrix->Print();*/
-		//PrimitiveTest<int>* vertices_count = CreateNumber(3, 5);
-		//PrimitiveTest<int>* edges_count = CreateNumber(5, 10);
+		//PrimitiveTest<int>* vertices_count = CreateElement(3, 5);
+		//PrimitiveTest<int>* edges_count = CreateElement(5, 10);
 		//Graph* graph = new Graph(vertices_count, edges_count);
 		//graph->Buckle()->Directed();
 		//graph->PrintType(Graph::LIST_OF_EDGES);
@@ -478,11 +484,11 @@ void run_code()
 		//delete graph;
 		//delete edges_count;
 		//delete vertices_count;
-		Graph* graph = new Graph(CreateNumber(3, 5), CreateNumber(5, 10));
+		/*Graph* graph = new Graph(CreateElement(3, 5), CreateElement(5, 10));
 		graph->Buckle()->Directed()->PrintType(Graph::LIST_OF_EDGES)->Generate()->Print();
 		delete graph;
 		system("pause");
-		system("cls");
+		system("cls");*/
 		/*RegEx* regex = new RegEx("", 10);
 		std::cout << "Printing...\n";
 		regex->Generate();
@@ -491,8 +497,8 @@ void run_code()
 		delete regex;
 		system("pause");
 		system("cls");*/
-        /*PrimitiveTest<int>* size_of_matrix = CreateNumber( 6, 6 );
-        Array* arr1 = new Array( size_of_matrix, CreateNumber( 10, 20 ) );
+        /*PrimitiveTest<int>* size_of_matrix = CreateElement( 6, 6 );
+        Array* arr1 = new Array( size_of_matrix, CreateElement( 10, 20 ) );
 		arr1->PrintSize(false);
         Array* arr2 = new Array( size_of_matrix, arr1, "");
         arr2->Generate();

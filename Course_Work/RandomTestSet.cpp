@@ -20,6 +20,7 @@ RandomTestSet* RandomTestSet::Generate()
 {
 	test_generated_ = true;
 	current_test_ = random_set_[Rand() % (random_set_.size())];
+	current_test_->Generate();
 	return this;
 }
 

@@ -7,10 +7,42 @@
 
 
 
-
+/// RegEx\n
+/// This is for generating tests via RegEx\n
+/// Here is an example for RegEx. You can try it by taking it from RegEx.h\n
+///
+/// A short example
+///
+/*!
+\code
+int main()
+{
+	// Generating <= 100 strings with length equals to 100
+	RegEx* regex = new RegEx("([a-zA-Z]{100}\n)*", 100);
+	regex->Generate()->Print();
+	delete regex;
+}
+\endcode
+*/
+///
+/// Another example
+///
+/*!
+\code
+int main()
+{
+	// Generating something like IP, but without caring about limitations
+	RegEx* regex = new RegEx("\\d{3}(\\.\\d{3}){3}", 10);
+	regex->Generate()->Print();
+	delete regex;
+}
+\endcode
+*/
 class RegEx : public Test
 {
-protected:
+
+private:
+	/// \cond
 	class Expression
 	{
 	public:
@@ -21,177 +53,13 @@ protected:
 	{
 		std::string regex_;
 		ConstStringSet* css_;
-		void add_to_css_by_escaped_char(std::set<char>& _chars_to_adding, char _ch)
-		{
-			if (_ch == 's')
-			{
-				_chars_to_adding.insert(' ');
-				_chars_to_adding.insert('\t');
-				_chars_to_adding.insert('\n');
-			}
-			else if (_ch == 'S')
-			{
-				for (int i = 0; i < 256; i++)
-				{
-					if (i != ' ' && i != '\t' && i != '\n')
-					{
-						_chars_to_adding.insert(i);
-					}
-				}
-			}
-			else if (_ch == 'd')
-			{
-				for (char i = '0'; i <= '9'; i++)
-				{
-					_chars_to_adding.insert(i);
-				}
-			}
-			else if (_ch == 'D')
-			{
-				for (int i = 0; i < 256; i++)
-				{
-					if (i < '0' || i > '9')
-					{
-						_chars_to_adding.insert(i);
-					}
-				}
-			}
-			else if (_ch == 'w')
-			{
-				for (char i = 'a'; i <= 'z'; i++)
-				{
-					_chars_to_adding.insert(i);
-				}
-				for (char i = 'A'; i <= 'Z'; i++)
-				{
-					_chars_to_adding.insert(i);
-				}
-				for (char i = '0'; i <= '9'; i++)
-				{
-					_chars_to_adding.insert(i);
-				}
-			}
-			else if (_ch == 'W')
-			{
-				for (int i = 0; i < 256; i++)
-				{
-					if ((i < '0' || i > '9') && (i < 'a' || i > 'z') && (i < 'A' || i > 'Z'))
-					{
-						_chars_to_adding.insert(i);
-					}
-				}
-			}
-			else
-			{
-				THROW(true, "Incorrect escaped character \\" + _ch);
-			}
-		}
+		void add_to_css_by_escaped_char(std::set<char>& _chars_to_adding, char _ch);
 	public:
-        Terminal( char c )
-            : Terminal( std::string( 1, c ) )
-        {
-
-        }
-		Terminal(const std::string& _regex)
-			: regex_(_regex)
-			, css_(new ConstStringSet())
-		{
-			bool backslash = false;
-			bool negation = false;
-			std::set<char> chars_to_adding;
-			for (unsigned int i = 0; i < regex_.size(); i++)
-			{
-				if (i == 0 && regex_[i] == '^')
-				{
-					negation = true;
-					continue;
-				}
-				if (backslash)
-				{
-					std::string escaped_characters = "tn0\\/.?^$[]{}()|sSdDwW";
-					bool character_found = false;
-					for ( unsigned int j = 0; j < escaped_characters.size(); j++)
-					{
-						if (regex_[i] == escaped_characters[j])
-						{
-							std::string temp = "\\";
-							temp += regex_[i];
-							if (GetEscapedCharByString(temp) != ' ')
-							{
-								chars_to_adding.insert(GetEscapedCharByString(temp));
-							}
-							else if (!isalpha(regex_[i]))
-							{
-								chars_to_adding.insert(regex_[i]);
-							}
-							else
-							{
-								add_to_css_by_escaped_char(chars_to_adding, regex_[i]);
-							}
-							character_found = true;
-							break;
-						}
-					}
-					THROW(!character_found, "Incorrect escaped character \\" + regex_[i]);
-					backslash = false;
-					continue;
-				}
-				if (regex_[i] == '.' && backslash == false)
-				{
-					for (int ch = 0; ch < 256; ch++)
-					{
-						css_->Add(ch);
-					}
-				}
-				if (i < regex_.size() - 2 && regex_[i + 1] == '-')
-				{
-					for (char j = regex_[i]; j <= regex_[i + 2]; j++)
-					{
-						chars_to_adding.insert(j);
-					}
-					i += 2;
-				}
-				else if (regex_[i] != '\\')
-				{
-					chars_to_adding.insert(regex_[i]);
-				}
-				else
-				{
-					backslash = true;
-				}
-			}
-		
-            for (int ch = 0; ch < 256; ch++)
-			{
-				if (negation)
-				{
-					if (chars_to_adding.find(ch) == chars_to_adding.end())
-					{
-						css_->Add(ch);
-					}
-				}
-				else
-				{
-					if (chars_to_adding.find(ch) != chars_to_adding.end())
-					{
-						css_->Add(ch);
-					}
-				}
-			}
-
-		}
-		void Generate()
-		{
-			css_->Generate();
-		}
-		std::string Get()
-		{
-			return css_->Get();
-		}
-		~Terminal()
-		{
-			delete css_;
-		}
+		Terminal(char c);
+		Terminal(const std::string& _regex);
+		void Generate();
+		std::string Get();
+		~Terminal();
 	};
 	class Operation : public Expression
 	{
@@ -207,27 +75,9 @@ protected:
 		Expression* exp_;
 		PrimitiveTest<int>* count_;
 	public:
-		Repeat(Expression* _exp, PrimitiveTest<int>* _count)
-			: exp_(_exp)
-			, count_(_count)
-		{
-
-		}
-		virtual void Generate()
-		{
-			count_->Generate();
-			exp_->Generate();
-		}
-		virtual std::string Get()
-		{
-			std::string word = "";
-			for (int i = 0; i < count_->Get(); i++)
-			{
-				exp_->Generate();
-				word += exp_->Get();
-			}
-			return word;
-		}
+		Repeat(Expression* _exp, PrimitiveTest<int>* _count);
+		virtual void Generate();
+		virtual std::string Get();
 	};
 	class And : public Operation
 	{
@@ -235,20 +85,9 @@ protected:
 		Expression* left_exp_;
 		Expression* right_exp_;
 	public:
-		And(Expression* _left_exp, Expression* _right_exp)
-			: left_exp_(_left_exp)
-			, right_exp_(_right_exp)
-		{
-		}
-		virtual void Generate()
-		{
-			left_exp_->Generate();
-			right_exp_->Generate();
-		}
-		virtual std::string Get()
-		{
-			return left_exp_->Get() + right_exp_->Get();
-		}
+		And(Expression* _left_exp, Expression* _right_exp);
+		virtual void Generate();
+		virtual std::string Get();
 	};
 	class Or : public Operation
 	{
@@ -256,50 +95,51 @@ protected:
 		std::vector<Expression*> subexps_;
 		int current_element_;
 	public:
-		Or()
-		{
-		}
-		void Add(Expression* _exp)
-		{
-			subexps_.push_back(_exp);
-		}
-		virtual void Generate()
-		{
-			current_element_ = (int)(Rand() % subexps_.size());
-			subexps_[current_element_]->Generate();
-		}
-		virtual std::string Get()
-		{
-			return subexps_[current_element_]->Get();
-		}
+		Or();
+		void Add(Expression* _exp);
+		virtual void Generate();
+		virtual std::string Get();
 	};
+
+	enum SymbolType {
+		Term,
+		BinaryOperation,
+		UnaryOperation,
+		SpecialOp
+	};
+	SymbolType get_symbol_type(char c) const;
+	Expression* str_to_expression(unsigned int start, unsigned int end);
+	Expression* AndAllExpression(std::stack<Expression*>& exp_stack);
     
-    Expression* regex_exp;
+protected:
+	Expression* regex_exp;
 	std::string regex_;
 	std::string current_string_;
 
-	int max_lenght_;
+	int max_depth_;
+	/// \endcond
 
 public:
-
-	RegEx(const std::string&, int = 1000);
+	/// If you think that your test case is too simple and you can write a regular expression for it, then this class is for you!\n
+	/// This class will parse your expression and generate for you a test that matches this regular expression\n
+	/// \param _regex - regex ifself
+	/// \param _max_depth - maximal depth for infinite operations like * or +
+	/// \n
+	/// \note RegEx parse given expression in constuctor.
+	RegEx(const std::string& _regex, int _max_depth = 1000);
+	/// After parsing, there is a simple Expression, which we can use for generation.
+	/// Generate() simply invokes the corresponding method in Expression and fix the string, that matches given regex.
+	/// \returns this
 	virtual RegEx* Generate();
+
+	/// \returns Generated string
 	virtual std::string Get();
 	virtual void Print(std::ostream& = std::cout) const;
-	virtual void MaxLenght(int _max_size);
+	/// Setter for max depth 
+	/// \param _max_depth - maximal depth for infinite operations like * or +
+	virtual void MaxDepth(int _max_depth);
 	virtual RegEx* Clone() const;
 	virtual ~RegEx();
-
-private:
-    enum SymbolType {
-        Term,
-        BinaryOperation,
-        UnaryOperation,
-        SpecialOp
-    };
-    SymbolType get_symbol_type( char c ) const;
-    Expression* str_to_expression(unsigned int start, unsigned int end );
-    Expression* AndAllExpression( std::stack<Expression*>& exp_stack );
 };
 
 #endif

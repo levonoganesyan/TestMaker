@@ -89,8 +89,8 @@ public:
 	\code
 	int main()
 	{
-		PrimitiveTest<int>* vertices_count = CreateNumber(3, 5);
-		PrimitiveTest<int>* edges_count = CreateNumber(5, 10);
+		PrimitiveTest<int>* vertices_count = CreateElement(3, 5);
+		PrimitiveTest<int>* edges_count = CreateElement(5, 10);
 		Graph* graph = new Graph(vertices_count, edges_count);
 		graph->Buckle()->Directed();
 		graph->PrintType(Graph::LIST_OF_EDGES);
@@ -103,13 +103,13 @@ public:
 	\endcode
 	*/
 	///
-	/// The shorter version
+	/// The shorter example
 	///
 	/*!
 	\code
 	int main()
 	{
-		Graph* graph = new Graph(CreateNumber(3, 5), CreateNumber(5, 10));
+		Graph* graph = new Graph(CreateElement(3, 5), CreateElement(5, 10));
 		graph->Buckle()->Directed()->PrintType(Graph::LIST_OF_EDGES)->Generate()->Print();
 		delete graph;
 	}

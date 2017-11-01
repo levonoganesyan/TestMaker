@@ -8,22 +8,16 @@ template <typename T>
 class Range : public Test
 {
 private:
-	//long long get_time()
-	//{
-	//	int lo, hi; 
-	//	__asm { 
-	//		rdtsc
-	//		mov lo, eax
-	//		mov hi, edx
-	//	}
-	//	return (((long long)hi) << 32LL) | lo;	
-	//}
+	void RangeValidation()
+	{
+		THROW(begin_ == nullptr || end_ == nullptr, "Begin and end must be specified");
+		THROW(begin_->Get() > end_->Get(), "Begin can't be greater than end");
+	}
 protected:
 	PrimitiveTest<T> *begin_, *end_;
 public:
 	Range() : begin_(nullptr), end_(nullptr) { }
 	Range(PrimitiveTest<T>* _begin, PrimitiveTest<T>* _end) : begin_(_begin), end_(_end) {}
-	//Range(T _begin) : begin_(_begin), end_(_begin) {}
 	T Get() {};
 	Range* Clone() const
 	{
@@ -47,11 +41,6 @@ public:
 // 	{
 // 		return new Range(begin_->Clone(), end_->Clone());
 // 	}
-	void RangeValidation()
-	{
-		THROW(begin_ == nullptr || end_ == nullptr, "Begin and end must be specified");
-		THROW(begin_->Get() > end_->Get(), "Begin can't be greater than end");
-	}
 	Range<T>& operator= (T _current_value)
 	{
 		_range.begin_ = new ConstPrimitiveTest<T>(_current_value);

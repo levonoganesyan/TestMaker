@@ -77,9 +77,9 @@ int Array::Size()
 {
 	return array_size_->Get();
 }
-Test* Array::operator[]( int i ) 
+Test* Array::operator[]( int _index)
 {
-	return array_ [ i ];
+	return array_ [_index];
 }
 void Array::PrintSize(bool _print_size)
 {

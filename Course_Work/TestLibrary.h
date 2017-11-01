@@ -8,6 +8,7 @@
 #include"Array.h"
 #include"Matrix.h"
 #include"Delimiter.h"
+#include"RandomTestSet.h"
 #include"ConstStringSet.h"
 #include"ConstPrimitiveTest.h"
 #include"RangePrimitiveTest.h"
@@ -36,7 +37,7 @@ PrimitiveTest<int>* milliard = new ConstPrimitiveTest<int>(1000000000);
 
 // global helpful functions
 template <typename T>
-inline PrimitiveTest<T>* CreateNumber(PrimitiveTest<T>* _start, PrimitiveTest<T>* _end)
+inline PrimitiveTest<T>* CreateElement(PrimitiveTest<T>* _start, PrimitiveTest<T>* _end)
 {
 	PrimitiveTest<T>* start_number = _start->Clone();
 	PrimitiveTest<T>* end_number = _end->Clone();
@@ -49,20 +50,20 @@ inline PrimitiveTest<T>* CreateNumber(PrimitiveTest<T>* _start, PrimitiveTest<T>
 }
 
 template <typename T = int>
-inline PrimitiveTest<T>* CreateNumber(T _start, T _end)
+inline PrimitiveTest<T>* CreateElement(T _start, T _end)
 {
 	ConstPrimitiveTest<T>* start_number = new ConstPrimitiveTest<T>(_start);
 	ConstPrimitiveTest<T>* end_number = new ConstPrimitiveTest<T>(_end);
-	PrimitiveTest<T>* number = CreateNumber<T>(start_number, end_number);
+	PrimitiveTest<T>* number = CreateElement<T>(start_number, end_number);
 	number->AddDeleteResponsibility(start_number);
 	number->AddDeleteResponsibility(end_number);
 	return number;
 }
 
 template <typename T = int>
-inline PrimitiveTest<T>* CreateNumber(T _number)
+inline PrimitiveTest<T>* CreateElement(T _number)
 {
-	return CreateNumber(_number, _number);
+	return CreateElement(_number, _number);
 }
 
 #endif
