@@ -56,7 +56,7 @@ Array* Array::Generate()
 		out << line_breaker_;
 		result_ = out.str();
 	}
-	test_generated_ = true;
+	Test::Generate();
 	return this;
 }
 void Array::Print(std::ostream& _out) const

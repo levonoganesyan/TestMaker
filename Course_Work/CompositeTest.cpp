@@ -22,7 +22,7 @@ CompositeTest* CompositeTest::Generate()
 {
 	for ( unsigned int i = 0 ; i < tests_.size() ; i++ )
 		tests_[ i ]->Generate();
-	test_generated_ = true;
+	Test::Generate();
 	return this;
 }
 void CompositeTest::Print(std::ostream& _out) const

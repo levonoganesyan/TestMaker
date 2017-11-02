@@ -25,7 +25,7 @@ RandomTestSet* RandomTestSet::Generate()
 	current_test_->Print(out);
 	result_ = out.str();
 
-	test_generated_ = true;
+	Test::Generate();
 	return this;
 }
 

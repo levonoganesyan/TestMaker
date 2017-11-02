@@ -17,7 +17,11 @@ public:
 	{
 		return current_value_;
 	}
-	virtual ConstPrimitiveTest* Generate() { return this;  }
+	virtual ConstPrimitiveTest* Generate() 
+	{
+		Test::Generate();
+		return this;  
+	}
 	virtual void Print(std::ostream& _out = std::cout) const 
 	{ 
 		_out << current_value_; 

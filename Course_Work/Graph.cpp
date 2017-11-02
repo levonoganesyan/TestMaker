@@ -290,7 +290,7 @@ Graph* Graph::Generate()
 	std::ostringstream out;
 	print_function_(out);
 	result_ = out.str();
-	test_generated_ = true;
+	Test::Generate();
 	return this;
 }
 void Graph::Print(std::ostream& _out) const

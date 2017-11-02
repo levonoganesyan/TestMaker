@@ -14,7 +14,7 @@ std::string Delimiter::Get()
 Delimiter* Delimiter::Generate()
 {
 	result_ = delimiter_;
-	test_generated_ = true;
+	Test::Generate();
 	return this;
 }
 void Delimiter::Print(std::ostream& _out) const

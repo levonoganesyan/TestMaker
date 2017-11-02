@@ -193,7 +193,7 @@ Grammar* Grammar::Generate()
 	std::ostringstream out;
 	CompositeTest::Print(out);
 	result_ = out.str();
-	test_generated_ = true;
+	Test::Generate();
 	return this;
 }
 void Grammar::Print(std::ostream& _out) const

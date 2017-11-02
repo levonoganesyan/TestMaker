@@ -26,11 +26,13 @@ public:
 	}
 	virtual Range* Generate()
 	{
-		test_generated_ = true;
 		begin_->Generate();
 		end_->Generate();
 		RangeValidation();
-		result_ = std::string("[") + std::to_string(begin_->Get()) + ", " + std::to_string(end_->Get()) + "]";
+		// result_ = std::string("[") + std::to_string(begin_->Get()) + ", " + std::to_string(end_->Get()) + "]";
+		test_generated_ = true; // HACK
+		result_ = std::to_string(Get());
+		Test::Generate();
 		return this;
 	}
 	virtual void Print(std::ostream& _out) const

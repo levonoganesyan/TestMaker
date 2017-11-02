@@ -50,7 +50,6 @@ Matrix::Matrix(PrimitiveTest<int>* _n, Test * _example, std::string _delimiter, 
 
 Matrix* Matrix::Generate()
 {
-	test_generated_ = true;
 	n_->Generate();
 	m_->Generate();
 	for (int i = 0; i < matrix_.size(); i++)
@@ -110,6 +109,7 @@ Matrix* Matrix::Generate()
 		}
 		result_ = out.str();
 	}
+	Test::Generate();
 	return this;
 }
 

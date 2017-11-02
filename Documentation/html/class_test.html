@@ -107,8 +107,8 @@ Inheritance diagram for Test:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a99f2bbfac6c95612322b0f10e607ebe5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_test.html#a99f2bbfac6c95612322b0f10e607ebe5">Test</a> ()</td></tr>
 <tr class="separator:a99f2bbfac6c95612322b0f10e607ebe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae61f69b3193fed2e438dff63c286b337"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_test.html">Test</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_test.html#ae61f69b3193fed2e438dff63c286b337">Generate</a> ()=0</td></tr>
-<tr class="separator:ae61f69b3193fed2e438dff63c286b337"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21fe6db2c509c429738d18a73617b6be"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_test.html">Test</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_test.html#a21fe6db2c509c429738d18a73617b6be">Generate</a> ()</td></tr>
+<tr class="separator:a21fe6db2c509c429738d18a73617b6be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e2e91987b10d938bbeb77e70e4cce48"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_test.html#a5e2e91987b10d938bbeb77e70e4cce48">Print</a> (std::ostream &amp;_stream=std::cout) const =0</td></tr>
 <tr class="separator:a5e2e91987b10d938bbeb77e70e4cce48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a859196a50bc6fb1e5153c38ecbef0ab1"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_test.html">Test</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_test.html#a859196a50bc6fb1e5153c38ecbef0ab1">Clone</a> () const =0</td></tr>
@@ -117,8 +117,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a614b7a9ecd7715e03746aaf05d4b8334"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6246397d122b42ed7ea3af9aa15221b2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_test.html#a6246397d122b42ed7ea3af9aa15221b2">AddDeleteResponsibility</a> (<a class="el" href="class_test.html">Test</a> *_object)</td></tr>
 <tr class="separator:a6246397d122b42ed7ea3af9aa15221b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00d82c58d4c1078c45989c583cd60099"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_test.html#a00d82c58d4c1078c45989c583cd60099">Postprocessing</a> ()</td></tr>
-<tr class="separator:a00d82c58d4c1078c45989c583cd60099"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67ea13c774dadb97bfa9bc00ca17bea7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_test.html">Test</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_test.html#a67ea13c774dadb97bfa9bc00ca17bea7">SetPostprocessFunction</a> (std::function&lt; void(std::string &amp;)&gt; _postprocess_function)</td></tr>
+<tr class="separator:a67ea13c774dadb97bfa9bc00ca17bea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="class_test.html">Test</a> class <br />
@@ -150,7 +150,7 @@ About that pattern you can read here: <a href="https://en.wikipedia.org/wiki/Com
 </table>
 </div><div class="memdoc">
 <p><a class="el" href="class_test.html">Test</a> constructor<br />
-Initializes the variable test_generated_ as false, so that <a class="el" href="class_test.html">Test</a> can not be generated if <a class="el" href="class_test.html#ae61f69b3193fed2e438dff63c286b337">Generate()</a> has not yet been called.<br />
+Initializes the variable test_generated_ as false, so that <a class="el" href="class_test.html">Test</a> can not be generated if <a class="el" href="class_test.html#a21fe6db2c509c429738d18a73617b6be">Generate()</a> has not yet been called.<br />
  </p>
 
 </div>
@@ -261,8 +261,8 @@ Must be implemented in any inherited classes.<br />
 
 </div>
 </div>
-<a id="ae61f69b3193fed2e438dff63c286b337"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae61f69b3193fed2e438dff63c286b337">&#9670;&nbsp;</a></span>Generate()</h2>
+<a id="a21fe6db2c509c429738d18a73617b6be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21fe6db2c509c429738d18a73617b6be">&#9670;&nbsp;</a></span>Generate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -279,49 +279,18 @@ Must be implemented in any inherited classes.<br />
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 <p>Function to generating test<br />
-When <a class="el" href="class_test.html#ae61f69b3193fed2e438dff63c286b337">Generate()</a> is called for any object, it calls same function for all dependent objects, and so on.<br />
+When <a class="el" href="class_test.html#a21fe6db2c509c429738d18a73617b6be">Generate()</a> is called for any object, it calls same function for all dependent objects, and so on.<br />
 Each class inherits and implements their logic of <a class="el" href="class_test.html">Test</a> Generating.<br />
 Must be implemented in any inherited classes.<br />
 Can be overridden by client, but it is not recommended.<br />
 </p><dl class="section return"><dt>Returns</dt><dd>this </dd></dl>
 
-<p>Implemented in <a class="el" href="class_reg_ex.html#a37f879e242b8f0412aaa3bf3980d68c1">RegEx</a>, <a class="el" href="class_graph.html#a5f3cae0746a16d78f33683cce0df3871">Graph</a>, <a class="el" href="class_matrix.html#a150daf16523f9ddaa7fa9dea1cecb07d">Matrix</a>, <a class="el" href="class_array.html#a6d6136c6ea6471b5b8fefb6fc2757511">Array</a>, <a class="el" href="class_range_primitive_test.html#a8b48e5c6b4d4c78cd65fbaeefcdf70ed">RangePrimitiveTest&lt; T &gt;</a>, <a class="el" href="class_random_test_set.html#aa1022d73c72e9d34f120d8f074af6f96">RandomTestSet</a>, <a class="el" href="class_delimiter.html#a40e3fc45b3e70af2e4784ec8b5f3e1cc">Delimiter</a>, and <a class="el" href="class_primitive_test.html#a155ac63ca4cfda8a8a90d2a776a31c4d">PrimitiveTest&lt; T &gt;</a>.</p>
-
-</div>
-</div>
-<a id="a00d82c58d4c1078c45989c583cd60099"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a00d82c58d4c1078c45989c583cd60099">&#9670;&nbsp;</a></span>Postprocessing()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void Test::Postprocessing </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Postprocessing function<br />
-If you want to postprocess some generated by this class data, then you can overload this method<br />
-The example and information about possible changes you can get from the corresponding class documentation<br />
- </p>
-
-<p>Reimplemented in <a class="el" href="class_random_test_set.html#a599264431c14659b7f5b7a247a86155f">RandomTestSet</a>, and <a class="el" href="class_delimiter.html#a2db43f047e40439b8ea8f84ccacc585f">Delimiter</a>.</p>
+<p>Reimplemented in <a class="el" href="class_reg_ex.html#a37f879e242b8f0412aaa3bf3980d68c1">RegEx</a>, <a class="el" href="class_graph.html#a5f3cae0746a16d78f33683cce0df3871">Graph</a>, <a class="el" href="class_matrix.html#a150daf16523f9ddaa7fa9dea1cecb07d">Matrix</a>, <a class="el" href="class_array.html#a6d6136c6ea6471b5b8fefb6fc2757511">Array</a>, <a class="el" href="class_range_primitive_test.html#a8b48e5c6b4d4c78cd65fbaeefcdf70ed">RangePrimitiveTest&lt; T &gt;</a>, <a class="el" href="class_random_test_set.html#aa1022d73c72e9d34f120d8f074af6f96">RandomTestSet</a>, <a class="el" href="class_delimiter.html#a40e3fc45b3e70af2e4784ec8b5f3e1cc">Delimiter</a>, and <a class="el" href="class_primitive_test.html#a155ac63ca4cfda8a8a90d2a776a31c4d">PrimitiveTest&lt; T &gt;</a>.</p>
 
 </div>
 </div>
@@ -360,6 +329,42 @@ Must be implemented in any inherited classes.<br />
 </dl>
 
 <p>Implemented in <a class="el" href="class_reg_ex.html#a6ace1d67d2958a15f0d9b88b11fe330c">RegEx</a>, <a class="el" href="class_graph.html#ac0953dd80558892dc281e17ae40fd5f1">Graph</a>, <a class="el" href="class_matrix.html#a73e84f4b1db2fec828c81028b808510d">Matrix</a>, <a class="el" href="class_array.html#acd4f6a61bdf078fb95d88bfefde968b6">Array</a>, <a class="el" href="class_range_primitive_test.html#a01ef34f0ffee1bb38f2ae4ce8754cb25">RangePrimitiveTest&lt; T &gt;</a>, <a class="el" href="class_random_test_set.html#a50dea8180a7ac0f2e7336f21b88b7f70">RandomTestSet</a>, <a class="el" href="class_delimiter.html#acb6a47271dbe1bda372e1a80bcfad31b">Delimiter</a>, and <a class="el" href="class_primitive_test.html#a7f510e857162432281fa6fed458bfd5f">PrimitiveTest&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a67ea13c774dadb97bfa9bc00ca17bea7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67ea13c774dadb97bfa9bc00ca17bea7">&#9670;&nbsp;</a></span>SetPostprocessFunction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="class_test.html">Test</a>* Test::SetPostprocessFunction </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; void(std::string &amp;)&gt;&#160;</td>
+          <td class="paramname"><em>_postprocess_function</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Postprocessing function.<br />
+If you want to postprocess for some data generated by this class, you can pass function by this method.<br />
+All the generated data is in the variable "result_", which has the type std::string. <br />
+This will be easy to change if you use stringstream<br />
+</p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_postprocess_function</td><td>- function for postprocessing </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

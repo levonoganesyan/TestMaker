@@ -449,15 +449,47 @@ void problem_g()
 	tc.Make();
 }
 
+void regexPostProcess1(std::string& _result)
+{
+	_result.replace(0, _result.find('\n'), std::string(_result.find('\n'), 'a'));
+}
+void regexPostProcess2(std::string& _result)
+{
+	for (int i = 0; i < _result.size(); i++)
+	{
+		_result[i] = '0' + '4' - _result[i];
+	}
+}
+void matrixPostProcess(std::string& _result)
+{
+	std::istringstream is(_result);
+	std::ostringstream os;
+	int n;
+	is >> n;
+	std::vector<std::vector<int>> vec(n, std::vector<int>(n));
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+			is >> vec[i][j];
+	for (int i = 0; i < n; i++)
+		vec[i][i] = 0;
+	os << n << std::endl;
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+			os << vec[i][j] << " ";
+		os << std::endl;
+	}
+	_result = os.str();
+}
 void run_code()
 {
 	while (1)
 	{
 	
-		RegEx* regex = new RegEx("([a-zA-Z]{100}\n)*", 100);
-		regex->Generate()->Print();
+		/*RegEx* regex = new RegEx("([a-zA-Z]{100}\n)*", 100);
+		regex->SetPostprocessFunction(regexPostProcess1)->Generate()->Print();
 		system("pause");
-		system("cls");
+		system("cls");*/
 
 		/*auto a = CreateElement(0, 99);
 		std::vector<int> vec(100);
@@ -471,9 +503,11 @@ void run_code()
 			std::cout << i << "\t" << vec[ i ] << std::endl;
 		}
 		return;
-		Matrix* matrix = new Matrix(CreateElement(5), CreateElement(10));
-		matrix->Generate();
-		matrix->Print();*/
+		*/
+		/*Matrix* matrix = new Matrix(CreateElement(5), CreateElement(10));
+		matrix->SetPostprocessFunction(matrixPostProcess)->Generate()->Print();
+		system("pause");
+		system("cls");*/
 		//PrimitiveTest<int>* vertices_count = CreateElement(3, 5);
 		//PrimitiveTest<int>* edges_count = CreateElement(5, 10);
 		//Graph* graph = new Graph(vertices_count, edges_count);
@@ -489,14 +523,15 @@ void run_code()
 		delete graph;
 		system("pause");
 		system("cls");*/
-		/*RegEx* regex = new RegEx("", 10);
+		RegEx* regex = new RegEx("[12]*", 100);
 		std::cout << "Printing...\n";
+		regex->SetPostprocessFunction(regexPostProcess2);
 		regex->Generate();
 		regex->Print();
 		std::cout << "\nPrinted...\n";
 		delete regex;
 		system("pause");
-		system("cls");*/
+		system("cls");
         /*PrimitiveTest<int>* size_of_matrix = CreateElement( 6, 6 );
         Array* arr1 = new Array( size_of_matrix, CreateElement( 10, 20 ) );
 		arr1->PrintSize(false);

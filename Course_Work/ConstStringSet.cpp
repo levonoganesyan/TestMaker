@@ -36,7 +36,7 @@ ConstStringSet* ConstStringSet::Generate()
 		elements.assign(set_.begin(), set_.end());
 	current_string_ = elements[ Rand()%( set_.size() ) ];
 	result_ = current_string_;
-	test_generated_ = true;
+	Test::Generate();
 	return this;
 }
 void ConstStringSet::Print(std::ostream& _out) const

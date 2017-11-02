@@ -383,10 +383,10 @@ RegEx::Expression * RegEx::AndAllExpression( std::stack<RegEx::Expression*>& _ex
 }
 RegEx* RegEx::Generate()
 {
-    test_generated_ = true;
     regex_exp->Generate();
     current_string_ = regex_exp->Get();
 	result_ = current_string_;
+	Test::Generate();
 	return this;
 }
 std::string RegEx::Get()
