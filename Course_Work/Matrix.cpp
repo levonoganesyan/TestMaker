@@ -84,33 +84,39 @@ Matrix* Matrix::Generate()
 			matrix_[i][j]->Generate();
 		}
 	}
+
+	{
+		std::ostringstream out;
+		int n = n_->Get();
+		int m = m_->Get();
+		if (print_size_)
+		{
+			out << n;
+			if (!print_size_as_square_)
+			{
+				out << delimiter_ << m;
+			}
+			out << line_breaker_;
+		}
+		for (unsigned int i = 0; i < matrix_.size(); i++)
+		{
+			for (unsigned int j = 0; j < matrix_[i].size(); j++)
+			{
+				matrix_[i][j]->Print(out);
+				if (j != matrix_[i].size() - 1)
+					out << delimiter_;
+			}
+			out << line_breaker_;
+		}
+		result_ = out.str();
+	}
 	return this;
 }
 
 void Matrix::Print(std::ostream & _out) const
 {
 	THROW(!test_generated_, "Print() must be called after Generate()");
-	int n = n_->Get();
-	int m = m_->Get();
-	if (print_size_)
-	{
-		_out << n;
-		if (!print_size_as_square_)
-		{
-			_out << delimiter_ << m;
-		}
-		_out << line_breaker_;
-	}
-	for (unsigned int i = 0; i < matrix_.size(); i++)
-	{
-		for (unsigned int j = 0; j < matrix_[i].size(); j++)
-		{
-			matrix_[i][j]->Print(_out);
-			if (j != matrix_[i].size() - 1)
-				_out << delimiter_;
-		}
-		_out << line_breaker_;
-	}
+	_out << result_;
 }
 
 void Matrix::PrintSize(bool _print_size)

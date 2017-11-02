@@ -13,11 +13,13 @@ std::string Delimiter::Get()
 }
 Delimiter* Delimiter::Generate()
 {
+	result_ = delimiter_;
+	test_generated_ = true;
 	return this;
 }
 void Delimiter::Print(std::ostream& _out) const
 {
-	_out << delimiter_;
+	_out << result_;
 }
 Delimiter* Delimiter::Clone() const
 {

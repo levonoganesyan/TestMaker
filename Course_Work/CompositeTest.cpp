@@ -20,10 +20,9 @@ void CompositeTest::Clear()
 }
 CompositeTest* CompositeTest::Generate()
 {
-	test_generated_ = true;
 	for ( unsigned int i = 0 ; i < tests_.size() ; i++ )
 		tests_[ i ]->Generate();
-	//std::for_each( tests_.begin(), tests_.end(), []( const TOSPtr& testObj ) { testObj->Generate(); } );
+	test_generated_ = true;
 	return this;
 }
 void CompositeTest::Print(std::ostream& _out) const

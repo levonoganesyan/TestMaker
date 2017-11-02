@@ -18,16 +18,21 @@ Test * RandomTestSet::Get()
 
 RandomTestSet* RandomTestSet::Generate()
 {
-	test_generated_ = true;
 	current_test_ = random_set_[Rand() % (random_set_.size())];
 	current_test_->Generate();
+
+	std::ostringstream out;
+	current_test_->Print(out);
+	result_ = out.str();
+
+	test_generated_ = true;
 	return this;
 }
 
 void RandomTestSet::Print(std::ostream & _out) const
 {
 	THROW(!test_generated_, "Print() must be called after Generate()");
-	current_test_->Print(_out);
+	_out << result_;
 }
 
 RandomTestSet* RandomTestSet::Clone() const

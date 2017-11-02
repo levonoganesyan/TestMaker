@@ -68,12 +68,13 @@ public:
 		test_generated_ = true;
 		range_->Generate();
 		current_value_ = range_->Get();
+		result_ = current_value_;
 		return this;
 	}
 	virtual void Print(std::ostream& _out = std::cout) const
 	{
 		THROW(!test_generated_, "Print() must be called after Generate()");
-		_out << current_value_;
+		_out << result_;
 	};
 	virtual RangePrimitiveTest * Clone() const
 	{

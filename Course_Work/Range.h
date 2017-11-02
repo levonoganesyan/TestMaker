@@ -30,12 +30,13 @@ public:
 		begin_->Generate();
 		end_->Generate();
 		RangeValidation();
+		result_ = std::string("[") + std::to_string(begin_->Get()) + ", " + std::to_string(end_->Get()) + "]";
 		return this;
 	}
 	virtual void Print(std::ostream& _out) const
 	{
 		THROW(!test_generated_, "Print() must be called after Generate()");
-		_out << "[" << begin_->Get() << ", " << end_->Get() << "]";
+		_out << result_;
 	}
 	// 	Range* Clone()
 // 	{

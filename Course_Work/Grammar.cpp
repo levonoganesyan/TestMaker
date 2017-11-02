@@ -187,15 +187,19 @@ void Grammar::Generator(const std::string & _current_nonterm)
 }
 Grammar* Grammar::Generate()
 {	
-	test_generated_ = true;
 	this->Clear();
 	this->Generator(start_nonterm_);
+
+	std::ostringstream out;
+	CompositeTest::Print(out);
+	result_ = out.str();
+	test_generated_ = true;
 	return this;
 }
 void Grammar::Print(std::ostream& _out) const
 {
 	THROW(!test_generated_, "Print() must be called after Generate()");
-	CompositeTest::Print(_out);
+	_out << result_;
 }
 Grammar* Grammar::Clone() const
 {

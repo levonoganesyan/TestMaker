@@ -386,6 +386,7 @@ RegEx* RegEx::Generate()
     test_generated_ = true;
     regex_exp->Generate();
     current_string_ = regex_exp->Get();
+	result_ = current_string_;
 	return this;
 }
 std::string RegEx::Get()
@@ -396,7 +397,7 @@ std::string RegEx::Get()
 void RegEx::Print( std::ostream& _out ) const
 {
 	THROW(!test_generated_, "Print() must be called after Generate()");
-	_out << current_string_;
+	_out << result_;
 }
 void RegEx::MaxDepth( int _max_depth)
 {

@@ -22,7 +22,6 @@ Array::Array(PrimitiveTest<int>* _array_size_to, Test* _example, std::string _de
 }
 Array* Array::Generate() 
 {
-	test_generated_ = true;
 	array_size_->Generate();
 	for (int i = 0; i < array_.size(); i++)
 		delete array_[i];
@@ -42,22 +41,28 @@ Array* Array::Generate()
 		THROW(array_[i] == nullptr, "Array element is not assigned");
 		array_[ i ]->Generate();
 	}
+	{
+		std::ostringstream out;
+		if (print_size_)
+		{
+			out << array_.size() << line_breaker_;
+		}
+		for (unsigned int i = 0; i < array_.size(); i++)
+		{
+			array_[i]->Print(out);
+			if (i != array_.size() - 1)
+				out << delimiter_;
+		}
+		out << line_breaker_;
+		result_ = out.str();
+	}
+	test_generated_ = true;
 	return this;
 }
 void Array::Print(std::ostream& _out) const
 {
 	THROW(!test_generated_, "Print() must be called after Generate()");
-	if (print_size_)
-	{
-		_out << array_.size() << line_breaker_;
-	}
-	for (unsigned int i = 0 ; i < array_.size() ; i++ )
-	{
-		array_[ i ]->Print(_out);
-		if ( i != array_.size() - 1 ) 
-			_out << delimiter_;
-	}
-	_out << line_breaker_;
+	_out << result_;
 }
 Array* Array::Clone() const
 { 

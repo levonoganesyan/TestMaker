@@ -285,15 +285,19 @@ void Graph::GenerateLargeGraph()
 }
 Graph* Graph::Generate()
 {
-	test_generated_ = true;
 	GenerateGraph();
+
+	std::ostringstream out;
+	print_function_(out);
+	result_ = out.str();
+	test_generated_ = true;
 	return this;
 }
 void Graph::Print(std::ostream& _out) const
 {
 	THROW(!test_generated_, "Print() must be called after Generate()");
 	THROW(print_type_ != LIST_OF_EDGES && weight_ != nullptr, "Weights cannot be specified with not LIST_OF_EDGES printing modificator");
-	print_function_(_out);
+	_out << result_;
 }
 Graph * Graph::Buckle(bool _buckle)
 {

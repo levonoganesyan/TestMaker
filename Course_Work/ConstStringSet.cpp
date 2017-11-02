@@ -32,16 +32,17 @@ std::string ConstStringSet::Get()
 }
 ConstStringSet* ConstStringSet::Generate()
 {
-	test_generated_ = true;
 	if ( elements.size() == 0 )
 		elements.assign(set_.begin(), set_.end());
 	current_string_ = elements[ Rand()%( set_.size() ) ];
+	result_ = current_string_;
+	test_generated_ = true;
 	return this;
 }
 void ConstStringSet::Print(std::ostream& _out) const
 {
 	THROW(!test_generated_, "Print() must be called after Generate()");
-	_out << current_string_;
+	_out << result_;
 }
 ConstStringSet* ConstStringSet::Clone() const
 {

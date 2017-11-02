@@ -454,8 +454,8 @@ void run_code()
 	while (1)
 	{
 	
-		/*RegEx* regex = new RegEx("([a-zA-Z]{100}\n)*", 100);
-		regex->Generate()->Print();*/
+		RegEx* regex = new RegEx("([a-zA-Z]{100}\n)*", 100);
+		regex->Generate()->Print();
 		system("pause");
 		system("cls");
 
