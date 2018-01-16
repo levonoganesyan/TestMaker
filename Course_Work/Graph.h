@@ -3,9 +3,7 @@
 
 #include"Test.h"
 #include"PrimitiveTest.h"
-#include<vector>
-#include<set>
-#include<functional>
+
 
 /*!
 Graph class.\n
@@ -16,7 +14,7 @@ If your Graph have more that n*n/2 edges, where n is number of vertices, then Gr
 Big Graph generated this way: it takes full-connected Graph, and tries to remove random (u, v). If that edge is already deleted or that edge is in fixed tree, algorithm tries again. In worst case there is 50% chance to mistake, so number of trying should be ~ 2\n
 Small Graph generated this way: it takes empty fraph, and add fixed tree edges. After that if there is any edges left tries to add random (u, v). If that edge is already added algorithm tries again. In worst case there is 50% chance to mistake, so number of trying should be ~ 2\n
 If you want to generate not connected Graphs, you must use GraphMerge function (but not now :D)
-\todo write GraphMerge function 
+\todo write GraphMerge function
 */
 class Graph : public Test
 {
@@ -53,11 +51,12 @@ protected:
 	std::vector< std::set<long long> > graph_;
 	std::set<std::pair<long long, long long> >  fixed_tree_;
 	std::function<void(std::ostream&)> print_function_;
+	// std::map<int, int> arrange_map_;
 	long long number_of_already_added_edges_;
 	bool buckle_;
 	bool directed_;
 	PRINT_TYPE print_type_;
-	
+
 	virtual bool AddEdge();
 	virtual void AddEdge(long long, long long);
 	virtual bool RemoveEdge();
@@ -68,14 +67,15 @@ protected:
 	virtual void GenerateSmallGraph();
 	virtual void GenerateLargeGraph();
 	virtual void CreateTree();
-	virtual std::vector<std::vector<bool> > ConnectionMatrix();
-	virtual void PrintConnectionMatrix(std::ostream&);
-	virtual std::vector<std::set<long long> > ConnectionList();
-	virtual void PrintConnectionList(std::ostream&);
-	virtual std::vector<std::pair<long long, long long> > ListOfEdges();
-	virtual void PrintListOfEdges(std::ostream&);
-	/// \endcond
+	virtual void PrintConnectionMatrix(std::ostream& _out);
+	virtual void PrintConnectionList(std::ostream& _out);
+	virtual void PrintListOfEdges(std::ostream& _out);
 public:
+	virtual std::vector<std::vector<bool> > ConnectionMatrix();
+	virtual std::vector<std::set<long long> > ConnectionList();
+	virtual std::vector<std::pair<long long, long long> > ListOfEdges();
+	/// \endcond
+
 	/// Graph
 	/// \param _number_of_vertices - number of vertices in Graph
 	/// \param _number_of_edges - number of edges in Graph
@@ -118,7 +118,7 @@ public:
 
 	Graph(PrimitiveTest<int>* _number_of_vertices, PrimitiveTest<int>* _number_of_edges, Test* _weights = nullptr, bool _directed = false, bool _buckle = false);
 	virtual Graph* Generate();
-	virtual void Print(std::ostream& = std::cout) const;
+	virtual void Print(std::ostream& _stream = std::cout) const;
 	virtual Graph* Clone() const;
 	/// Specifies whether there should be self-loops in the graph
 	/// \param _buckle - bool to specifying self-looping
@@ -163,7 +163,33 @@ public:
 	virtual long long VerticesCount();
 	/// \returns count of edges
 	virtual long long EdgesCount();
+	// virtual Graph* Rearrange(std::map<int, int> _arrange_map);
 	virtual ~Graph();
 };
 
+
+class GraphMerger : public Test
+{
+	std::vector<Graph*> graphs_;
+	Graph::PRINT_TYPE print_type_;
+	std::function<void(const std::vector<std::map<int, int>>&, int)> rearrange_function_;
+	virtual void RearrangeConnectionMatrix(const std::vector<std::map<int, int>>& _rearrangment_maps, int _size);
+	virtual void RearrangeConnectionList(const std::vector<std::map<int, int>>&	_rearrangment_maps, int _size);
+	virtual void RearrangeListOfEdges(const std::vector<std::map<int, int>>& _rearrangment_maps, int _size);
+public:
+	template<class... T>
+	GraphMerger(T*... _graphs) : graphs_{_graphs...}
+	{
+		rearrange_function_ = std::bind(&GraphMerger::RearrangeConnectionList, this, std::placeholders::_1, std::placeholders::_2);
+		//static_assert(std::is_same<Graph, T>::value, "GraphMerger takes only Graphs");
+	}
+	GraphMerger();
+	virtual GraphMerger* Add(Graph* _graph);
+	virtual GraphMerger* Generate();
+	virtual GraphMerger* PrintType(Graph::PRINT_TYPE _print_type);
+	virtual void Print(std::ostream& _out = std::cout) const;
+	virtual GraphMerger* Clone() const;
+};
+
 #endif
+

@@ -19,7 +19,7 @@ Graph::Graph(PrimitiveTest<int>* _number_of_vertices, PrimitiveTest<int>* _numbe
 }
 std::vector<std::vector<bool> > Graph::ConnectionMatrix()
 {
-	THROW(current_number_of_vertices_ > 1000, "Number of vertices must be less or equal 1000");
+	THROW(current_number_of_vertices_ > 10000, "Number of vertices must be less or equal 10000");
 	std::vector < std::vector < bool > > connection_matrix(current_number_of_vertices_, std::vector< bool >(current_number_of_vertices_));
 	for (int i = 0; i < current_number_of_vertices_; i++)
 	{
@@ -260,7 +260,7 @@ void Graph::GenerateLargeGraph()
 	long long count_of_all_edges = 0;
 	for (int i = 0; i < current_number_of_vertices_; i++)
 	{
-		for (int j = i * !directed_; j < current_number_of_vertices_ ; j++)
+		for (int j = i * !directed_; j < current_number_of_vertices_; j++)
 		{
 			if (i == j && !buckle_)
 			{
@@ -274,7 +274,7 @@ void Graph::GenerateLargeGraph()
 	{
 		return;
 	}
-	for (;count_of_all_edges > current_number_of_edges_; count_of_all_edges--)
+	for (; count_of_all_edges > current_number_of_edges_; count_of_all_edges--)
 	{
 		bool edge_removed = RemoveEdge();
 		while (!edge_removed)
@@ -347,3 +347,160 @@ Graph* Graph::Clone() const
 	graph->print_function_ = print_function_;
 	return graph;
 }
+
+// GraphMerger
+
+void GraphMerger::RearrangeConnectionMatrix(const std::vector<std::map<int, int>>& _rearrangment_maps, int _size ) // number_of_vertices
+{
+	THROW(_size > 10000, "Number of vertices must be less or equal 10000");
+	std::vector<std::vector<bool> > all_graphs_connection_matrix(_size, std::vector<bool>(_size));	
+	for (int i = 0; i < graphs_.size(); i++)
+	{
+		std::vector<std::vector<bool> > connection_matrix = graphs_[i]->ConnectionMatrix();
+		for (int j = 0; j < connection_matrix.size(); j++)
+		{
+			for (int k = 0; k < connection_matrix[j].size(); k++)
+			{
+				all_graphs_connection_matrix[_rearrangment_maps[i].at(j)][_rearrangment_maps[i].at(k)] = connection_matrix[j][k];
+			}
+		}
+	}
+	std::ostringstream os;
+	os << all_graphs_connection_matrix.size() << std::endl;
+	for (int i = 0; i < all_graphs_connection_matrix.size(); i++)
+	{
+		for (int j = 0; j < all_graphs_connection_matrix[i].size(); j++)
+		{
+			os << all_graphs_connection_matrix[i][j] << " ";
+		}
+		os << std::endl;
+	}
+	result_ = os.str();
+}
+
+void GraphMerger::RearrangeConnectionList(const std::vector<std::map<int, int>>& _rearrangment_maps, int _size)
+{
+	std::vector<std::set<long long> > all_graphs_connection_list(_size);
+	for (int i = 0; i < graphs_.size(); i++)
+	{
+		std::vector<std::set<long long> > connection_list = graphs_[i]->ConnectionList();
+		for (int j = 0; j < connection_list.size(); j++)
+		{
+			for (auto neighbor : connection_list[j])
+			{
+				all_graphs_connection_list[_rearrangment_maps[i].at(j)].insert(_rearrangment_maps[i].at(neighbor));
+			}
+		}
+	}
+	std::ostringstream os;
+	os << all_graphs_connection_list.size() << std::endl;
+	for (int i = 0; i < all_graphs_connection_list.size(); i++)
+	{
+		os << all_graphs_connection_list[i].size() << " ";
+		for (auto neighbor : all_graphs_connection_list[i])
+		{
+			os << neighbor + 1 << " ";
+		}
+		os << std::endl;
+	}
+	result_ = os.str();
+}
+
+void GraphMerger::RearrangeListOfEdges(const std::vector<std::map<int, int>>& _rearrangment_maps, int _size)
+{
+	std::vector<std::pair<long long, long long> > all_graphs_list_of_edges;
+	for (int i = 0; i < graphs_.size(); i++)
+	{
+		std::vector<std::pair<long long, long long> > list_of_edges = graphs_[i]->ListOfEdges();
+		for (int j = 0; j < list_of_edges.size(); j++)
+		{
+			// all_graphs_list_of_edges[_rearrangment_maps[i].at(j)].insert(_rearrangment_maps[i].at(neighbor));
+			all_graphs_list_of_edges.push_back({ _rearrangment_maps[i].at(list_of_edges[j].first), _rearrangment_maps[i].at(list_of_edges[j].second) });
+		}
+	}
+	std::random_shuffle(all_graphs_list_of_edges.begin(), all_graphs_list_of_edges.end(), Rand_with_mod);
+	std::ostringstream os;
+	os << all_graphs_list_of_edges.size() << std::endl;
+	for (int i = 0; i < all_graphs_list_of_edges.size(); i++)
+	{
+		os << all_graphs_list_of_edges[i].first + 1 << " " << all_graphs_list_of_edges[i].second + 1 << std::endl;
+	}
+	result_ = os.str();
+}
+
+GraphMerger::GraphMerger()
+{
+	rearrange_function_ = std::bind(&GraphMerger::RearrangeConnectionList, this, std::placeholders::_1, std::placeholders::_2);
+}
+
+GraphMerger * GraphMerger::Add(Graph * _graph)
+{
+	graphs_.push_back(_graph->Clone());
+	return this;
+}
+
+GraphMerger * GraphMerger::Generate()
+{
+	int number_of_vertices = 0;
+	for (int i = 0; i < graphs_.size(); i++)
+	{
+		graphs_[i]->Generate();
+		number_of_vertices += graphs_[i]->VerticesCount();
+	}
+	std::vector<int> rearrange_array( number_of_vertices );
+	for (int i = 0; i < rearrange_array.size(); i++)
+	{
+		rearrange_array[i] = i;
+	}
+	std::random_shuffle(rearrange_array.begin(), rearrange_array.end(), Rand_with_mod);
+	std::vector<std::map<int, int>> rearragment_maps(graphs_.size());
+	for (int i = 0, index = 0; i < graphs_.size(); i++)
+	{
+		for (int j = 0; j < graphs_[i]->VerticesCount(); j++)
+		{
+			rearragment_maps[i][j] = rearrange_array[index++];
+		}
+	}
+	rearrange_function_(rearragment_maps, number_of_vertices);
+	Test::Generate();
+	return this;
+}
+
+GraphMerger * GraphMerger::PrintType(Graph::PRINT_TYPE _print_type)
+{
+	print_type_ = _print_type;
+	switch (print_type_)
+	{
+	case Graph::PRINT_TYPE::CONNECTION_MATRIX:
+		rearrange_function_ = std::bind(&GraphMerger::RearrangeConnectionMatrix, this, std::placeholders::_1, std::placeholders::_2);
+		break;
+	case Graph::PRINT_TYPE::CONNECTION_LIST:
+		rearrange_function_ = std::bind(&GraphMerger::RearrangeConnectionList, this, std::placeholders::_1, std::placeholders::_2);
+		break;
+	case Graph::PRINT_TYPE::LIST_OF_EDGES:
+		rearrange_function_ = std::bind(&GraphMerger::RearrangeListOfEdges, this, std::placeholders::_1, std::placeholders::_2);
+		break;
+	default:
+		break;
+	}
+	return this;
+}
+
+void GraphMerger::Print(std::ostream& _out) const
+{
+	THROW(!test_generated_, "Print() must be called after Generate()");
+	_out << result_;
+}
+
+GraphMerger * GraphMerger::Clone() const
+{
+	GraphMerger* graph_merger = new GraphMerger();
+	for (int i = 0; i < graphs_.size(); i++)
+	{
+		graph_merger->Add(graphs_[i]);
+	}
+	return graph_merger;
+}
+
+
+

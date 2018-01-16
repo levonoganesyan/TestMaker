@@ -99,7 +99,7 @@ Inheritance diagram for RangePrimitiveTest&lt; T &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa6661f7649f14fb09b1f2dd61e181f75"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_range_primitive_test.html#aa6661f7649f14fb09b1f2dd61e181f75">RangePrimitiveTest</a> (Range&lt; T &gt; *_range)</td></tr>
+<tr class="memitem:aa6661f7649f14fb09b1f2dd61e181f75"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_range_primitive_test.html#aa6661f7649f14fb09b1f2dd61e181f75">RangePrimitiveTest</a> (<a class="el" href="class_range.html">Range</a>&lt; T &gt; *_range)</td></tr>
 <tr class="separator:aa6661f7649f14fb09b1f2dd61e181f75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d6683558e9057c056a5a8229b7fca5f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_range_primitive_test.html#a5d6683558e9057c056a5a8229b7fca5f">RangePrimitiveTest</a> (int _start=0, int _end=0)</td></tr>
 <tr class="separator:a5d6683558e9057c056a5a8229b7fca5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -127,7 +127,7 @@ class RangePrimitiveTest&lt; T &gt;</h3>
 Class describes a primitive test, that can take in constructor Ranges<br />
 Use this class for numbers with floating edges<br />
  An example</p>
-<div class="fragment"><div class="line"><span class="keywordtype">int</span> main()</div><div class="line">{</div><div class="line">    ConstPrimitiveTest&lt;int&gt;* a = <span class="keyword">new</span> ConstPrimitiveTest&lt;int&gt;(10);</div><div class="line">    ConstPrimitiveTest&lt;int&gt;* b = <span class="keyword">new</span> ConstPrimitiveTest&lt;int&gt;(20);</div><div class="line">    Range&lt;int&gt;* r1 = <span class="keyword">new</span> Range&lt;int&gt;(a, b);</div><div class="line">    <a class="code" href="class_range_primitive_test.html">RangePrimitiveTest&lt;int&gt;</a>* c = <span class="keyword">new</span> <a class="code" href="class_range_primitive_test.html">RangePrimitiveTest&lt;int&gt;</a>(r1); <span class="comment">// [10, 20]</span></div><div class="line">    Range&lt;int&gt;* r2 = <span class="keyword">new</span> Range&lt;int&gt;(a, c);</div><div class="line">    <a class="code" href="class_range_primitive_test.html">RangePrimitiveTest&lt;int&gt;</a>* d = <span class="keyword">new</span> <a class="code" href="class_range_primitive_test.html">RangePrimitiveTest&lt;int&gt;</a>(r2); <span class="comment">// [10, [10, 20]]</span></div><div class="line">    d-&gt;Generate()-&gt;Print();</div><div class="line">    <span class="keyword">delete</span> a; <span class="keyword">delete</span> b; <span class="keyword">delete</span> c; <span class="keyword">delete</span> d; <span class="keyword">delete</span> r1; <span class="keyword">delete</span> r2;</div><div class="line">}</div></div><!-- fragment --><p> A shorter example that did same thing as example above</p>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> main()</div><div class="line">{</div><div class="line">    <a class="code" href="class_const_primitive_test.html">ConstPrimitiveTest&lt;int&gt;</a>* a = <span class="keyword">new</span> <a class="code" href="class_const_primitive_test.html">ConstPrimitiveTest&lt;int&gt;</a>(10);</div><div class="line">    <a class="code" href="class_const_primitive_test.html">ConstPrimitiveTest&lt;int&gt;</a>* b = <span class="keyword">new</span> <a class="code" href="class_const_primitive_test.html">ConstPrimitiveTest&lt;int&gt;</a>(20);</div><div class="line">    <a class="code" href="class_range.html">Range&lt;int&gt;</a>* r1 = <span class="keyword">new</span> <a class="code" href="class_range.html">Range&lt;int&gt;</a>(a, b);</div><div class="line">    <a class="code" href="class_range_primitive_test.html">RangePrimitiveTest&lt;int&gt;</a>* c = <span class="keyword">new</span> <a class="code" href="class_range_primitive_test.html">RangePrimitiveTest&lt;int&gt;</a>(r1); <span class="comment">// [10, 20]</span></div><div class="line">    <a class="code" href="class_range.html">Range&lt;int&gt;</a>* r2 = <span class="keyword">new</span> <a class="code" href="class_range.html">Range&lt;int&gt;</a>(a, c);</div><div class="line">    <a class="code" href="class_range_primitive_test.html">RangePrimitiveTest&lt;int&gt;</a>* d = <span class="keyword">new</span> <a class="code" href="class_range_primitive_test.html">RangePrimitiveTest&lt;int&gt;</a>(r2); <span class="comment">// [10, [10, 20]]</span></div><div class="line">    d-&gt;<a class="code" href="class_range.html#a6762b1fc21e441b46b54f99620866422">Generate</a>()-&gt;<a class="code" href="class_range.html#a00c9138fb65efccb1f8d5156e067dc47">Print</a>();</div><div class="line">    <span class="keyword">delete</span> a; <span class="keyword">delete</span> b; <span class="keyword">delete</span> c; <span class="keyword">delete</span> d; <span class="keyword">delete</span> r1; <span class="keyword">delete</span> r2;</div><div class="line">}</div></div><!-- fragment --><p> A shorter example that did same thing as example above</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> main()</div><div class="line">{</div><div class="line">    CreateElement(CreateElement(10), CreateElement(10, 20))-&gt;Generate()-&gt;Print();</div><div class="line">}</div></div><!-- fragment --> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa6661f7649f14fb09b1f2dd61e181f75"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa6661f7649f14fb09b1f2dd61e181f75">&#9670;&nbsp;</a></span>RangePrimitiveTest() <span class="overload">[1/2]</span></h2>
@@ -143,7 +143,7 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="memname"><a class="el" href="class_range_primitive_test.html">RangePrimitiveTest</a>&lt; T &gt;::<a class="el" href="class_range_primitive_test.html">RangePrimitiveTest</a> </td>
           <td>(</td>
-          <td class="paramtype">Range&lt; T &gt; *&#160;</td>
+          <td class="paramtype"><a class="el" href="class_range.html">Range</a>&lt; T &gt; *&#160;</td>
           <td class="paramname"><em>_range</em></td><td>)</td>
           <td></td>
         </tr>
@@ -154,7 +154,7 @@ template&lt;typename T&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section note"><dt>Note</dt><dd>Constructor do not take ownership over Range object </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Constructor do not take ownership over <a class="el" href="class_range.html">Range</a> object </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">_range</td><td>- range to construct </td></tr>
@@ -200,8 +200,8 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 <p>There is a more simple way to construct <a class="el" href="class_range_primitive_test.html">RangePrimitiveTest</a> by passing [start, end] interval.<br />
-ConstPrimitiveTest and Range creating inside this constructor<br />
-</p><dl class="section note"><dt>Note</dt><dd>This constructor creates Range, which will be deleted with AddDeleteResponsibility function of <a class="el" href="class_test.html">Test</a>.<br />
+<a class="el" href="class_const_primitive_test.html">ConstPrimitiveTest</a> and <a class="el" href="class_range.html">Range</a> creating inside this constructor<br />
+</p><dl class="section note"><dt>Note</dt><dd>This constructor creates <a class="el" href="class_range.html">Range</a>, which will be deleted with AddDeleteResponsibility function of <a class="el" href="class_test.html">Test</a>.<br />
 </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">

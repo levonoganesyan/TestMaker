@@ -453,11 +453,11 @@ void regexPostProcess1(std::string& _result)
 {
 	_result.replace(0, _result.find('\n'), std::string(_result.find('\n'), 'a'));
 }
-void regexPostProcess2(std::string& _result)
+void regexPostProcess(std::string& _result)
 {
 	for (int i = 0; i < _result.size(); i++)
 	{
-		_result[i] = '0' + '4' - _result[i];
+		_result[i]++;
 	}
 }
 void matrixPostProcess(std::string& _result)
@@ -483,9 +483,28 @@ void matrixPostProcess(std::string& _result)
 }
 void run_code()
 {
+
+	ConstPrimitiveTest<double>* pi = new ConstPrimitiveTest<double>(3.14);
 	while (1)
 	{
-	
+		RegEx* regex = new RegEx("[a-z]+(\\.[a-z]+)*@[a-z]+(\\.[a-z]+)*", 100000000);
+		regex->Generate()->Print();
+
+		/*Grammar* gr = new Grammar("({1,2,3}, {a,b,c}, P, 1)", "${1}->${2}${3}\n${2}->a${2}\n${2}->${3}\n${3}->${3}b\n${3}->e");
+		gr->Generate()->Print();
+		*/system("pause");
+		system("cls");
+		/*Graph* g1 = new Graph(CreateElement(3), CreateElement(2));
+		g1->PrintType(Graph::LIST_OF_EDGES)->Generate()->Print(std::cout);
+		std::cout << std::endl;
+		Graph* g2 = new Graph(CreateElement(3), CreateElement(2));
+		g2->PrintType(Graph::LIST_OF_EDGES)->Generate()->Print(std::cout);
+		std::cout << std::endl;
+		GraphMerger* gm = new GraphMerger(g1, g2, g1, g2, g1, g2);
+		GraphMerger* gm1 = new GraphMerger(g1, g2);
+		gm1->PrintType(Graph::LIST_OF_EDGES)->Generate()->Print(std::cout);
+		system("pause");
+		system("cls");*/
 		/*RegEx* regex = new RegEx("([a-zA-Z]{100}\n)*", 100);
 		regex->SetPostprocessFunction(regexPostProcess1)->Generate()->Print();
 		system("pause");
@@ -523,7 +542,7 @@ void run_code()
 		delete graph;
 		system("pause");
 		system("cls");*/
-		RegEx* regex = new RegEx("[12]*", 100);
+		/*RegEx* regex = new RegEx("[12]*", 100);
 		std::cout << "Printing...\n";
 		regex->SetPostprocessFunction(regexPostProcess2);
 		regex->Generate();
@@ -531,7 +550,7 @@ void run_code()
 		std::cout << "\nPrinted...\n";
 		delete regex;
 		system("pause");
-		system("cls");
+		system("cls");*/
         /*PrimitiveTest<int>* size_of_matrix = CreateElement( 6, 6 );
         Array* arr1 = new Array( size_of_matrix, CreateElement( 10, 20 ) );
 		arr1->PrintSize(false);

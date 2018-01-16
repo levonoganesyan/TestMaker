@@ -187,9 +187,9 @@ void Grammar::Generator(const std::string & _current_nonterm)
 }
 Grammar* Grammar::Generate()
 {	
+	test_generated_ = true;
 	this->Clear();
 	this->Generator(start_nonterm_);
-
 	std::ostringstream out;
 	CompositeTest::Print(out);
 	result_ = out.str();

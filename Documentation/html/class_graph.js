@@ -7,7 +7,7 @@ var class_graph =
     [ "Directed", "class_graph.html#a0ba71d6e231b874dbd2ab9024f594bb2", null ],
     [ "EdgesCount", "class_graph.html#a80fc159f5508fb7ecf12f1273c60518f", null ],
     [ "Generate", "class_graph.html#a5f3cae0746a16d78f33683cce0df3871", null ],
-    [ "Print", "class_graph.html#ac0953dd80558892dc281e17ae40fd5f1", null ],
+    [ "Print", "class_graph.html#a4bc5e19a1f0e6b18a629eb986409354b", null ],
     [ "PrintType", "class_graph.html#a9ec5b5b65b2648b7f3d61314f75c6bfd", null ],
     [ "VerticesCount", "class_graph.html#a8eccb4ebab764cf134e527aaf648af19", null ]
 ];

@@ -86,9 +86,10 @@ Test* Array::operator[]( int _index)
 {
 	return array_ [_index];
 }
-void Array::PrintSize(bool _print_size)
+Array* Array::PrintSize(bool _print_size)
 {
 	print_size_ = _print_size;
+	return this;
 }
 Array::~Array()
 {
