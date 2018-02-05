@@ -42,9 +42,9 @@ public:
 	/// Must be implemented in any inherited classes.\n
 	/// \returns New object which has same state as current class
 	virtual Test* Clone() const = 0;
-	/// Clone function\n
+	/// Add function\n
 	/// Implements the composite test logic.\n
-	/// Must be implemented in any inherited classes.\n
+	/// Must be implemented only in CompositeTest class.\n
 	/// \param _test - test to add in composite test
 	/// \returns this
 	virtual Test * Add ( Test * _test )

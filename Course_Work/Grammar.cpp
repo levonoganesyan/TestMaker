@@ -203,13 +203,14 @@ void Grammar::Print(std::ostream& _out) const
 }
 Grammar* Grammar::Clone() const
 {
-	Grammar* grammar = new Grammar(grammar_, rules_);
-	grammar->parsed_rules_ = parsed_rules_;
-	grammar->names_of_nonterm_ = names_of_nonterm_;
-	grammar->terms_ = terms_;
-	grammar->start_nonterm_ = start_nonterm_;
-	grammar->current_string_ = current_string_;
-	return grammar;
+	Grammar* grammar_to_return = new Grammar(grammar_, rules_);
+	grammar_to_return->parsed_rules_ = parsed_rules_;
+	grammar_to_return->names_of_nonterm_ = names_of_nonterm_;
+	grammar_to_return->terms_ = terms_;
+	grammar_to_return->start_nonterm_ = start_nonterm_;
+	grammar_to_return->current_string_ = current_string_;
+	grammar_to_return->postprocess_function_ = postprocess_function_;
+	return grammar_to_return;
 }
 Grammar::~Grammar()
 {

@@ -405,7 +405,9 @@ void RegEx::MaxDepth( int _max_depth)
 }
 RegEx* RegEx::Clone() const
 {
-    return nullptr;
+	RegEx* to_return_regex = new RegEx(regex_, max_depth_);
+	to_return_regex->postprocess_function_ = postprocess_function_;
+    return to_return_regex;
 }
 RegEx::~RegEx()
 {

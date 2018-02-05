@@ -46,13 +46,14 @@ void ConstStringSet::Print(std::ostream& _out) const
 }
 ConstStringSet* ConstStringSet::Clone() const
 {
-	ConstStringSet set_to_return;
+	ConstStringSet* set_to_return;
 	for (auto it : set_)
 	{
-		set_to_return.Add(it);
+		set_to_return->Add(it);
 	}
-	set_to_return.Generate();
-	return new ConstStringSet( set_to_return );
+	set_to_return->Generate();
+	set_to_return->postprocess_function_ = postprocess_function_;
+	return set_to_return;
 }
 ConstStringSet::~ConstStringSet() 
 {

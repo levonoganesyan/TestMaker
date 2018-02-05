@@ -487,8 +487,10 @@ void run_code()
 	ConstPrimitiveTest<double>* pi = new ConstPrimitiveTest<double>(3.14);
 	while (1)
 	{
-		RegEx* regex = new RegEx("[a-z]+(\\.[a-z]+)*@[a-z]+(\\.[a-z]+)*", 100000000);
-		regex->Generate()->Print();
+		RegEx* regex = new RegEx("[a-z]+(\\.[a-z]+)*@[a-z]+(\\.[a-z]+)*", 10);
+		TestCreator* tc = new TestCreator(regex, 10, "d:\\Users\\Loki\\Desktop\\Tests", 1, "regex", ".txt", 12);
+		tc->Make();
+		// regex->Generate()->Print();
 
 		/*Grammar* gr = new Grammar("({1,2,3}, {a,b,c}, P, 1)", "${1}->${2}${3}\n${2}->a${2}\n${2}->${3}\n${3}->${3}b\n${3}->e");
 		gr->Generate()->Print();

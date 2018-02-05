@@ -66,17 +66,18 @@ void Array::Print(std::ostream& _out) const
 }
 Array* Array::Clone() const
 { 
-	Array* arr;
+	Array* array_to_return;
 	if (example_ == nullptr)
 	{
-		arr = new Array(array_size_, generation_function_, delimiter_, line_breaker_);
+		array_to_return = new Array(array_size_, generation_function_, delimiter_, line_breaker_);
 	}
 	else
 	{
-		arr = new Array(array_size_, example_, delimiter_, line_breaker_);
+		array_to_return = new Array(array_size_, example_, delimiter_, line_breaker_);
 	}
-	arr->print_size_ = print_size_;
-	return arr;
+	array_to_return->print_size_ = print_size_;
+	array_to_return->postprocess_function_ = postprocess_function_;
+	return array_to_return;
 }
 int Array::Size()
 {

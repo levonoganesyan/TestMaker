@@ -39,9 +39,10 @@ CompositeTest * CompositeTest::Clone() const
 	{
 		tests.push_back(tests_[ i ]->Clone());
 	}
-	CompositeTest* cto = new CompositeTest();
-	cto->tests_ = tests;
-	return cto;
+	CompositeTest* cto_to_return = new CompositeTest();
+	cto_to_return->tests_ = tests;
+	cto_to_return->postprocess_function_ = postprocess_function_;
+	return cto_to_return;
 }
 CompositeTest::~CompositeTest() 
 {

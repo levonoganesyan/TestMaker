@@ -342,10 +342,11 @@ Graph::~Graph()
 
 Graph* Graph::Clone() const
 {
-	Graph* graph = new Graph(number_of_vertices_, number_of_edges_, weight_, directed_, buckle_);
-	graph->print_type_ = print_type_;
-	graph->print_function_ = print_function_;
-	return graph;
+	Graph* graph_to_return = new Graph(number_of_vertices_, number_of_edges_, weight_, directed_, buckle_);
+	graph_to_return->print_type_ = print_type_;
+	graph_to_return->print_function_ = print_function_;
+	graph_to_return->postprocess_function_ = postprocess_function_;
+	return graph_to_return;
 }
 
 // GraphMerger
@@ -494,12 +495,13 @@ void GraphMerger::Print(std::ostream& _out) const
 
 GraphMerger * GraphMerger::Clone() const
 {
-	GraphMerger* graph_merger = new GraphMerger();
+	GraphMerger* graph_merger_to_return = new GraphMerger();
 	for (int i = 0; i < graphs_.size(); i++)
 	{
-		graph_merger->Add(graphs_[i]);
+		graph_merger_to_return->Add(graphs_[i]);
 	}
-	return graph_merger;
+	graph_merger_to_return->postprocess_function_ = postprocess_function_;
+	return graph_merger_to_return;
 }
 
 

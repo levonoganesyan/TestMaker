@@ -131,32 +131,33 @@ std::pair<int, int> Matrix::Size()
 
 Matrix * Matrix::Clone() const
 {
-	Matrix* matrix;
+	Matrix* matrix_to_return;
 	if (example_ == nullptr)
 	{
 		if (m_)
 		{
-			matrix = new Matrix(n_, m_, generation_function_, delimiter_, line_breaker_);
+			matrix_to_return = new Matrix(n_, m_, generation_function_, delimiter_, line_breaker_);
 		}
 		else
 		{
-			matrix = new Matrix(n_, generation_function_, delimiter_, line_breaker_);
+			matrix_to_return = new Matrix(n_, generation_function_, delimiter_, line_breaker_);
 		}
 	}
 	else
 	{
 		if(m_)
 		{
-			matrix = new Matrix(n_, m_, example_, delimiter_, line_breaker_);
+			matrix_to_return = new Matrix(n_, m_, example_, delimiter_, line_breaker_);
 		}
 		else
 		{
-			matrix = new Matrix(n_, example_, delimiter_, line_breaker_);
+			matrix_to_return = new Matrix(n_, example_, delimiter_, line_breaker_);
 		}
 	}
-	matrix->print_size_ = print_size_;
-	matrix->print_size_as_square_ = print_size_as_square_;
-	return matrix;
+	matrix_to_return->print_size_ = print_size_;
+	matrix_to_return->print_size_as_square_ = print_size_as_square_;
+	matrix_to_return->postprocess_function_ = postprocess_function_;
+	return matrix_to_return;
 }
 
 Matrix::~Matrix()
