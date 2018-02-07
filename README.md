@@ -1,6 +1,3 @@
 # TestMaker
-Test ReadMe
 
-TestMaker
-
-This is the Diploma work
+This is Diploma work
