@@ -4,7 +4,7 @@
 #include "CompositeTest.h"
 
 /// \class Grammar
-/// Class that implements grammar.
+/// Class that implements context-free grammar.
 class Grammar : public CompositeTest
 {
 protected:
