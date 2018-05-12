@@ -46,7 +46,7 @@ void ConstStringSet::Print(std::ostream& _out) const
 }
 ConstStringSet* ConstStringSet::Clone() const
 {
-	ConstStringSet* set_to_return;
+	ConstStringSet* set_to_return = new ConstStringSet();
 	for (auto it : set_)
 	{
 		set_to_return->Add(it);

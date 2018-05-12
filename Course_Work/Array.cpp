@@ -23,7 +23,7 @@ Array::Array(PrimitiveTest<int>* _array_size_to, Test* _example, std::string _de
 Array* Array::Generate() 
 {
 	array_size_->Generate();
-	for (int i = 0; i < array_.size(); i++)
+	for (size_t i = 0; i < array_.size(); i++)
 		delete array_[i];
 	int n = array_size_->Get();
 	THROW(n <= 0, "Array size must be strongly positive");

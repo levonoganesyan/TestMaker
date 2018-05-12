@@ -355,12 +355,12 @@ void GraphMerger::RearrangeConnectionMatrix(const std::vector<std::map<int, int>
 {
 	THROW(_size > 10000, "Number of vertices must be less or equal 10000");
 	std::vector<std::vector<bool> > all_graphs_connection_matrix(_size, std::vector<bool>(_size));	
-	for (int i = 0; i < graphs_.size(); i++)
+	for (size_t i = 0; i < graphs_.size(); i++)
 	{
 		std::vector<std::vector<bool> > connection_matrix = graphs_[i]->ConnectionMatrix();
-		for (int j = 0; j < connection_matrix.size(); j++)
+		for (size_t j = 0; j < connection_matrix.size(); j++)
 		{
-			for (int k = 0; k < connection_matrix[j].size(); k++)
+			for (size_t k = 0; k < connection_matrix[j].size(); k++)
 			{
 				all_graphs_connection_matrix[_rearrangment_maps[i].at(j)][_rearrangment_maps[i].at(k)] = connection_matrix[j][k];
 			}
@@ -368,9 +368,9 @@ void GraphMerger::RearrangeConnectionMatrix(const std::vector<std::map<int, int>
 	}
 	std::ostringstream os;
 	os << all_graphs_connection_matrix.size() << std::endl;
-	for (int i = 0; i < all_graphs_connection_matrix.size(); i++)
+	for (size_t i = 0; i < all_graphs_connection_matrix.size(); i++)
 	{
-		for (int j = 0; j < all_graphs_connection_matrix[i].size(); j++)
+		for (size_t j = 0; j < all_graphs_connection_matrix[i].size(); j++)
 		{
 			os << all_graphs_connection_matrix[i][j] << " ";
 		}
@@ -382,10 +382,10 @@ void GraphMerger::RearrangeConnectionMatrix(const std::vector<std::map<int, int>
 void GraphMerger::RearrangeConnectionList(const std::vector<std::map<int, int>>& _rearrangment_maps, int _size)
 {
 	std::vector<std::set<long long> > all_graphs_connection_list(_size);
-	for (int i = 0; i < graphs_.size(); i++)
+	for (size_t i = 0; i < graphs_.size(); i++)
 	{
 		std::vector<std::set<long long> > connection_list = graphs_[i]->ConnectionList();
-		for (int j = 0; j < connection_list.size(); j++)
+		for (size_t j = 0; j < connection_list.size(); j++)
 		{
 			for (auto neighbor : connection_list[j])
 			{
@@ -395,7 +395,7 @@ void GraphMerger::RearrangeConnectionList(const std::vector<std::map<int, int>>&
 	}
 	std::ostringstream os;
 	os << all_graphs_connection_list.size() << std::endl;
-	for (int i = 0; i < all_graphs_connection_list.size(); i++)
+	for (size_t i = 0; i < all_graphs_connection_list.size(); i++)
 	{
 		os << all_graphs_connection_list[i].size() << " ";
 		for (auto neighbor : all_graphs_connection_list[i])
@@ -410,10 +410,10 @@ void GraphMerger::RearrangeConnectionList(const std::vector<std::map<int, int>>&
 void GraphMerger::RearrangeListOfEdges(const std::vector<std::map<int, int>>& _rearrangment_maps, int _size)
 {
 	std::vector<std::pair<long long, long long> > all_graphs_list_of_edges;
-	for (int i = 0; i < graphs_.size(); i++)
+	for (size_t i = 0; i < graphs_.size(); i++)
 	{
 		std::vector<std::pair<long long, long long> > list_of_edges = graphs_[i]->ListOfEdges();
-		for (int j = 0; j < list_of_edges.size(); j++)
+		for (size_t j = 0; j < list_of_edges.size(); j++)
 		{
 			// all_graphs_list_of_edges[_rearrangment_maps[i].at(j)].insert(_rearrangment_maps[i].at(neighbor));
 			all_graphs_list_of_edges.push_back({ _rearrangment_maps[i].at(list_of_edges[j].first), _rearrangment_maps[i].at(list_of_edges[j].second) });
@@ -422,7 +422,7 @@ void GraphMerger::RearrangeListOfEdges(const std::vector<std::map<int, int>>& _r
 	std::random_shuffle(all_graphs_list_of_edges.begin(), all_graphs_list_of_edges.end(), Rand_with_mod);
 	std::ostringstream os;
 	os << all_graphs_list_of_edges.size() << std::endl;
-	for (int i = 0; i < all_graphs_list_of_edges.size(); i++)
+	for (size_t i = 0; i < all_graphs_list_of_edges.size(); i++)
 	{
 		os << all_graphs_list_of_edges[i].first + 1 << " " << all_graphs_list_of_edges[i].second + 1 << std::endl;
 	}
@@ -443,21 +443,21 @@ GraphMerger * GraphMerger::Add(Graph * _graph)
 GraphMerger * GraphMerger::Generate()
 {
 	int number_of_vertices = 0;
-	for (int i = 0; i < graphs_.size(); i++)
+	for (size_t i = 0; i < graphs_.size(); i++)
 	{
 		graphs_[i]->Generate();
 		number_of_vertices += graphs_[i]->VerticesCount();
 	}
 	std::vector<int> rearrange_array( number_of_vertices );
-	for (int i = 0; i < rearrange_array.size(); i++)
+	for (size_t i = 0; i < rearrange_array.size(); i++)
 	{
 		rearrange_array[i] = i;
 	}
 	std::random_shuffle(rearrange_array.begin(), rearrange_array.end(), Rand_with_mod);
 	std::vector<std::map<int, int>> rearragment_maps(graphs_.size());
-	for (int i = 0, index = 0; i < graphs_.size(); i++)
+	for (size_t i = 0, index = 0; i < graphs_.size(); i++)
 	{
-		for (int j = 0; j < graphs_[i]->VerticesCount(); j++)
+		for (size_t j = 0; j < graphs_[i]->VerticesCount(); j++)
 		{
 			rearragment_maps[i][j] = rearrange_array[index++];
 		}
@@ -496,7 +496,7 @@ void GraphMerger::Print(std::ostream& _out) const
 GraphMerger * GraphMerger::Clone() const
 {
 	GraphMerger* graph_merger_to_return = new GraphMerger();
-	for (int i = 0; i < graphs_.size(); i++)
+	for (size_t i = 0; i < graphs_.size(); i++)
 	{
 		graph_merger_to_return->Add(graphs_[i]);
 	}

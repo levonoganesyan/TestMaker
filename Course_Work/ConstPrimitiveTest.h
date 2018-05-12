@@ -3,12 +3,17 @@
 
 #include"PrimitiveTest.h"
 
+
+/// ConstPrimitiveTest class\n
+/// Class that describes constants in library context\n
 template< typename T >
 class ConstPrimitiveTest : public PrimitiveTest<T> 
 {
 protected:
 	T current_value_;
 public:
+	/// Test constructor\n
+	/// \param _value - constant, 0 by default
 	ConstPrimitiveTest( T _value = 0 ) 
 		: current_value_(_value)
 	{

@@ -12,12 +12,9 @@
 #include"ConstStringSet.h"
 #include"ConstPrimitiveTest.h"
 #include"RangePrimitiveTest.h"
-
 #include"Graph.h"
-
 #include"RegEx.h"
 #include"Grammar.h"
-
 #include"TestCreator.h"
 
 

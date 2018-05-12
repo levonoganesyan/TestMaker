@@ -52,9 +52,9 @@ Matrix* Matrix::Generate()
 {
 	n_->Generate();
 	m_->Generate();
-	for (int i = 0; i < matrix_.size(); i++)
+	for (size_t i = 0; i < matrix_.size(); i++)
 	{
-		for (int j = 0; j < matrix_[i].size(); j++)
+		for (size_t j = 0; j < matrix_[i].size(); j++)
 		{
 			delete matrix_[i][j];
 		}
@@ -63,7 +63,7 @@ Matrix* Matrix::Generate()
 	int m = m_->Get();
 	THROW(n <= 0 && m <= 0, "Matrix size must be strongly positive");
 	matrix_.resize(n);
-	for (int i = 0; i < matrix_.size(); i++)
+	for (size_t i = 0; i < matrix_.size(); i++)
 	{
 		matrix_[i].resize(m);
 	}
