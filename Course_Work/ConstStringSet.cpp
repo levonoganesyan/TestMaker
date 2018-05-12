@@ -3,9 +3,9 @@
 ConstStringSet::ConstStringSet()
 {
 }
-ConstStringSet* ConstStringSet::Add(std::string _word)
+ConstStringSet* ConstStringSet::Add(const std::string& _string)
 {
-	set_.insert(_word);
+	set_.insert(_string);
 	if (set_.size() == 1)
 	{
 		current_string_ = *set_.begin();

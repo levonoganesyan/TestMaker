@@ -455,7 +455,7 @@ void regexPostProcess1(std::string& _result)
 }
 void regexPostProcess(std::string& _result)
 {
-	for (int i = 0; i < _result.size(); i++)
+	for (size_t i = 0; i < _result.size(); i++)
 	{
 		_result[i]++;
 	}

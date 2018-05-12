@@ -29,8 +29,12 @@ public:
 	\endcode
 	*/
 	ConstStringSet();
-	virtual ConstStringSet* Add(std::string);
-	virtual ConstStringSet* Add( char );
+	/// Add function
+	/// \param _string - string to add in set
+	virtual ConstStringSet* Add(const std::string& _string);
+	/// Add function
+	/// \param _char - char to add in set
+	virtual ConstStringSet* Add(char _char);
 	virtual std::string Get();
 	virtual ConstStringSet* Generate();
 	virtual void Print(std::ostream& = std::cout) const;

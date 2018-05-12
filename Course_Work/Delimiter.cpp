@@ -3,7 +3,7 @@ Delimiter::Delimiter(char _delimiter)
 	: delimiter_(1, _delimiter)
 {
 }
-Delimiter::Delimiter(std::string _delimiter)
+Delimiter::Delimiter(const std::string& _delimiter)
 	: delimiter_(_delimiter)
 {
 }

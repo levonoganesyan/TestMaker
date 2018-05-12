@@ -54,7 +54,7 @@
 	throw std::runtime_error(std::string("\nFile_name: ") + __FILE__ + "\nLine: " + std::to_string(__LINE__) + "\nError message: " + error_message );\
 }\
 
-inline static char GetEscapedCharByString(std::string character)
+inline static char GetEscapedCharByString(const std::string& character)
 {
 	if (character == "\\t")
 		return '\t';

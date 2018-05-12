@@ -37,7 +37,7 @@ void RandomTestSet::Print(std::ostream & _out) const
 
 RandomTestSet* RandomTestSet::Clone() const
 {
-	RandomTestSet* set_to_return;
+	RandomTestSet* set_to_return = new RandomTestSet();
 	for (unsigned int i = 0; i < random_set_.size(); i++)
 	{
 		set_to_return->Add(random_set_[i]);
