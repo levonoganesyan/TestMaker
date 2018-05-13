@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{74EC72E0-C760-4EFF-9E38-002A89D851F8}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Course_Work</RootNamespace>
+    <RootNamespace>TestMaker</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
