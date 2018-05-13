@@ -1,3 +1,3 @@
 # TestMaker
 
-This is Diploma work
+This is library for test generation.
