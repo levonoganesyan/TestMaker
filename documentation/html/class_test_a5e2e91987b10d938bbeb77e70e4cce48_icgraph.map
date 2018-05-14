@@ -1,6 +1,0 @@
-<map id="Test::Print" name="Test::Print">
-<area shape="rect" id="node2" href="$class_graph.html#a480d475b69a6b892b044b255a5fb47f5" title="Graph::Graph" alt="" coords="161,5,261,32"/>
-<area shape="rect" id="node4" href="$class_random_test_set.html#a50dea8180a7ac0f2e7336f21b88b7f70" title="RandomTestSet::Print" alt="" coords="136,56,287,83"/>
-<area shape="rect" id="node5" href="$class_test.html#a99f2bbfac6c95612322b0f10e607ebe5" title="Test::Test" alt="" coords="171,107,251,133"/>
-<area shape="rect" id="node3" href="$class_graph.html#a6d122fe3d1c8b3e39d752e11ac801062" title="Graph::Clone" alt="" coords="335,5,433,32"/>
-</map>

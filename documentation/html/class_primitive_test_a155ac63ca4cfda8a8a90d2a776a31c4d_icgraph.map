@@ -1,7 +1,0 @@
-<map id="PrimitiveTest::Generate" name="PrimitiveTest::Generate">
-<area shape="rect" id="node2" href="$class_array.html#a6d6136c6ea6471b5b8fefb6fc2757511" title="Array::Generate" alt="" coords="213,5,328,32"/>
-<area shape="rect" id="node3" href="$class_graph.html#a480d475b69a6b892b044b255a5fb47f5" title="Graph::Graph" alt="" coords="221,56,321,83"/>
-<area shape="rect" id="node5" href="$class_range.html#a6762b1fc21e441b46b54f99620866422" title="Range::Generate" alt="" coords="211,108,331,135"/>
-<area shape="rect" id="node4" href="$class_graph.html#a6d122fe3d1c8b3e39d752e11ac801062" title="Graph::Clone" alt="" coords="396,53,495,80"/>
-<area shape="rect" id="node6" href="$class_range_primitive_test.html#a8b48e5c6b4d4c78cd65fbaeefcdf70ed" title="RangePrimitiveTest\l::Generate" alt="" coords="379,105,512,146"/>
-</map>

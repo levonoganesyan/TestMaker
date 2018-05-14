@@ -1,6 +1,0 @@
-<map id="RegEx::Operation" name="RegEx::Operation">
-<area shape="rect" id="node3" href="$class_reg_ex_1_1_and.html" title="RegEx::And" alt="" coords="5,155,97,181"/>
-<area shape="rect" id="node4" href="$class_reg_ex_1_1_or.html" title="RegEx::Or" alt="" coords="122,155,205,181"/>
-<area shape="rect" id="node5" href="$class_reg_ex_1_1_repeat.html" title="RegEx::Repeat" alt="" coords="229,155,340,181"/>
-<area shape="rect" id="node2" href="$class_reg_ex_1_1_expression.html" title="RegEx::Expression" alt="" coords="96,5,231,32"/>
-</map>
