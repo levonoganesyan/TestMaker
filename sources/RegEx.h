@@ -125,7 +125,7 @@ public:
 	/// \param _regex - regex ifself
 	/// \param _max_depth - maximal depth for infinite operations like * or +
 	/// \n
-	/// \note RegEx parse given expression in constuctor.
+	/// \note RegEx parses given in constructor expression.
 	RegEx(const std::string& _regex, int _max_depth = 1000);
 	/// After parsing, there is a simple Expression, which we can use for generation.
 	/// Generate() simply invokes the corresponding method in Expression and fix the string, that matches given regex.

@@ -2,7 +2,7 @@
 #define MATRIX___
 
 #include "PrimitiveTest.h"
-/// \ class Matrix\n
+/// \class Matrix\n
 /// This is for generating Matrix of a tests\n
 /// Here is an example for Matrix. You can try it by taking it from Matrix.h\n
 /*!

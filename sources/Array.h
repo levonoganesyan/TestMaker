@@ -4,7 +4,7 @@
 #include"Test.h"
 #include"Range.h"
 
-/// Array\n
+/// \class Array\n
 /// This is for generating sequences of a tests\n
 /// Here is an example for Array. You can try it by taking it from Array.h\n
 /*!
@@ -61,7 +61,7 @@ public:
 	/// \param _generation_function - generation function
 	/// \param _delimiter - delimiter for elements
 	/// \param _line_breaker - delimiter after size printing
-	Array(PrimitiveTest<int>* _array_size_to, std::function<Test*()> _generation_function, std::string _delimiter = " ", std::string _line_breaker = "\n");
+	Array(PrimitiveTest<int>* _array_size_to, std::function<Test*()> _generation_function, const std::string& _delimiter = " ", const std::string& _line_breaker = "\n");
 	/// If you do not have a test with dependent variables, 
 	/// you may pass to the Array the example test, 
 	/// which will be used for self-filling (through Generate() invocation)
@@ -69,7 +69,7 @@ public:
 	/// \param _example - test to generation
 	/// \param _delimiter - delimiter for elements
 	/// \param _line_breaker - delimiter after size printing
-	Array(PrimitiveTest<int>* _array_size_to, Test* _example, std::string _delimiter = " ", std::string _line_breaker = "\n");
+	Array(PrimitiveTest<int>* _array_size_to, Test* _example, const std::string& _delimiter = " ", const std::string& _line_breaker = "\n");
 	/// Generates and fixes the Array assuming the generation way
 	/// \returns this
 	virtual Array* Generate();

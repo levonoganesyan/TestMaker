@@ -2,7 +2,7 @@
 #include"Range.h"
 #include"Array.h"
 
-Array::Array(PrimitiveTest<int>* _array_size_to, std::function<Test*()> _generation_function, std::string _delimiter, std::string _line_breaker)
+Array::Array(PrimitiveTest<int>* _array_size_to, std::function<Test*()> _generation_function, const std::string& _delimiter, const std::string& _line_breaker)
 	: array_size_(_array_size_to)
 	, generation_function_(_generation_function)
 	, example_(nullptr)
@@ -11,7 +11,7 @@ Array::Array(PrimitiveTest<int>* _array_size_to, std::function<Test*()> _generat
 	, print_size_(true)
 {
 }
-Array::Array(PrimitiveTest<int>* _array_size_to, Test* _example, std::string _delimiter, std::string _line_breaker)
+Array::Array(PrimitiveTest<int>* _array_size_to, Test* _example, const std::string& _delimiter, const std::string& _line_breaker)
 	: array_size_(_array_size_to)
 	, generation_function_(nullptr)
 	, example_(_example)

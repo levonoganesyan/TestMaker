@@ -10,10 +10,12 @@
 class Test
 {
 protected:
+	/// \cond
 	bool test_generated_;
 	std::string result_;
 	std::function<void(std::string&)> postprocess_function_;
 	std::vector<Test*> objects_with_delete_responsibility_;
+	/// \endcond
 public:
 	/// Test constructor\n
 	/// Initializes the variable test_generated_ as false, so that Test can not be generated if Generate() has not yet been called.\n
