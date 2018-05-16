@@ -3,6 +3,8 @@
 
 #include "CompositeTest.h"
 
+/// \class Grammar
+/// Class that implements grammar.
 class Grammar : public CompositeTest
 {
 protected:

@@ -3,7 +3,7 @@
 
 #include"Test.h"
 
-/// PrimitiveTest \n
+/// \class PrimitiveTest \n
 /// Base class for all primitive types\n
 /// Implements the Composite pattern\n
 /// About that pattern you can read here: https://en.wikipedia.org/wiki/Composite_pattern \n

@@ -4,7 +4,7 @@
 
 #include"Test.h"
 
-/// RandomTestSet class.\n
+/// \class RandomTestSet.\n
 /// Must be used when need get random test from set of tests.\n
 
 class RandomTestSet : public Test

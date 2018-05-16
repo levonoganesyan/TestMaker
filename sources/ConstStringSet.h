@@ -4,7 +4,7 @@
 #include"Test.h"
 
 
-/// ConstStringSet class.\n
+/// \class ConstStringSet.\n
 /// Must be used when need get random string from set of strings.\n
 /// 
 class ConstStringSet : public Test 

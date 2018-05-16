@@ -6,15 +6,14 @@
 
 
 /*!
-Graph class.\n
+\class Graph\n
 Supports creating directed and non-directed graphs.\n
 Graph always connected (except the case, when number of edges is low than number of vertices)\n
 Graph always fix a random tree, and try to deduce, are your Graph small or big (deduces by number of edges)\n
 If your Graph have more that n*n/2 edges, where n is number of vertices, then Graph is big, otherwise small.\n
 Big Graph generated this way: it takes full-connected Graph, and tries to remove random (u, v). If that edge is already deleted or that edge is in fixed tree, algorithm tries again. In worst case there is 50% chance to mistake, so number of trying should be ~ 2\n
 Small Graph generated this way: it takes empty fraph, and add fixed tree edges. After that if there is any edges left tries to add random (u, v). If that edge is already added algorithm tries again. In worst case there is 50% chance to mistake, so number of trying should be ~ 2\n
-If you want to generate not connected Graphs, you must use GraphMerge function (but not now :D)
-\todo write GraphMerge function
+If you want to generate not connected Graphs, you must use GraphMerger class
 */
 class Graph : public Test
 {

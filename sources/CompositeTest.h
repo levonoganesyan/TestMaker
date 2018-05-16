@@ -3,7 +3,7 @@
 
 #include "Test.h"
 
-/// CompositeTest class \n
+/// \class CompositeTest \n
 /// Class that allows work with multiple tests as one.\n
 /// Implements the Composite pattern\n
 /// About that pattern you can read here: https://en.wikipedia.org/wiki/Composite_pattern \n

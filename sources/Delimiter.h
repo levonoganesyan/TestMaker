@@ -4,7 +4,7 @@
 #include"Test.h"
 #include"Range.h"
 
-/// Class Delimiter
+/// \class Delimiter
 /// Class that describes Delimiter, like '\n' or "|||"
 class Delimiter : public Test
 {

@@ -481,7 +481,8 @@ void matrixPostProcess(std::string& _result)
 	}
 	_result = os.str();
 }
-#include<Windows.h>
+
+
 void run_code()
 {
 	ConstPrimitiveTest<double>* pi = new ConstPrimitiveTest<double>(3.14);

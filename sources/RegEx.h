@@ -7,7 +7,7 @@
 
 
 
-/// RegEx\n
+/// \class RegEx\n
 /// This is for generating tests via RegEx\n
 /// Here is an example for RegEx. You can try it by taking it from RegEx.h\n
 ///

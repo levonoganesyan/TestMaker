@@ -3,7 +3,7 @@
 
 
 #include"Utils.h"
-/// Test class \n
+/// \class Test \n
 /// Base class for all classes.\n
 /// Implements the Composite pattern\n
 /// About that pattern you can read here: https://en.wikipedia.org/wiki/Composite_pattern \n

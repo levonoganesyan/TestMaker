@@ -4,7 +4,7 @@
 #include"PrimitiveTest.h"
 
 
-/// ConstPrimitiveTest class\n
+/// \class ConstPrimitiveTest\n
 /// Class that describes constants in library context\n
 template< typename T >
 class ConstPrimitiveTest : public PrimitiveTest<T> 

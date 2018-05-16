@@ -7,7 +7,7 @@
 #include<fstream>
 #include<thread>
 
-/// TestCreator class\n
+/// \class TestCreator\n
 /// Class that allows generate multiple tests\n
 class TestCreator
 {

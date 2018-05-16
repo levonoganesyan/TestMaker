@@ -5,7 +5,7 @@
 #include"Range.h"
 #include"ConstPrimitiveTest.h"
 
-/// RangePrimitiveTest\n
+/// \class RangePrimitiveTest\n
 /// Class describes a primitive test, that can take in constructor Ranges\n
 /// Use this class for numbers with floating edges\n
 ///
