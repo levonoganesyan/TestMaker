@@ -18,6 +18,8 @@ public:
 		: current_value_(_value)
 	{
 	}
+	/// Getter function  
+	/// \returns current value
 	virtual T Get()
 	{
 		return current_value_;

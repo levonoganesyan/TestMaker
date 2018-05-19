@@ -76,6 +76,7 @@ public:
 	virtual void Print(std::ostream& = std::cout) const;
 	/// Specifies are you need print the Array size while printing
 	/// \param _print_size - specify printing mode
+	/// \returns this
 	Array* PrintSize(bool _print_size);
 	/// \returns Fixed Array size
 	int Size();
