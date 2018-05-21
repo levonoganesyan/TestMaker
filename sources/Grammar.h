@@ -31,7 +31,9 @@ public:
 	/// P = "${1}->${2}${3}\n${2}->a${2}\n${2}->e\n${3}->${3}b\n${3}->e"
 	/// a^nb^m, n >= 0, m >= 0
 	/// Grammar constructor
-	Grammar(const std::string &, const std::string &);
+	/// \param _grammar - Grammar in this form (N, Sigma, P, S)
+	/// \param _rules - Rules of Grammar
+	Grammar(const std::string & _grammar, const std::string & _rules);
 	virtual void Generator(const std::string &);
 	virtual Grammar* Generate();
 	virtual void Print(std::ostream& = std::cout) const;
