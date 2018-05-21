@@ -30,6 +30,7 @@ public:
 	/// e.g. ({1,2,3}, {a,b,c}, P, 1)
 	/// P = "${1}->${2}${3}\n${2}->a${2}\n${2}->e\n${3}->${3}b\n${3}->e"
 	/// a^nb^m, n >= 0, m >= 0
+	/// Grammar constructor
 	Grammar(const std::string &, const std::string &);
 	virtual void Generator(const std::string &);
 	virtual Grammar* Generate();
