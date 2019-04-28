@@ -1,6 +1,0 @@
-var searchData=
-[
-  ['add',['Add',['../d8/d71/class_composite_test.html#a471876019786118d3a8fa559a1bd2bc9',1,'CompositeTest::Add()'],['../df/da4/class_const_string_set.html#abb473eff61d679b8f1a4125fd8e69277',1,'ConstStringSet::Add(const std::string &amp;_string)'],['../df/da4/class_const_string_set.html#adc710d444f5ba318bfd3c8ebb328c505',1,'ConstStringSet::Add(char _char)'],['../d5/d10/class_random_test_set.html#abf19a9737f2fe958f9c2c399edad50ee',1,'RandomTestSet::Add()'],['../d1/d9b/class_test.html#a614b7a9ecd7715e03746aaf05d4b8334',1,'Test::Add()']]],
-  ['adddeleteresponsibility',['AddDeleteResponsibility',['../d1/d9b/class_test.html#a6246397d122b42ed7ea3af9aa15221b2',1,'Test']]],
-  ['array',['Array',['../d5/d21/class_array.html',1,'Array'],['../d5/d21/class_array.html#a7c13a1b5cc0b6684d473594f381d5456',1,'Array::Array(PrimitiveTest&lt; int &gt; *_array_size_to, std::function&lt; Test *()&gt; _generation_function, const std::string &amp;_delimiter=&quot; &quot;, const std::string &amp;_line_breaker=&quot;\)'],['../d5/d21/class_array.html#a43a0e2887322bb5fa90056a0b0469690',1,'Array::Array(PrimitiveTest&lt; int &gt; *_array_size_to, Test *_example, const std::string &amp;_delimiter=&quot; &quot;, const std::string &amp;_line_breaker=&quot;\)']]]
-];
